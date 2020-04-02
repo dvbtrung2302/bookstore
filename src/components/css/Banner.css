@@ -1,0 +1,37 @@
+.Banner {
+  background-image: url('https://res.cloudinary.com/dofqucuyy/image/upload/v1585755127/Books/background_etmzc6.png');
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 89vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(247, 247, 247);
+}
+
+.Banner .SearchBar {
+  flex-grow: 0;
+  width: 700px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 21px 36px;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.Banner .title h1 {
+  font-size: 55px;
+  font-weight: 700;
+  color: rgb(13, 17, 54);
+  text-align: center;
+}
+
+.Banner .title p {
+  margin-top: 20px;
+  margin-bottom: 50px;
+  font-weight: 400;
+  font-size: 19px;
+  color: rgb(119, 121, 140);
+  text-align: center;
+}
