@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -6,9 +6,25 @@ import './css/TopMenu.css';
 import SearchBar from './SearchBar';
 
 export default function() {
+  const [isHide, setHide] = useState(true);
+
+  const hideMenu = () => {
+    console.log(window.pageYOffset);
+    if (window.pageYOffset === 0 || window.pageYOffset > 500) {
+      return setHide(true);
+    } else {
+      return setHide(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("scroll", e => {
+      hideMenu();
+    });
+  });
   return(
     <header className="TopMenu">
-      <div className="wrapper">
+      <div className={isHide ? "wrapper" : "wrapper hide"}>
         <Container>
           <div className="logo">
             <Link to="/"> 

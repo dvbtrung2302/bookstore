@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Container,
@@ -7,32 +7,29 @@ import {
 } from 'reactstrap';
 
 import './css/Products.css';
-import ProductsContext from '../contexts/ProductsContext';
+import { ProductsContext } from '../contexts/ProductsContext';
 
 export default function(props) {
+  const { products } = useContext(ProductsContext);
   return(
-    <ProductsContext.Consumer>
-      {({products}) => 
-        <div className="Products">
-          <Container>
-            <Row>
-              {
-                products.map(product => 
-                <Col lg="3" className="p-0 mb-5">
-                  <Link to='/' className="product">
-                    <img src={product.image} alt="" />
-                    <div className="info">
-                      <h3 className="title">{product.title}</h3>
-                      <p className="author">By {product.author}</p>
-                    </div>
-                  </Link> 
-                </Col>
-                )
-              }
-            </Row>
-          </Container>
-        </div>
-      }
-    </ProductsContext.Consumer>
+      <div className="Products">
+        <Container>
+          <Row>
+            {
+              products.map(product => 
+              <Col xl="3" lg="4" md="6" sm="6" className="p-0 mb-5">
+                <Link to='/' className="product">
+                  <img src={product.image} alt="" />
+                  <div className="info">
+                    <h3 className="title">{product.title}</h3>
+                    <p className="author">By {product.author}</p>
+                  </div>
+                </Link> 
+              </Col>
+              )
+            }
+          </Row>
+        </Container>
+      </div>
   );
 }

@@ -28,6 +28,10 @@
   color: rgb(13, 17, 54);
   font-weight: 500;
   font-size: 15px;
+  text-overflow: ellipsis;
+  width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .product .info .author {

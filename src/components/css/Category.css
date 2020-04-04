@@ -1,25 +1,30 @@
 .Category {
   background-color: rgb(255, 255, 255);
-  height: 100vh;
   padding: 20px;
+  min-height: 100vh;
   position: sticky;
   position: -webkit-sticky;
   top: 0;
 }
 
 .Category .navbar {
-  flex-direction: column;
   position: sticky;
   position: -webkit-sticky;
   top: 80px;
+  display: block;
+}
+
+.Category .navbar .navbar-brand {
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgb(13, 17, 54)
 }
 
 .Category .navbar-collapse {
   width: 100%;
-  height: 100%;
 }
  
-.Category .navbar-expand-md .navbar-nav {
+.Category .navbar .navbar-nav {
   flex-direction: column;
   width: 100%;
 }

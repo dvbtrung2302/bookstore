@@ -6,6 +6,7 @@
   width: 100%;
   background: #fff;
   z-index: 99999;
+  transition: top 0.4s;
 }
 
 .TopMenu .wrapper .container {
@@ -59,3 +60,6 @@
   cursor: pointer;
 }
 
+.hide {
+  top: -100px !important;
+}

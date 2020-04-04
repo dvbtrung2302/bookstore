@@ -6,7 +6,7 @@ import axios from 'axios';
 import TopMenu from './components/TopMenu';
 import Home from './pages/Home';
 import TopMenuMobile from './components/TopMenuMobile';
-import ProductsContext from './contexts/ProductsContext';
+import { ProductsProvider } from './contexts/ProductsContext';
 
 class App extends React.Component {
   constructor() {
@@ -28,9 +28,7 @@ class App extends React.Component {
   render() {
     const { products } = this.state;
     return(
-      <ProductsContext.Provider value={{
-        products: products
-      }}>
+      <ProductsProvider products={products}>
         <Router>
           <div className="App">
             <TopMenu />
@@ -38,7 +36,7 @@ class App extends React.Component {
             <Home />
           </div>
         </Router>
-      </ProductsContext.Provider>
+      </ProductsProvider>
     )
   }
 }

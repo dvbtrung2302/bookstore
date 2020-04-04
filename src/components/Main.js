@@ -12,12 +12,12 @@ import './css/Main.css';
 export default function (props) {
   return(
     <main className="Main">
-      <Container>
+      <Container fluid>
         <Row>
-          <Col lg="2">
+          <Col xl="3" lg="4">
             <Catogory />
           </Col>
-          <Col lg="10">
+          <Col xl="9" lg="8">
             <Products />
           </Col>
         </Row>

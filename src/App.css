@@ -26,3 +26,14 @@ p {
     display: none;
   }
 }
+
+
+@media (max-width: 992px) {
+  .Category {
+    min-height: 0!important;
+  }
+  .Category .navbar {
+    display: flex!important;
+    justify-content: space-between;
+  }
+}

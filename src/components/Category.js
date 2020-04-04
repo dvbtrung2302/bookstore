@@ -9,6 +9,8 @@ import {
   NavLink
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThLarge } from "@fortawesome/free-solid-svg-icons";
 
 import './css/Category.css';
 
@@ -29,8 +31,11 @@ const Category = (props) => {
 
   return (
     <div className="Category">
-      <Navbar color="light" light expand="md">
-        {/* <NavbarBrand href="/">reactstrap</NavbarBrand> */}
+      <Navbar color="light" light expand="lg" >
+        <NavbarBrand tag={Link} to="/">
+          <FontAwesomeIcon icon={faThLarge} className="mr-2" />
+          Select your Category
+        </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
