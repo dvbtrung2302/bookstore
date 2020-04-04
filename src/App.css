@@ -1,3 +1,28 @@
-.container {
-  max-width: 1800px;
+p {
+  color: rgb(119, 121, 140);
+}
+ h1,h2,h3 {
+  color: rgb(13, 17, 54);
+ }
+
+@media (min-width: 1200px) {
+  .container, .container-lg, 
+  .container-md, .container-sm, .container-xl {
+      max-width: 1800px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .TopMenu {
+    display: none;
+  }
+  .TopMenuMobile {
+    display: block!important;
+  }
+  .Banner {
+    background-position: left!important;
+  }
+  .Banner .SearchBar {
+    display: none;
+  }
 }

@@ -23,6 +23,7 @@
   background-color: rgb(255, 255, 255);
   color: rgb(119, 121, 140);
   border-radius: 3px;
+  overflow: hidden;
 }
 .SearchBar input {
   flex-grow: 1;
@@ -31,6 +32,7 @@
   font-size: 15px;
   color: rgb(119, 121, 140);
   padding: 0 20px;
+  width: 100%;
 }
 
 .SearchBar button {
@@ -45,4 +47,9 @@
   height: 45px;
 }
 
-
+.mobile-btn {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  font-size: 20px;
+}

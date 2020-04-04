@@ -1,0 +1,40 @@
+.Category {
+  background-color: rgb(255, 255, 255);
+  height: 100vh;
+  padding: 20px;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+
+.Category .navbar {
+  flex-direction: column;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 80px;
+}
+
+.Category .navbar-collapse {
+  width: 100%;
+  height: 100%;
+}
+ 
+.Category .navbar-expand-md .navbar-nav {
+  flex-direction: column;
+  width: 100%;
+}
+
+.Category .navbar-light .navbar-nav .nav-link {
+  color: rgb(13, 17, 54);
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.4s;
+  padding: 20px;
+  width: 100%;
+}
+
+.Category .navbar-light .navbar-nav .nav-link:hover {
+  color: rgb(0, 158, 127);
+}
+
+ 

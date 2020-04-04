@@ -1,12 +1,21 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import './css/SearchBar.css';
 
 export default function(props) {
-  const { isTopMenu } = props;
+  const { isTopMenu, isTopMenuMobile, setClicked } = props;
   return(
     <div className="SearchBar" style={{justifyContent:"center"}}>
+      {
+        isTopMenuMobile &&
+        <div className="mobile-btn">
+          <FontAwesomeIcon 
+            icon={faArrowLeft}
+            onClick={() => setClicked()}
+          />
+        </div>
+      }
       {!isTopMenu && <span>Book</span>}
       {
         isTopMenu ?
@@ -25,11 +34,17 @@ export default function(props) {
        </form>
       }
         {
-          !isTopMenu &&
+          (!isTopMenu && !isTopMenuMobile) &&
           <button>
             <FontAwesomeIcon icon={faSearch} className="mr-2"/>
             Search
           </button>
+        }
+        {
+          isTopMenuMobile &&
+          <div className="mobile-btn">
+            <FontAwesomeIcon icon={faSearch} />
+          </div>
         }
     </div>
   )
