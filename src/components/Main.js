@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import {
   Container,
   Row,
   Col
 } from 'reactstrap';
 
-import Catogory from './Category';
-import Products from './Products';
+import Category from './Category';
+import Loading from './Loading';
 import './css/Main.css';
+
+const Products = lazy(() => import('./Products'));
 
 export default function (props) {
   return(
@@ -15,11 +17,13 @@ export default function (props) {
       <Container fluid>
         <Row>
           <Col xl="3" lg="4">
-            <Catogory />
+            <Category />
           </Col>
-          <Col xl="9" lg="8">
-            <Products />
-          </Col>
+            <Col xl="9" lg="8">
+              <Suspense fallback={<Loading />} >
+                <Products />
+              </Suspense>
+            </Col>
         </Row>
       </Container>
     </main>

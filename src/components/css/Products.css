@@ -37,3 +37,27 @@
 .product .info .author {
   font-size: 13px;
 }
+
+.Products .load-more {
+  border: none;
+  outline: none;
+  background: #fff;
+  padding: 10px 15px;
+  border-radius: 3px;
+  font-size: 15px;
+  color: rgb(0, 158, 127);
+  font-weight: 700;
+}
+
+.fade-in {  
+  animation: fadeIn .3s ease-in
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+}

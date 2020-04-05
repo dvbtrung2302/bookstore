@@ -41,7 +41,7 @@ const Category = (props) => {
           <Nav className="mr-auto" navbar>
             {
               category.map(item => 
-                <NavItem>
+                <NavItem key={item}>
                   <NavLink tag={Link} to="/">{item}</NavLink>
                 </NavItem>
               )
