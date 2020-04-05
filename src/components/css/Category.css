@@ -33,7 +33,7 @@
   color: rgb(13, 17, 54);
   font-weight: 500;
   font-size: 15px;
-  transition: color 0.4s;
+  transition: color 0.2s;
   padding: 20px;
   width: 100%;
 }
@@ -42,4 +42,6 @@
   color: rgb(0, 158, 127);
 }
 
- 
+ .Category .active {
+  color: rgb(0, 158, 127)!important;
+ }

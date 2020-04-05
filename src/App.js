@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 
 import TopMenu from './components/TopMenu';
@@ -24,19 +24,23 @@ class App extends React.Component {
            })
          })
   }
-
+  
   render() {
     const { products } = this.state;
-    return(
-      <ProductsProvider products={products}>
-        <Router>
-          <div className="App">
-            <TopMenu />
-            <TopMenuMobile />
-            <Home />
-          </div>
-        </Router>
-      </ProductsProvider>
+    return(  
+      <Router>
+        <Route 
+          exact path="/" 
+          render={props => 
+          <ProductsProvider products={products} {...props}>
+            <div className="App">
+              <TopMenu />
+              <TopMenuMobile />
+              <Home/>
+            </div>
+          </ProductsProvider>
+        }/>
+      </Router>
     )
   }
 }

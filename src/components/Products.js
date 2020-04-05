@@ -13,7 +13,7 @@ import Loading from './Loading';
 export default function(props) {
   const { products } = useContext(ProductsContext);
   const [ items, setItems ] = useState([]);
-  const [ visible, setVisible ] = useState(8);
+  const [ visible, setVisible ] = useState(10);
   const [ isLoading, setLoading ] = useState(false);
 
   useEffect(() => {
