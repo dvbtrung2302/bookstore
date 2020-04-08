@@ -34,9 +34,6 @@
 }
 
 /* Mobile devices */
-.TopMenuMobile {
-  display: none;
-}
 
 .TopMenuMobile .search-bar {
   position: fixed;
@@ -50,10 +47,6 @@
 
 .TopMenuMobile .wrapper {
   background-color: #fff;
-}
-
-.TopMenuMobile .logo {
-  margin: 0 auto;
 }
 
 .TopMenuMobile .mobile-btn svg {

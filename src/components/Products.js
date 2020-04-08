@@ -9,9 +9,10 @@ import {
 import './css/Products.css';
 import { ProductsContext } from '../contexts/ProductsContext';
 import Loading from './Loading';
+import NotFound from './NotFound';
 
 export default function(props) {
-  const { products } = useContext(ProductsContext);
+  const { products, keyword} = useContext(ProductsContext);
   const [ items, setItems ] = useState([]);
   const [ visible, setVisible ] = useState(10);
   const [ isLoading, setLoading ] = useState(false);
@@ -31,21 +32,27 @@ export default function(props) {
   return(
       <div className="Products">
         <Container>
-          <Row>
-            {
-              items.slice(0, visible).map(item => 
-                <Col key={item.title} xl="3" lg="4" md="6" sm="6" className="p-0 mb-5">
-                  <Link to='/' className="product fade-in">
-                    <img src={item.image} alt="" />
-                    <div className="info">
-                      <h3 className="title">{item.title}</h3>
-                      <p className="author">By {item.author}</p>
-                    </div>
-                  </Link> 
-                </Col>
-              )
-            }
-          </Row>
+          {
+           (items === undefined || items.length === 0) ?
+           <Row className="h-100 w-100 position-absolute">
+             {keyword ? <NotFound /> : <Loading />}
+           </Row> :
+            <Row>
+              {
+                items.slice(0, visible).map(item => 
+                  <Col key={item.title} xl="3" lg="4" md="6" sm="6" className="p-0 mb-5">
+                    <Link to='/' className="product fade-in">
+                      <img src={item.image} alt="" />
+                      <div className="info">
+                        <h3 className="title">{item.title}</h3>
+                        <p className="author">By {item.author}</p>
+                      </div>
+                    </Link> 
+                  </Col>
+                )
+              }
+            </Row>
+          }
           <Row className="m-0 w-100 d-flex justify-content-center">
             {
               (visible < items.length && !isLoading) &&

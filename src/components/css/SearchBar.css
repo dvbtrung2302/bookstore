@@ -11,19 +11,23 @@
   line-height: 38px;
   font-weight: 700;
   background-color: rgb(247, 247, 247);
-  margin-left: 5px;
+  margin: 0 5px;
   white-space: nowrap;
   padding: 0 15px;
   border-radius: 6px;
+  align-items: center;
+  display: flex;
 }
 .SearchBar form {
   flex-grow: 1;
+  max-width: 70%;
   display: flex;
   align-items: center;
   background-color: rgb(255, 255, 255);
   color: rgb(119, 121, 140);
   border-radius: 3px;
   overflow: hidden;
+  padding: 20px 0;
 }
 .SearchBar input {
   flex-grow: 1;
@@ -33,6 +37,7 @@
   color: rgb(119, 121, 140);
   padding: 0 20px;
   width: 100%;
+  height: 100%;
 }
 
 .SearchBar button {
@@ -44,7 +49,7 @@
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   font-weight: 600;
-  height: 45px;
+  height: 55px;
 }
 
 .mobile-btn {

@@ -13,12 +13,12 @@ p {
 }
 
 @media (max-width: 1200px) {
-  .TopMenu {
+  /* .TopMenu {
     display: none;
   }
   .TopMenuMobile {
     display: block!important;
-  }
+  } */
   .Banner {
     background-position: left!important;
   }

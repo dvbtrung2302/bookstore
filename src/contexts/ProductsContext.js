@@ -1,52 +1,82 @@
 import React from 'react';
-import queryString from 'query-string';
+import axios from 'axios';
 
 export const ProductsContext = React.createContext();
 
 export class ProductsProvider extends React.Component {
-  toSlug = (str) => {
-    // Chuyển hết sang chữ thường
-    str = str.toLowerCase();     
- 
-    // xóa dấu
-    str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
-    str = str.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, 'e');
-    str = str.replace(/(ì|í|ị|ỉ|ĩ)/g, 'i');
-    str = str.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, 'o');
-    str = str.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, 'u');
-    str = str.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, 'y');
-    str = str.replace(/(đ)/g, 'd');
- 
-    // Xóa ký tự đặc biệt
-    str = str.replace(/([^0-9a-z-\s])/g, '');
- 
-    // Xóa khoảng trắng thay bằng ký tự -
-    str = str.replace(/(\s+)/g, '-');
- 
-    // xóa phần dự - ở đầu
-    str = str.replace(/^-+/g, '');
- 
-    // xóa phần dư - ở cuối
-    str = str.replace(/-+$/g, '');
- 
-    // return
-    return str;
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: [],
+      displayCategory: null,
+      keyword: '',
+    }
+    this.setCategory = this.setCategory.bind(this);
+    this.setStateDefault = this.setStateDefault.bind(this);
+    this.setKeyword = this.setKeyword.bind(this);
+    this.filterProducts = this.filterProducts.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/products')
+         .then(res => {
+           this.setState({
+             products: res.data
+           })
+         })
+         .catch(err => {
+           console.log(err);
+         })
+  }
+
+  setCategory(category = '') {
+    this.setState({
+      displayCategory: category
+    })
+  }
+
+  setKeyword(keyword = '') {
+    this.setState({
+      keyword: keyword,
+      displayCategory: null
+    })
+  }
+
+  setStateDefault() {
+    this.setState({
+      displayCategory: null,
+      keyword: ''
+    })
+  }
+
+  filterProducts(category = '', keyword = '') {
+    const { products } = this.state;
+    if (category) {
+      const filteredProducts = products.filter(function(product) {
+        return product.category.indexOf(category) !== -1;
+      });
+      return filteredProducts;
+    }
+    if (keyword) {
+      const filteredProducts = products.filter(function(product) {
+        return product.title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+      });
+      return filteredProducts;
+    }
+    return products;
   }
 
   render() {
-    const { products } = this.props;
-    const params = queryString.parse(this.props.location.search);
-    let filterProducts = [];
-    if (params.category === '' || !params.category) {
-      filterProducts = products;
-    } else {
-      filterProducts = products.filter(product => {
-        return this.toSlug(product.category) === params.category;
-      })
-    }
+    const { displayCategory, keyword } = this.state;
+    const products = this.filterProducts(displayCategory, keyword);
     return(
       <ProductsContext.Provider value={{
-        products: filterProducts
+        products: products,
+        setCategory: this.setCategory,
+        setStateDefault: this.setStateDefault,
+        setKeyword: this.setKeyword,
+        categoryName: displayCategory,
+        keyword: keyword
       }}>
         {this.props.children}
       </ProductsContext.Provider>
