@@ -29,7 +29,20 @@ export class ProductsProvider extends React.Component {
          })
   }
 
+  componentWillUnmount() {
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+
+    axios.get('http://localhost:5000/products', {
+      cancelToken: source.token
+    })
+  }
+
   setCategory(category = '') {
+    window.scrollTo({
+      top: window.innerHeight - 90,
+      behavior: "smooth"
+    });
     this.setState({
       displayCategory: category
     })

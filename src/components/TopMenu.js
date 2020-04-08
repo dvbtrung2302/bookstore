@@ -8,34 +8,38 @@ import './css/TopMenu.css';
 import SearchBar from './SearchBar';
 import {ProductsContext} from '../contexts/ProductsContext'
 
-export default function() {
+export default function(props) {
   const [isHide, setHide] = useState(false);
   const [isVisble, setVisible] = useState(true);
   const { setStateDefault } = useContext(ProductsContext);
   const [isClicked, setClicked] = useState(false);
-
-  const hideMenu = () => {
-    if (window.pageYOffset === 0 || window.pageYOffset > 500) {
-      return setHide(false);
-    } else {
-      return setHide(true);
-    }
-  };
-
-  const hideSearch = () => {
-    if (window.pageYOffset > 500) {
-      return setVisible(false); 
-    } else {
-      return setVisible(true);
-    }
-  }
-
+  const { isTopMenu } = props;
+  
   useEffect(() => {
-    document.addEventListener("scroll", e => {
-      hideMenu();
-      hideSearch();
-    });
-  });
+    if (isTopMenu) {
+      const hideMenu = () => {
+        if (window.pageYOffset === 0 || window.pageYOffset > 500) {
+          return setHide(false);
+        } else {
+          return setHide(true);
+        }
+      };
+    
+      const hideSearch = () => {
+        if (window.pageYOffset > 500) {
+          return setVisible(false); 
+        } else {
+          return setVisible(true);
+        }
+      }    
+      window.addEventListener("scroll", hideMenu, true);
+      window.addEventListener("scroll", hideSearch, true);
+      return () => {
+        window.removeEventListener("scroll", hideMenu, true);
+        window.removeEventListener("scroll", hideSearch, true);
+      };
+    }
+  }, [isTopMenu]);
   return(
     <header className="TopMenu TopMenuMobile">
        {
@@ -46,16 +50,21 @@ export default function() {
               isTopMenuMobile={true} 
               setClicked={() => setClicked(false)}
             />
+          <div>a</div>
           </div>
         </div> :
         <div className={!isHide ? "wrapper" : "wrapper hide"}>
           <Container className="justify-content-between">
-            <div className="mobile-btn d-block d-xl-none">
-              <FontAwesomeIcon 
-                icon={faSearch}
-                onClick={() => setClicked(true)}
-              />
-            </div>
+            { 
+              isTopMenu &&
+              <div className="mobile-btn d-block d-xl-none">
+                <FontAwesomeIcon 
+                  icon={faSearch}
+                  onClick={() => setClicked(true)}
+                />
+              </div>
+
+            }
             <div className="logo">
               <Link to="/" onClick={() => setStateDefault()}> 
                 <img alt="" src="https://res.cloudinary.com/dofqucuyy/image/upload/v1585755124/Books/logo_gtuxyy.svg" />

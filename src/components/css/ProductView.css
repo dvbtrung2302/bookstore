@@ -1,0 +1,97 @@
+.ProductView {
+  background-color: #fff;
+}
+
+.ProductView .back-btn {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(241, 241, 241);
+  color: rgb(119, 121, 140);
+  position: absolute;
+  font-size: 14px;
+  font-weight: 400;
+  top: 0;
+  left: 60px;
+  border-radius: 5px;
+  padding: 5px 20px;
+}
+
+.ProductView .back-btn:focus {
+  box-shadow: none;
+}
+
+.ProductView .back-btn:hover {
+  border: 1px solid rgb(0, 158, 127);
+  color: rgb(0, 158, 127);
+}
+
+.ProductView .img-wrapper {
+  max-width: 450px;
+  max-height: 450px;
+  margin: 0 auto;
+}
+
+.ProductView .img-wrapper img {
+  width: 100%;
+  height: 100%;
+}
+
+.ProductView .title {
+  margin-bottom: 30px;
+}
+
+.ProductView .title h1 {
+  font-size: 21px;
+  font-weight: 700;
+  color: rgb(13, 17, 54);
+}
+
+.ProductView .title p {
+  font-size: 14px;
+}
+
+.ProductView .des p {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgb(66, 69, 97);
+  line-height: 1.8;
+  height: 115px;
+  overflow: hidden;
+  margin: 0;
+}
+
+.ProductView .des .read-more {
+  color: rgb(0, 158, 127);
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 50px;
+}
+
+.ProductView .price {
+  font-size: 22px;
+  font-weight: 600;
+  color: rgb(0, 158, 127);
+  margin-bottom: 20px;
+}
+
+.ProductView .category .btn {
+  margin-top: 30px;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgb(13, 17, 54);
+  background-color: rgb(247, 247, 247);
+  border-radius: 10px;
+}
+
+.ProductView .category .btn:focus {
+  box-shadow: none;
+}
+
+.ProductView .category .btn:hover {
+  border: 1px solid rgb(0, 158, 127);
+  color: rgb(0, 158, 127);
+}
+
+.des-show {
+  height: 100%!important;
+  overflow: unset!important;
+}

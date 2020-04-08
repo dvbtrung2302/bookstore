@@ -10,7 +10,7 @@
 .Category .navbar {
   position: sticky;
   position: -webkit-sticky;
-  top: 80px;
+  top: 100px;
   display: block;
 }
 

@@ -13,12 +13,6 @@ p {
 }
 
 @media (max-width: 1200px) {
-  /* .TopMenu {
-    display: none;
-  }
-  .TopMenuMobile {
-    display: block!important;
-  } */
   .Banner {
     background-position: left!important;
   }
@@ -35,5 +29,8 @@ p {
   .Category .navbar {
     display: flex!important;
     justify-content: space-between;
+  }
+  .ProductView .back-btn {
+    top: -40px!important;
   }
 }

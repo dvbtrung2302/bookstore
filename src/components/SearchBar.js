@@ -16,7 +16,7 @@ export default function(props) {
         }
         setText('');
         window.scrollTo({
-          top: 867,
+          top: window.innerHeight,
           behavior: "smooth"
         });
         return setKeyword(event.target.value)

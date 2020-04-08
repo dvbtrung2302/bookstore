@@ -10,7 +10,7 @@ export default function() {
   return(
     <div className="NotFound">
       <h1>Sorry, No result found :(</h1>
-      <img src="https://res.cloudinary.com/dofqucuyy/image/upload/v1586332632/Books/notfound_sufieg.svg" alt="" />
+      <img className="w-100" src="https://res.cloudinary.com/dofqucuyy/image/upload/v1586332632/Books/notfound_sufieg.svg" alt="" />
       <button onClick={() => setStateDefault()} className="btn">
         <FontAwesomeIcon icon={faChevronLeft} />
         Go Back

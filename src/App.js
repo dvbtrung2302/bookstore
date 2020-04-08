@@ -1,23 +1,23 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import TopMenu from './components/TopMenu';
 import Home from './pages/Home';
 import { ProductsProvider } from './contexts/ProductsContext';
+import Detail from './pages/Detail';
 
 class App extends React.Component {
   render() {
     return(  
       <Router>
-        <Route exact path="/">
-          <ProductsProvider>
-            <div className="App">
-              <TopMenu />
-              <Home/>
-            </div>
-          </ProductsProvider>
-        </Route>
+        <ProductsProvider>
+          <div className="App">
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/product/:title" component={Detail}/>}
+              </Switch>
+          </div>
+        </ProductsProvider>
       </Router>
     )
   }
