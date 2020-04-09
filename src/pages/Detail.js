@@ -2,6 +2,7 @@ import React from 'react';
 
 import ProductView from '../components/ProductView';
 import TopMenu from '../components/TopMenu';
+import RelatedItems from '../components/RelatedItems';
 
 class Detail extends React.Component {
   render() {
@@ -13,7 +14,8 @@ class Detail extends React.Component {
           marginTop:"85px"
         }}>
           <TopMenu />
-          <ProductView {...this.props}/>
+          <ProductView key={this.props.match.params.title} {...this.props}/>
+          <RelatedItems />
       </div>
     );
   }

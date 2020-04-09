@@ -24,3 +24,21 @@
 .CartBtn .btn:focus {
   box-shadow: none;
 }
+
+.CartBtn .related {
+  background-color: #fff;
+  color: rgb(0, 158, 127);
+}
+
+.CartBtn .related p {
+  color: rgb(0, 158, 127);
+}
+
+.CartBtn .related:hover {
+  background-color: rgb(0, 158, 127);
+  color: #fff;
+}
+
+.CartBtn .related:hover p{
+  color: #fff;
+}

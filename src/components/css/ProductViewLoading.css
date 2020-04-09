@@ -1,0 +1,30 @@
+.ProductViewLoading .img-loading {
+  width: 300px;
+  height: 450px;
+  margin: 0 auto;
+}
+
+.ProductViewLoading .content-loading div, .ProductViewLoading .img-loading {
+  animation: load 1s infinite ease-in-out;
+  -webkit-animation: load 1s infinite ease-in-out;
+}
+
+.ProductViewLoading .content-loading div:nth-child(1) {
+  width: 300px;
+  height: 20px;
+}
+
+.ProductViewLoading .content-loading div:nth-child(2) {
+  width: 100px;
+  height: 20px;
+}
+
+.ProductViewLoading .content-loading div:nth-child(3) {
+  width: 100%;
+  height: 20px;
+}
+
+.ProductViewLoading .content-loading div:nth-child(4) {
+  width: 80%;
+  height: 20px;
+}

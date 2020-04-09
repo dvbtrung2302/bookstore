@@ -11,8 +11,8 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 import './css/ProductView.css';
 import CartBtn from './CartBtn';
-import Loading from './Loading';
 import { ProductsContext } from '../contexts/ProductsContext';
+import ProductViewLoading from './ProductViewLoading';
 
 class ProductView extends React.Component {
   constructor(props) {
@@ -26,16 +26,21 @@ class ProductView extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
     axios.get(`http://localhost:5000/products/product/?id=${this.props.location.state.id}`)
-         .then(res => {
-           this.setState({
-             product: res.data
-           })
-         })
-         .catch(err => {
-           console.log(err);
-         })
+          .then(res => {
+            this.setState({
+              product: res.data
+            })
+          })
+          .catch(err => {
+            console.log(err);
+          })
   }
+
   componentWillUnmount() {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
@@ -59,7 +64,7 @@ class ProductView extends React.Component {
       <div className="ProductView py-5">
         <Container fluid="lg">
           {
-            !product.title ? <Loading /> : 
+            !product.title ? <ProductViewLoading /> : 
             <Row>
               <Col xl="6" lg="6" className="mb-5 text-center">
                 <button 

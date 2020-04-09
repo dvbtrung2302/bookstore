@@ -18,15 +18,27 @@ export class ProductsProvider extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/products')
-         .then(res => {
-           this.setState({
-             products: res.data
+    if (this.state.products.length === 0) {
+      axios.get('http://localhost:5000/products')
+           .then(res => {
+             this.setState({
+               products: res.data
+             })
            })
-         })
-         .catch(err => {
-           console.log(err);
-         })
+           .catch(err => {
+             console.log(err);
+           })
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.products === nextState.products 
+      && this.state.displayCategory === nextState.displayCategory
+      && this.state.keyword === nextState.keyword
+    ) {
+      return false;
+    }
+    return true;
   }
 
   componentWillUnmount() {

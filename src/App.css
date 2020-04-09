@@ -5,6 +5,10 @@ p {
   color: rgb(13, 17, 54);
  }
 
+ .App {
+   background-color: rgb(224, 224, 224);
+ }
+
 @media (min-width: 1200px) {
   .container, .container-lg, 
   .container-md, .container-sm, .container-xl {

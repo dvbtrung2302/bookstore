@@ -11,8 +11,8 @@ import {ProductsContext} from '../contexts/ProductsContext'
 export default function(props) {
   const [isHide, setHide] = useState(false);
   const [isVisble, setVisible] = useState(true);
-  const { setStateDefault } = useContext(ProductsContext);
   const [isClicked, setClicked] = useState(false);
+  const { setStateDefault } = useContext(ProductsContext);
   const { isTopMenu } = props;
   
   useEffect(() => {
@@ -40,6 +40,7 @@ export default function(props) {
       };
     }
   }, [isTopMenu]);
+
   return(
     <header className="TopMenu TopMenuMobile">
        {
@@ -50,7 +51,6 @@ export default function(props) {
               isTopMenuMobile={true} 
               setClicked={() => setClicked(false)}
             />
-          <div>a</div>
           </div>
         </div> :
         <div className={!isHide ? "wrapper" : "wrapper hide"}>
