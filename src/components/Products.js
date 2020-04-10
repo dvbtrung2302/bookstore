@@ -32,7 +32,7 @@ export default function(props) {
 
   return(
     <div className="Products">
-      <Container className="h-100 d-flex flex-column justify-content-center align-items-center">
+      <Container className="h-100">
         {
           (items === undefined || items.length === 0) ?
           [keyword ? <NotFound /> : <ProductsLoading key={items.length} /> ] :

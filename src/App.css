@@ -38,3 +38,10 @@ p {
     top: -40px!important;
   }
 }
+
+
+@media (max-width: 576px){
+  .CartItems {
+    width: 100%!important;
+  }
+}

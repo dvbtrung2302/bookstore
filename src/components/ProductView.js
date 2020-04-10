@@ -107,7 +107,7 @@ class ProductView extends React.Component {
                   }
                 </div>
                 <div className="price">${product.price}</div>
-                <CartBtn />
+                <CartBtn product={product} />
                 <div className="category">
                   <ProductsContext.Consumer>
                   {({ setCategory }) => (
