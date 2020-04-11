@@ -39,7 +39,7 @@
   font-size: 13px;
 }
 
-.product .cart {
+.cart {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,7 +47,7 @@
   padding: 0 20px;
 }
 
-.product .cart .price {
+.cart .price {
   font-size: 16px;
   font-weight: 600;
   color: rgb(0, 158, 127);

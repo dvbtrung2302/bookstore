@@ -8,6 +8,14 @@
   font-weight: 600;
   border-radius: 30px;
   font-size: 14px;
+  padding: 5px 0;
+  -webkit-user-select: none; /* Chrome/Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
 }
 
 .QuantityAdjustment .adj {

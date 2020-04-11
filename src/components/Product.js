@@ -50,13 +50,13 @@ export default function(props) {
           <h3 className="title">{item.title}</h3>
           <p className="author">By {item.author}</p>
         </div>
-          { 
-            type === 'related' && 
-            <div className="cart">
-              <div className="price">${item.price}</div>
-              <CartBtn type={type} />
-            </div>
-          }
+        { 
+          type === 'related' && 
+          <div className="cart">
+            <div className="price">${item.price}</div>
+            <CartBtn type={type} product={item} />
+          </div>
+        }
       </Link> 
     </Col>
   );

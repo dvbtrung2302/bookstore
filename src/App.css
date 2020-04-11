@@ -5,6 +5,23 @@ p {
   color: rgb(13, 17, 54);
  }
 
+ ::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, .2);
+}
+
  .App {
    background-color: rgb(224, 224, 224);
  }

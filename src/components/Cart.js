@@ -6,7 +6,11 @@ import './css/Cart.css';
 import { CartContext } from '../contexts/CartContext';
 
 export default function() {
-  const { setCartClicked, cartItems } = useContext(CartContext);
+  const { 
+    setCartClicked, 
+    cartItems, 
+    totalPrice 
+  } = useContext(CartContext);
   return(
     <div 
       className="Cart"
@@ -17,7 +21,7 @@ export default function() {
         {cartItems.length} {cartItems.length < 2 ? 'item' : 'items'}
       </div>
       <div className="total-price">
-        <p>$80.00</p>
+        <p>${totalPrice}.00</p>
       </div>
     </div>
   );
