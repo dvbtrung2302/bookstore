@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBag ,faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 
-import './css/CartItems.css';
+import '../css/CartItems.css';
 import QuantityAdjustment from './QuantityAdjustment';
 import { CartContext } from '../contexts/CartContext';
 

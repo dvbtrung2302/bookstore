@@ -1,0 +1,12 @@
+.Alert {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  z-index: 5;
+  width: 280px;
+}
+
+.Alert .alert {
+  margin: 0;
+  padding: 20px 20px;
+}

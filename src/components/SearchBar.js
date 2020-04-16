@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { ProductsContext } from '../contexts/ProductsContext';
-import './css/SearchBar.css';
+import '../css/SearchBar.css';
 
 export default function(props) {
   const { isTopMenu, isTopMenuMobile, setClicked } = props;
@@ -19,8 +19,16 @@ export default function(props) {
           top: window.innerHeight,
           behavior: "smooth"
         });
-        return setKeyword(event.target.value)
+        return setKeyword(event.target.value);
     }
+  }
+
+  const handleBtnClick = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: "smooth"
+    });
+    return setKeyword(text);
   }
   return(
     <div 
@@ -54,7 +62,7 @@ export default function(props) {
       </form> 
       {
         (!isTopMenu && !isTopMenuMobile) &&
-        <button>
+        <button onClick={() => handleBtnClick()}>
           <FontAwesomeIcon icon={faSearch} className="mr-2"/>
           Search
         </button>
@@ -62,7 +70,7 @@ export default function(props) {
       {
         isTopMenuMobile &&
         <div className="mobile-btn">
-          <FontAwesomeIcon icon={faSearch} />
+          <FontAwesomeIcon icon={faSearch} onClick={() => handleBtnClick()} />
         </div>
       }
   </div>

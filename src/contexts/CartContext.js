@@ -5,7 +5,10 @@ export const CartContext = React.createContext();
 export class CartProvider extends React.Component {
   constructor(props) {
     super(props);
-    const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+    let cartItems = JSON.parse(localStorage.getItem('cartItems'));
+    if (!cartItems) {
+      cartItems = [];
+    }
     this.state = {
       cartItems: cartItems,
       isCartClicked: false

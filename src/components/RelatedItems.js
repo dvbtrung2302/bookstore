@@ -4,7 +4,7 @@ import {
  Row
 } from 'reactstrap';
 
-import './css/RelatedItems.css';
+import '../css/RelatedItems.css';
 import Product from './Product';
 import { ProductsContext } from '../contexts/ProductsContext';
 

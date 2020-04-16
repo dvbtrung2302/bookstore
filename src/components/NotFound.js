@@ -2,7 +2,7 @@ import React, { useContext }from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
-import './css/NotFound.css';
+import '../css/NotFound.css';
 import {ProductsContext} from '../contexts/ProductsContext';
 
 export default function() {

@@ -4,17 +4,21 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-import './css/TopMenu.css';
+import '../css/TopMenu.css';
 import SearchBar from './SearchBar';
-import {ProductsContext} from '../contexts/ProductsContext'
+import AuthForm from './AuthForm';
+import User from './User';
+import { ProductsContext } from '../contexts/ProductsContext'
+import { AuthContext } from '../contexts/AuthContext';
 
 export default function(props) {
   const [isHide, setHide] = useState(false);
   const [isVisble, setVisible] = useState(true);
   const [isClicked, setClicked] = useState(false);
-  const { setStateDefault } = useContext(ProductsContext);
   const { isTopMenu } = props;
-  
+  const { setStateDefault } = useContext(ProductsContext);
+  const { user } = useContext(AuthContext);
+
   useEffect(() => {
     if (isTopMenu) {
       const hideMenu = () => {
@@ -40,7 +44,6 @@ export default function(props) {
       };
     }
   }, [isTopMenu]);
-
   return(
     <header className="TopMenu TopMenuMobile">
        {
@@ -63,7 +66,6 @@ export default function(props) {
                   onClick={() => setClicked(true)}
                 />
               </div>
-
             }
             <div className="logo">
               <Link to="/" onClick={() => setStateDefault()}> 
@@ -72,7 +74,7 @@ export default function(props) {
             </div>
             {!isVisble && <SearchBar isTopMenu={true}/> }
             <div className="user-btn">
-              <button>Sign in</button>
+              {!user._id ? <AuthForm /> : <User />}
             </div>
           </Container>
         </div>

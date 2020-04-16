@@ -4,7 +4,7 @@ import  {
   Col
 } from 'reactstrap';
 
-import './css/ProductsLoading.css';
+import '../css/ProductsLoading.css';
 
 export default function() {
   return(

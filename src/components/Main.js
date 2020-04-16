@@ -7,7 +7,7 @@ import {
 
 import Category from './Category';
 import Products from './Products';
-import './css/Main.css';
+import '../css/Main.css';
 
 export default function (props) {
   return(

@@ -1,0 +1,86 @@
+.AuthForm {
+  padding: 40px 60px 10px;
+}
+
+.AuthForm .header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.AuthForm .header h1 {
+  color: rgb(0, 158, 127);
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.AuthForm .header p {
+  font-size: 14px;
+}
+
+.AuthForm .form-group label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.AuthForm .form-control {
+  height: 48px;
+  background-color: rgb(247, 247, 247);
+  border-color: rgb(241, 241, 241);
+  color: rgb(13, 17, 54);
+  font-size: 14px;
+  transition: border-color .3s;
+}
+
+.AuthForm .form-control:focus {
+  box-shadow: none;
+  border-color: rgb(0, 158, 127);
+}
+
+.AuthForm .btn {
+  background-color: rgb(0, 158, 127);
+  border: none;
+}
+
+.AuthForm .btn:focus, .AuthForm .btn:active {
+  box-shadow: none;
+  background-color: rgb(0, 158, 127)!important;
+  border: none;
+}
+
+.AuthForm .footer {
+  margin: 15px 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+.AuthForm .footer span {
+  margin-left: 5px;
+  cursor: pointer;
+  color: rgb(0, 158, 127);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.auth.close {
+  background-color: #fff;
+  opacity: 1!important;
+  width: 32px;
+  height: 32px;
+  color: rgb(34, 34, 34) !important;
+  border-radius: 50%;
+}
+
+.auth.close:hover {
+  background-color: #fff;
+}
+
+.auth.close:focus {
+  outline: none;
+}
+.AuthForm .validation {
+  margin: 0 0 10px;
+  font-weight:400;
+  font-size:13px;
+  color: #DE5959;
+}

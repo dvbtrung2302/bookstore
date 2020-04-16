@@ -19,7 +19,7 @@ export class ProductsProvider extends React.Component {
 
   componentDidMount() {
     if (this.state.products.length === 0) {
-      axios.get('http://localhost:5000/products')
+      axios.get('https://dvbt-bookstore.herokuapp.com/products')
            .then(res => {
              this.setState({
                products: res.data
@@ -45,7 +45,7 @@ export class ProductsProvider extends React.Component {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
 
-    axios.get('http://localhost:5000/products', {
+    axios.get('https://dvbt-bookstore.herokuapp.com/products', {
       cancelToken: source.token
     })
   }

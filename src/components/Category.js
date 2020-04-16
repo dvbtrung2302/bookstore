@@ -12,7 +12,7 @@ import { Link  } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThLarge } from "@fortawesome/free-solid-svg-icons";
 
-import './css/Category.css';
+import '../css/Category.css';
 import { ProductsContext } from '../contexts/ProductsContext';
 
 const Category = (props) => {

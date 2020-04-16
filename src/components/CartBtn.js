@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 
-import './css/CartBtn.css';
+import '../css/CartBtn.css';
 import { CartContext } from '../contexts/CartContext';
 import QuantityAdjustment from './QuantityAdjustment';
 
 export default function(props) {
   let { type, product } = props;
-  const { addToCart, cartItems } = useContext(CartContext);
+  const { addToCart, cartItems, setCartClicked } = useContext(CartContext);
   
   const isExists = (cartItems = [], item = {}) => {
     for (let cartItem of cartItems) {
@@ -29,7 +29,7 @@ export default function(props) {
         product.quantity ? <QuantityAdjustment product={product} /> :
         <button 
           className={type === 'related' ? 'btn related' : 'btn'}
-          onClick={(e) => {addToCart(product); e.preventDefault()}}
+          onClick={(e) => {addToCart(product); e.preventDefault(); setCartClicked()}}
         >  
           <FontAwesomeIcon icon={faShoppingBasket} />
             { 

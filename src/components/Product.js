@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Col } from 'reactstrap';
 
-import './css/Product.css';
+import '../css/Product.css';
 import CartBtn from './CartBtn';
 
 export default function(props) {

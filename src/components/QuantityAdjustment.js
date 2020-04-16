@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
-import './css/QuantityAdjustment.css';
+import '../css/QuantityAdjustment.css';
 import { CartContext } from '../contexts/CartContext';
 
 export default function(props) {
@@ -16,12 +16,12 @@ export default function(props) {
         "QuantityAdjustment"}
       onClick={(e) => e.preventDefault()}
     >
-      <div className="decrease adj">
-        <FontAwesomeIcon icon={faMinus} onClick={() => decreaseItem(product)}/>
+      <div className="decrease adj" onClick={() => decreaseItem(product)}>
+        <FontAwesomeIcon icon={faMinus} />
       </div>
       <div className="number">{!product ? 0 : product.quantity}</div>
-      <div className="increase adj">
-        <FontAwesomeIcon icon={faPlus} onClick={() => increaseItem(product)} />
+      <div className="increase adj" onClick={() => increaseItem(product)}>
+        <FontAwesomeIcon icon={faPlus}  />
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-import './css/ProductView.css';
+import '../css/ProductView.css';
 import CartBtn from './CartBtn';
 import { ProductsContext } from '../contexts/ProductsContext';
 import ProductViewLoading from './ProductViewLoading';
@@ -20,15 +20,13 @@ function ProductView(props) {
   const { setCategory } = useContext(ProductsContext);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/products/product/?id=${props.location.state.id}`)
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
+    axios.get(`https://dvbt-bookstore.herokuapp.com/products/product/?id=${props.location.state.id}`)
           .then(res => {
             setProduct(res.data);
-          })
-          .then(() => {
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth"
-            })
           })
           .catch(err => {
             console.log(err);
@@ -37,7 +35,7 @@ function ProductView(props) {
       const CancelToken = axios.CancelToken;
       const source = CancelToken.source();
   
-      axios.get(`http://localhost:5000/products/product/?id=${props.location.state.id}`, {
+      axios.get(`https://dvbt-bookstore.herokuapp.com/products/product/?id=${props.location.state.id}`, {
         cancelToken: source.token
       })
     }

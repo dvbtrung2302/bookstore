@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './css/Banner.css';
+import '../css/Banner.css';
 import SearchBar from './SearchBar';
 import { Container } from 'reactstrap';
 
