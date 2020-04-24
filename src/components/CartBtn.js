@@ -29,7 +29,7 @@ export default function(props) {
         product.quantity ? <QuantityAdjustment product={product} /> :
         <button 
           className={type === 'related' ? 'btn related' : 'btn'}
-          onClick={(e) => {addToCart(product); e.preventDefault(); setCartClicked()}}
+          onClick={(e) => {addToCart(product); e.preventDefault(); setCartClicked(true, true)}}
         >  
           <FontAwesomeIcon icon={faShoppingBasket} />
             { 

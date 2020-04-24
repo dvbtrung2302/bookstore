@@ -54,6 +54,12 @@ p {
   .ProductView .back-btn {
     top: -40px!important;
   }
+  .Checkout .checkout-form {
+    width: 100%!important;
+  }
+  .Checkout .checkout-form .payment .form-check {
+    flex-direction: column;
+  }
 }
 
 

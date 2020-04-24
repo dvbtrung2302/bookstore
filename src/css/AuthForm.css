@@ -78,7 +78,7 @@
 .auth.close:focus {
   outline: none;
 }
-.AuthForm .validation {
+.validation {
   margin: 0 0 10px;
   font-weight:400;
   font-size:13px;

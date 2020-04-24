@@ -1,0 +1,187 @@
+.Checkout {
+  background-color: rgb(247, 247, 247);
+  padding-top: 150px;
+}
+
+.Checkout .co-header {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(13, 17, 54);
+  line-height: 1.2;
+  margin-bottom: 25px;
+}
+
+.Checkout .checkout-form {
+  background-color: #fff;
+  width: 870px;
+  margin: 0 auto;
+  padding: 50px 30px;
+}
+
+.Checkout .checkout-form .order-info {
+  background-color: rgb(247, 247, 247);
+  padding: 20px 40px;
+  border-radius: 5px;
+  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.Checkout .checkout-form .order-info .item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding: 30px 0;
+}
+
+.Checkout .checkout-form .order-info .item:nth-child(4) {
+  border-bottom: none;
+}
+
+.Checkout .checkout-form .order-info .item .title {
+  color: rgb(13, 17, 54);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.Checkout .checkout-form .order-info .item .price {
+  font-size: 16px;
+  color: rgb(13, 17, 54);
+  line-height: 24px;
+  font-weight: 700;
+}
+
+.Checkout form {
+  margin-top: 50px;
+}
+
+
+.Checkout form .form-group {
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.Checkout form .form-group:nth-child(5) {
+  border-bottom: none;
+}
+
+.Checkout form .billing-address label {
+  font-size: 16px;
+  margin: 0;
+  width: 15%;
+  min-width: 70px;
+  padding: 11px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #797979;
+}
+
+.Checkout form .billing-address input {
+  font-size: 16px;
+  width: 100%;
+  padding: 11px 15px 11px 0;
+  background-color: rgb(247, 247, 247);
+  outline: none;
+  border: none;
+}
+
+.Checkout form input:focus {
+  box-shadow: none;
+  background-color: rgb(247, 247, 247);
+}
+
+.Checkout form .billing-address {
+  background-color: rgb(247, 247, 247);
+  padding: 20px 40px;
+  border-radius: 5px;
+  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.Checkout form .payment {
+  margin: 60px 0 30px 0;
+  background-color: rgb(247, 247, 247);
+  padding: 20px 40px;
+  border-radius: 5px;
+  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.Checkout form .payment label {
+  cursor: pointer;
+  padding: 10px 80px;
+  border: 2px solid rgb(0, 158, 127);
+  color: rgb(0, 158, 127);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: background-color .4s;
+}
+
+.Checkout form .payment input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.Checkout form .payment label svg {
+  font-size: 60px;
+}
+
+.Checkout form .payment label span {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.Checkout form .payment input[type="radio"]:checked + label {
+  background-color: rgb(0, 158, 127);
+  color: #fff;
+}
+
+.Checkout .StripeElement{
+  background-color: rgb(247, 247, 247);
+  border-radius: 5px;
+  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  padding: 20px 30px;
+} 
+ 
+.Checkout .checkout-form .btn {
+  margin-top: 50px;
+  background-color: rgb(0, 158, 127);
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 15px;
+}
+
+.Checkout .checkout-form .btn:active {
+  box-shadow: none;
+  background-color: rgb(0, 158, 127)!important;
+  border: none;
+}
+
+.Checkout .error-msg {
+  color: #eb1c26;
+  text-align: center;
+  margin-top: 10px;
+  width: 100%;
+  transform: translateY(-15px);
+  opacity: 0;
+  animation: fade 150ms ease-out;
+  animation-delay: 50ms;
+  animation-fill-mode: forwards;
+  will-change: opacity, transform;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: scale3D(0.95, 0.95, 0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale3D(1, 1, 1);
+  }
+}

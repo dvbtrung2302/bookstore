@@ -9,38 +9,40 @@ export class AuthProvider extends React.Component {
     this.state = {
       token: localStorage.getItem('token') || '',
       user: {},
-      isAlertOpen: false
+      isAlertOpen: false, 
+      isCheckoutClick: false
     }
-    this.setToken = this.setToken.bind(this);
     this.setStateDefault = this.setStateDefault.bind(this);
     this.setAlertOpen = this.setAlertOpen.bind(this);
+    this.setCheckoutClick = this.setCheckoutClick.bind(this);
+    this.userLogin = this.userLogin.bind(this);
   }
 
   componentDidMount() {
-    const { token } = this.state;
-    if (token) {
-      axios.get('http://localhost:5000/user', { headers: {"Authorization" : `Bearer ${token}`}} )
-           .then(res => {
-             this.setState({
+    axios.get('http://localhost:5000/user', { headers: {"Authorization" : `Bearer ${this.state.token}`}})
+         .then(res => {
+            this.setState({
               user: res.data
-             })
-           });
-    }
+            })
+         })
   }
 
-  setToken(token = '') {
+  userLogin(token = '') {
     axios.get('http://localhost:5000/user', { headers: {"Authorization" : `Bearer ${token}`}} )
-         .then(res => {
-           this.setState({
-            user: res.data
-           })
-         })
+    .then(res => {
+      this.setState({
+        token: token,
+        user: res.data
+      })
+    })
   }
 
   setStateDefault() {
     this.setState({
       token: '',
-      user: ''
+      isAlertOpen: false,
+      user: {},
+      isCheckoutClick: false
     })  
   }
 
@@ -56,16 +58,25 @@ export class AuthProvider extends React.Component {
     })
   }
 
+  setCheckoutClick() {
+    this.setState({
+      isCheckoutClick: !this.state.isCheckoutClick
+    })
+  }
+
   render() {
-    const { token, user, isAlertOpen }= this.state;
+    const { token, user, isAlertOpen, isCheckoutClick }= this.state;
     return(
       <AuthContext.Provider value={{
         token: token,
+        user: user,
         setToken: this.setToken,
         setStateDefault: this.setStateDefault,
-        user: user,
         setAlertOpen: this.setAlertOpen,
-        isAlertOpen: isAlertOpen
+        isAlertOpen: isAlertOpen,
+        isCheckoutClick: isCheckoutClick,
+        setCheckoutClick: this.setCheckoutClick,
+        userLogin: this.userLogin
       }}>
         {this.props.children}      
       </AuthContext.Provider>

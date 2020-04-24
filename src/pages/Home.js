@@ -3,6 +3,8 @@ import React from 'react';
 import Banner from '../components/Banner';
 import Main  from '../components/Main';
 import TopMenu from '../components/TopMenu';
+import Cart from '../components/Cart';
+import CartItems from '../components/CartItems';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -19,6 +21,8 @@ class Home extends React.Component {
     return(
       <div className="Home">
         <TopMenu isTopMenu={true} />
+        <Cart />
+        <CartItems {...this.props} />
         <Banner />
         <Main />
       </div>

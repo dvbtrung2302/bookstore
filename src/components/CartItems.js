@@ -6,8 +6,9 @@ import { Link } from 'react-router-dom';
 import '../css/CartItems.css';
 import QuantityAdjustment from './QuantityAdjustment';
 import { CartContext } from '../contexts/CartContext';
+import { AuthContext } from '../contexts/AuthContext';
 
-export default function() {
+export default function(props) {
   const { 
     isCartClicked, 
     setCartClicked,
@@ -15,6 +16,21 @@ export default function() {
     totalPrice,
     removeItem   
   } = useContext(CartContext);
+  const { setCheckoutClick } = useContext(AuthContext);
+
+  const handleCheckout = (event) => {
+    event.preventDefault();
+    if (cartItems.length === 0) {
+      return;
+    }
+    const token = localStorage.getItem('token');
+    if (token) {
+      props.history.push('/checkout');
+    } else {
+      setCheckoutClick();
+    }
+  }
+
   return(
     <div className={isCartClicked ? "CartItems w-sm-100 c-show" : "CartItems"}>
       <div className="header">
@@ -55,7 +71,7 @@ export default function() {
           }
       </div>
         
-      <Link to="/" className="footer">
+      <Link to="/checkout" onClick={handleCheckout} className="footer">
         <span>Checkout</span>
         <div className="total">
           ${totalPrice}.00

@@ -18,10 +18,22 @@ export class CartProvider extends React.Component {
     this.increaseItem = this.increaseItem.bind(this);
     this.decreaseItem = this.decreaseItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
+    this.setStateDefault = this.setStateDefault.bind(this);
   }
 
-  setCartClicked(isClick = Boolean) {
-    this.setState({
+  setCartClicked(isClick = false, isCartBtn = false) {
+    if (isCartBtn) {
+      return this.setState({
+        isCartClicked: isClick
+      }, () => {
+       setTimeout(() => {
+        this.setState({
+          isCartClicked: !isClick
+        })
+       }, 2000) 
+      }) 
+    }
+    return this.setState({
       isCartClicked: isClick
     })
   }
@@ -99,6 +111,13 @@ export class CartProvider extends React.Component {
     })
   }
 
+  setStateDefault() {
+    this.setState({
+      cartItems: [],
+      isCartClicked: false
+    })
+  }
+
   render() {
     const { isCartClicked, cartItems } = this.state;
     const totalPrice = cartItems.reduce((acc, current) => {
@@ -114,7 +133,8 @@ export class CartProvider extends React.Component {
           totalPrice: totalPrice,
           increaseItem: this.increaseItem,
           decreaseItem: this.decreaseItem,
-          removeItem: this.removeItem
+          removeItem: this.removeItem,
+          setStateDefault: this.setStateDefault
         }}>
         {this.props.children}
       </CartContext.Provider>

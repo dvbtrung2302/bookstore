@@ -6,12 +6,12 @@ import {
   DropdownToggle,
   DropdownMenu
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import '../css/User.css';
 import { AuthContext } from '../contexts/AuthContext';
 
-export default function() {
+const User = (props)  => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { setStateDefault } = useContext(AuthContext);
   
@@ -19,6 +19,9 @@ export default function() {
     event.preventDefault();
     localStorage.removeItem('token');
     setStateDefault();
+    if (props.match.path === '/checkout') {
+      props.history.push('/');
+    }
   }
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
@@ -43,3 +46,5 @@ export default function() {
     </div>
   );
 }
+
+export default withRouter(User);

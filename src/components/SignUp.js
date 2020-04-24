@@ -70,7 +70,7 @@ export default function(props) {
               address: user.address,
               phone: user.phone
             })
-            .then(res => {
+            .then(() => {
               props.changeForm('signin');
             })
             .catch(err => {

@@ -20,7 +20,7 @@ export default function(props) {
     password: '',
     err: ''
   })
-  const { setToken, setAlertOpen } = useContext(AuthContext);
+  const { setAlertOpen, userLogin } = useContext(AuthContext);
 
   const validate = () => {
     let emailError = '';
@@ -58,12 +58,10 @@ export default function(props) {
             })
            .then(res => {
               localStorage.setItem('token', res.data.token);
-              setToken(res.data.token);
-           })
-           .then(() => {
+              userLogin(res.data.token);
               props.setModal(true);
               setAlertOpen();
-           })
+            })
            .catch(err => {
               setError({
                 err: err.response.data
