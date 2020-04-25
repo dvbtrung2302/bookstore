@@ -74,7 +74,7 @@ export default function(props) {
             </div>
             {!isVisble && <SearchBar isTopMenu={true}/> }
             <div className="user-btn">
-              {!user._id ? <AuthForm /> : <User />}
+              {!user._id ? <AuthForm /> : <User {...props}/>}
             </div>
           </Container>
         </div>

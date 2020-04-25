@@ -1,14 +1,6 @@
 .Checkout {
   background-color: rgb(247, 247, 247);
-  padding-top: 150px;
-}
-
-.Checkout .co-header {
-  font-size: 20px;
-  font-weight: 700;
-  color: rgb(13, 17, 54);
-  line-height: 1.2;
-  margin-bottom: 25px;
+  padding: 150px 0 100px 0;
 }
 
 .Checkout .checkout-form {
@@ -16,6 +8,7 @@
   width: 870px;
   margin: 0 auto;
   padding: 50px 30px;
+  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
 .Checkout .checkout-form .order-info {

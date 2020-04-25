@@ -1,0 +1,56 @@
+.OrderReceived {
+  background-color: rgb(247, 247, 247);
+  padding: 150px 25px 100px 25px;
+}
+
+.OrderReceived .wrapper {
+  background-color: #fff;
+  width: 870px;
+  margin: 0 auto;
+  padding: 50px 30px;
+  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.OrderReceived .wrapper .BackToHomeBtn {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.OrderReceived .wrapper .received .info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.OrderReceived .info-header {
+  font-weight: 700;
+  color: rgb(66, 69, 97);
+  line-height: 1.2;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.OrderReceived .wrapper .detail .detail-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.OrderReceived .wrapper .detail .detail-info .info-header {
+  flex-basis: 280px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.OrderReceived .wrapper .detail .detail-info p {
+  padding-left: 100px;
+  margin: 0;
+}
+
+.OrderReceived .wrapper .detail .detail-info .info-header:after {
+  content: ":";
+  position: absolute;
+  line-height: 1;
+  right: 0;
+  top: 0;
+}

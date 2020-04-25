@@ -1,0 +1,14 @@
+.BackToHomeBtn a {
+  color: rgb(119, 121, 140);
+  text-decoration: none;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 6px;
+  padding: 8px 15px;
+  transition: all .3s;
+}
+
+.BackToHomeBtn a:hover {
+  background-color: rgb(0, 158, 127);
+  color: #fff;
+  border-color: rgb(0, 158, 127);
+}

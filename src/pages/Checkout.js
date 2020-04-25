@@ -15,15 +15,16 @@ import {
 } from '@stripe/react-stripe-js';
 import axios from 'axios';
 
-import TopMenu from '../components/TopMenu';
 import { CartContext } from '../contexts/CartContext';
 import { AuthContext } from '../contexts/AuthContext';
+import { OrderContext } from '../contexts/OrderContext';
 import '../css/Checkout.css';
 
 export default function(props) {
   const { cartItems, totalPrice} = useContext(CartContext);
   const { user } = useContext(AuthContext);
   const { setStateDefault } = useContext(CartContext);
+  const { createOrder } = useContext(OrderContext)
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setError] = useState(null);
@@ -63,9 +64,10 @@ export default function(props) {
         order: order
       })
       if (data) {
+        createOrder(data.order);
         localStorage.removeItem('cartItems');
         setStateDefault();
-        props.history.push('/');
+        props.history.push(`/order-received/${data.order._id}`);
       }
     } 
     if (order.payment === 'card') {
@@ -82,9 +84,10 @@ export default function(props) {
           order: order
         })
         if (data) {
+          createOrder(data.order);
           localStorage.removeItem('cartItems');
           setStateDefault();
-          props.history.push('/');
+          props.history.push(`/order-received/${data.order._id}`);
         }
       } else {
         setError(error);
@@ -105,10 +108,9 @@ export default function(props) {
 
   return(
     <div className="Checkout">
-      <TopMenu />
       <div className="checkout-form">
         <div className="order-info">
-          <h3 className="co-header">Your order</h3>
+          <h3 className="bt-header">Your order</h3>
           <div className="item">
             <div className="title">{`Sub Total(${cartItems.length}` + [cartItems.length === 1 ? 'item)': 'items)' ]}</div>
             <div className="price">{`$${totalPrice}.00`}</div>
@@ -126,7 +128,7 @@ export default function(props) {
         <Form onSubmit={handleSubmit}>
           <div className="billing-address">
 
-            <h3 className="co-header">Billing Address</h3>
+            <h3 className="bt-header">Billing Address</h3>
             <FormGroup>
               <Label for="name">
                 Name
@@ -181,7 +183,7 @@ export default function(props) {
             </FormGroup>
           </div>
           <div className="payment">
-            <h3 className="co-header">Select Payment Option</h3>
+            <h3 className="bt-header">Select Payment Option</h3>
             <FormGroup check className="d-flex justify-content-between mb-3 p-0">
               <Input 
                 type="radio" 

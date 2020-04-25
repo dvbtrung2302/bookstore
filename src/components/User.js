@@ -19,7 +19,8 @@ const User = (props)  => {
     event.preventDefault();
     localStorage.removeItem('token');
     setStateDefault();
-    if (props.match.path === '/checkout') {
+    const path = props.location.pathname.slice(0, props.location.pathname.lastIndexOf('/'));
+    if (props.location.pathname === '/checkout' || path === '/order-received') {
       props.history.push('/');
     }
   }

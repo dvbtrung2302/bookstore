@@ -26,6 +26,15 @@ p {
    background-color: rgb(224, 224, 224);
  }
 
+ .bt-header {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(13, 17, 54);
+  line-height: 1.2;
+  margin-bottom: 25px;
+}
+
+
 @media (min-width: 1200px) {
   .container, .container-lg, 
   .container-md, .container-sm, .container-xl {
@@ -57,6 +66,10 @@ p {
   .Checkout .checkout-form {
     width: 100%!important;
   }
+
+  .OrderReceived .wrapper {
+    width: 100%!important;
+  }
   .Checkout .checkout-form .payment .form-check {
     flex-direction: column;
   }
@@ -70,5 +83,14 @@ p {
   .SignIn .container {
     width: 100%!important;
     height: 100%!important;
+  }
+  .OrderReceived .wrapper .received .info {
+    flex-direction: column;
+  }
+  .OrderReceived .wrapper .detail .detail-info .info-header {
+    flex-basis: 110px;
+  }
+  .OrderReceived .wrapper .detail .detail-info p {
+    padding-left: 30px;
   }
 }
