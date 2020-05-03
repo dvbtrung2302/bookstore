@@ -71,8 +71,13 @@ export default function(props) {
           }
       </div>
         
-      <Link to="/checkout" onClick={handleCheckout} className="footer">
-        <span>Checkout</span>
+      <Link 
+        to="/checkout" 
+        onClick={handleCheckout} 
+        className={cartItems.length === 0 ? "footer disable-btn" : "footer"}>
+        <span style={{
+          color: [cartItems.length === 0 ? 'rgb(0, 158, 127)' : '']
+        }}>Checkout</span>
         <div className="total">
           ${totalPrice}.00
         </div>

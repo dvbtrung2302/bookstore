@@ -9,14 +9,15 @@ export default function(props) {
   const [order, setOrder] = useState({});
 
   useEffect(() => {
+    document.title = 'Invoice - PickBazar';
     axios.get(`http://localhost:5000/checkout/?id=${props.match.params.id}`)
          .then(res => {
            setOrder(res.data);
          }) 
   }, [props.match.params.id])
   return(
-    <div className="OrderReceived">
-      <div className="wrapper">
+    <div className="OrderReceived user-container">
+      <div className="user-wrapper">
         <BackToHomeBtn />
         <div className="received mb-5">
           <h3 className="bt-header">Order Received</h3>

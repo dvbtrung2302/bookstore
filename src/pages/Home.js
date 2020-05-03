@@ -16,6 +16,7 @@ class Home extends React.Component {
         });
       }, 300);
     }
+    document.title = 'PickBazar'
   }
   render() {
     return(

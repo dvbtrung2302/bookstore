@@ -27,6 +27,7 @@ function ProductView(props) {
     axios.get(`https://dvbt-bookstore.herokuapp.com/products/product/?id=${props.location.state.id}`)
           .then(res => {
             setProduct(res.data);
+            document.title = `${res.data.title} - PickBazar`;
           })
           .catch(err => {
             console.log(err);

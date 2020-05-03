@@ -3,8 +3,7 @@ import {
   Form,
   FormGroup,
   Label,
-  Input,
-  Button
+  Input
 } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCreditCard, faMoneyBillAlt } from "@fortawesome/free-solid-svg-icons";
@@ -19,6 +18,7 @@ import { CartContext } from '../contexts/CartContext';
 import { AuthContext } from '../contexts/AuthContext';
 import { OrderContext } from '../contexts/OrderContext';
 import '../css/Checkout.css';
+import UserSideBar from '../components/UserSideBar';
 
 export default function(props) {
   const { cartItems, totalPrice} = useContext(CartContext);
@@ -40,6 +40,7 @@ export default function(props) {
   });
 
   useEffect(() => {
+    document.title = 'Checkout - PickBazar'
     setOrder({
       id: user._id,
       name: user.name,
@@ -59,6 +60,9 @@ export default function(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (cartItems.length === 0) {
+      return;
+    }
     if (order.payment === 'cash') {
       const { data } = await axios.post('http://localhost:5000/checkout', {
         order: order
@@ -108,6 +112,7 @@ export default function(props) {
 
   return(
     <div className="Checkout">
+      <UserSideBar page="checkout" />
       <div className="checkout-form">
         <div className="order-info">
           <h3 className="bt-header">Your order</h3>
@@ -212,7 +217,11 @@ export default function(props) {
           </div> 
           {order.payment === 'card' && <CardElement options={CARD_OPTIONS} onChange={e => setError(e.error)}/> }
           {cardError && <div className="error-msg">{cardError.message}</div>}
-          <Button disabled={!stripe} size="lg" block type="submit">Proceed to Checkout</Button>
+          <button 
+            disabled={!stripe} 
+            type="submit"
+            className={cartItems.length === 0 ? 'disable-btn btn w-100' : 'btn w-100'} 
+          >Proceed to Checkout</button>
         </Form>
       </div>
     </div>

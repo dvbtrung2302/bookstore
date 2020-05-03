@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Detail from './pages/Detail';
 import Checkout from './pages/Checkout';
 import OrderReceived  from './pages/OrderReceived';
+import UserProfile from './pages/UserProfile';
 import { ProductsProvider } from './contexts/ProductsContext';
 import { CartProvider } from './contexts/CartContext';
 import { AuthProvider } from './contexts/AuthContext';
@@ -27,7 +28,7 @@ class App extends React.Component {
             <AuthProvider>
               <OrderProvider>
                 <div className="App">
-                  <Alert />
+                  <Alert option="login" />
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/product/:title" component={Detail} />
@@ -37,6 +38,7 @@ class App extends React.Component {
                         <Route exact path="/checkout" component={Checkout} />
                       </Elements>
                       <Route exact path="/order-received/:id" component={OrderReceived} />
+                      <Route exact path="/profile" component={UserProfile} />
                     </AuthenticatedComponent>
                   </Switch>
                 </div>

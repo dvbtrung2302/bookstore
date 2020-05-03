@@ -4,6 +4,24 @@ p {
  h1,h2,h3 {
   color: rgb(13, 17, 54);
  }
+ 
+ .btn:focus {
+   box-shadow: none!important;
+ }
+
+ .disable-btn {
+  color: rgb(144, 144, 144)!important;
+  background-color: rgb(241, 241, 241)!important;
+  border-color: rgb(241, 241, 241)!important;
+}
+.disable-btn:active {
+  color: rgb(144, 144, 144)!important;
+  background-color: rgb(241, 241, 241)!important;
+}
+
+.disable-btn:hover {
+  color: rgb(144, 144, 144);
+}
 
  ::-webkit-scrollbar {
   width: 8px;
@@ -34,6 +52,18 @@ p {
   margin-bottom: 25px;
 }
 
+.user-wrapper {
+  background-color: #fff;
+  width: 870px;
+  margin: 0 auto;
+  padding: 50px 30px;
+  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.user-container {
+  background-color: rgb(247, 247, 247);
+  padding: 150px 25px 100px 25px;
+}
 
 @media (min-width: 1200px) {
   .container, .container-lg, 
@@ -67,7 +97,7 @@ p {
     width: 100%!important;
   }
 
-  .OrderReceived .wrapper {
+  .user-wrapper {
     width: 100%!important;
   }
   .Checkout .checkout-form .payment .form-check {
@@ -84,13 +114,29 @@ p {
     width: 100%!important;
     height: 100%!important;
   }
-  .OrderReceived .wrapper .received .info {
+  .Checkout {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .OrderReceived .user-wrapper .received .info {
     flex-direction: column;
   }
-  .OrderReceived .wrapper .detail .detail-info .info-header {
+  .OrderReceived .user-wrapper .detail .detail-info .info-header {
     flex-basis: 110px;
   }
-  .OrderReceived .wrapper .detail .detail-info p {
+  .OrderReceived .user-wrapper .detail .detail-info p {
     padding-left: 30px;
+  }
+  .UserProfile .AuthForm {
+    flex-direction: column;
+  }
+  .UserProfile .AuthForm .form-group {
+    margin-bottom: 20px;
+  }
+  .UserProfile .AuthForm .btn {
+    width: 100%;
+  }
+  .UserInfo {
+    width: 100%;
   }
 }

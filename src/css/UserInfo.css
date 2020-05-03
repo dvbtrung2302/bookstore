@@ -1,0 +1,38 @@
+.UserInfo {
+  display: flex;
+  width: 50%;
+  background-color: rgb(247, 247, 247);
+  padding: 15px;
+  cursor: pointer;
+  border-radius: .25rem;
+  border: 1px solid rgb(0, 158, 127);
+}
+
+.UserInfo .info {
+  flex-grow: 1;
+}
+
+.UserInfo .edit-btn {
+  background-color: rgb(0, 158, 127);
+  color: #fff; 
+  border-radius: 50%;
+  min-width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.UserInfo:hover .edit-btn {
+  opacity: 1;
+}
+
+.edit-modal {
+  padding: 40px;
+}
+
+.edit-modal input {
+  margin-bottom: 20px;
+}

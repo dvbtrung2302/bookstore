@@ -1,0 +1,41 @@
+import React, { useContext } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+
+import '../css/UserSideBar.css';
+import { AuthContext } from '../contexts/AuthContext';
+
+const UserSideBar =  (props) => {
+  const { page } = props;
+  const { setStateDefault } = useContext(AuthContext);
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    localStorage.removeItem('token');
+    setStateDefault();
+    const path = props.location.pathname.slice(0, props.location.pathname.lastIndexOf('/'));
+    if (path !== '/product') {
+      props.history.push('/');
+    }
+  }
+
+  return(
+    <div className="UserSideBar d-none d-xl-block">
+      <ul className="nav flex-column">
+        <li className={page === 'order' ? "nav-item current-page" : "nav-item"}>
+          <Link to="/">Order</Link>
+        </li>
+        <li className={page === 'checkout' ? "nav-item current-page mb-5" : "nav-item mb-5"}>
+          <Link to="/checkout">Checkout</Link>
+        </li>
+        <li className={page === 'profile' ? "nav-item current-page" : "nav-item"}>
+          <Link to="/profile">Your Account Settings</Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/" onClick={handleLogout}>Logout</Link>
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+export default withRouter(UserSideBar);

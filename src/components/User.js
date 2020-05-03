@@ -20,7 +20,7 @@ const User = (props)  => {
     localStorage.removeItem('token');
     setStateDefault();
     const path = props.location.pathname.slice(0, props.location.pathname.lastIndexOf('/'));
-    if (props.location.pathname === '/checkout' || path === '/order-received') {
+    if (path !== '/product') {
       props.history.push('/');
     }
   }
@@ -34,10 +34,10 @@ const User = (props)  => {
         </DropdownToggle>
         <DropdownMenu right>
           <div className="menu-item">
-            <Link to="/">Profile</Link>
+            <Link to="/profile">Profile</Link>
           </div>
           <div className="menu-item">
-            <Link to="/">Checkout</Link>
+            <Link to="/checkout">Checkout</Link>
           </div>
           <div className="menu-item">
             <Link to="/" onClick={handleLogout}>Logout</Link>

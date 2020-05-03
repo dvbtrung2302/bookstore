@@ -1,0 +1,16 @@
+.UserProfile .AuthForm {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.UserProfile .AuthForm .form-group {
+  flex-grow: 1;
+  margin: 0 20px 0 0;
+}
+
+.UserProfile .AuthForm .btn {
+  height: 48px;
+  flex-grow: 1;
+  align-self: flex-end;
+}
