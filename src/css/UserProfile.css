@@ -1,3 +1,7 @@
+.UserProfile {
+  padding-bottom: 244px!important;
+}
+
 .UserProfile .AuthForm {
   display: flex;
   justify-content: space-between;

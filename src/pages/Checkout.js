@@ -111,8 +111,10 @@ export default function(props) {
   };
 
   return(
-    <div className="Checkout">
-      <UserSideBar page="checkout" />
+    <div className="Checkout user-container">
+      <div>
+        <UserSideBar page="checkout" />
+      </div>
       <div className="checkout-form">
         <div className="order-info">
           <h3 className="bt-header">Your order</h3>

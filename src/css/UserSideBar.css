@@ -1,13 +1,14 @@
 .UserSideBar {
   background-color: #fff;
   box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08);
-  position: absolute;
   width: 300px;
+  height: auto;
   padding: 50px 0;
 }
 
 .UserSideBar .nav-item {
   padding: 15px 50px;
+  border-left: 5px solid transparent;
 }
 
 .UserSideBar .nav-item a {
@@ -24,10 +25,4 @@
 
 .UserSideBar .current-page {
   border-left: 5px solid rgb(0, 158, 127);
-}
-
-@media (max-width: 1500px) {
-  .UserSideBar {
-    width: 200px;
-  }
 }

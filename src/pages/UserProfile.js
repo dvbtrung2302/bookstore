@@ -49,7 +49,9 @@ const  UserProfile = () => {
   return(
     <div className="UserProfile user-container">
       <Alert option="edit" isOpen={isSave} />
-      <UserSideBar page="profile" />
+      <div>
+        <UserSideBar page="profile" />
+      </div>
       <div className="user-wrapper">
         <div className="profile mb-5">
           <h3 className="bt-header">Your Profile</h3>

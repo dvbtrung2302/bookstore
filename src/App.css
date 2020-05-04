@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 p {
   color: rgb(119, 121, 140);
 }
@@ -52,6 +58,12 @@ p {
   margin-bottom: 25px;
 }
 
+.user-container {
+  background-color: rgb(247, 247, 247);
+  padding: 150px 25px 100px 25px;
+  display: flex;
+}
+
 .user-wrapper {
   background-color: #fff;
   width: 870px;
@@ -79,6 +91,38 @@ p {
   .Banner .SearchBar {
     display: none;
   }
+  .Orders {
+    padding-bottom: 20px!important;
+    padding-left: 0!important;
+    padding-right: 0!important;
+  }
+  .Orders .order-container {
+    width: 100%;
+  }
+  .Orders .my-order {
+    width: 100%;
+    padding-left: 20px!important;
+    padding-right: 20px!important;
+  }
+  .Order {
+    width: 100%;
+    margin: 0;
+  }
+  .Orders .details {
+    flex-direction: column;
+  }
+  .Orders .address {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+  .Orders .info {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .Orders .des .text {
+    font-size: 9px;
+  }
 }
 
 
@@ -103,6 +147,7 @@ p {
   .Checkout .checkout-form .payment .form-check {
     flex-direction: column;
   }
+  
 }
 
 

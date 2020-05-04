@@ -22,7 +22,7 @@ const UserSideBar =  (props) => {
     <div className="UserSideBar d-none d-xl-block">
       <ul className="nav flex-column">
         <li className={page === 'order' ? "nav-item current-page" : "nav-item"}>
-          <Link to="/">Order</Link>
+          <Link to="/order">Your Order</Link>
         </li>
         <li className={page === 'checkout' ? "nav-item current-page mb-5" : "nav-item mb-5"}>
           <Link to="/checkout">Checkout</Link>

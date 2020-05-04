@@ -1,0 +1,38 @@
+.Order {
+  background-color: rgb(247, 247, 247);
+  border-radius: 5px;
+  cursor: pointer;
+  width: 330px;
+  margin: 0 30px 20px 30px;
+  border: 2px solid transparent;
+}
+
+.Order .header {
+  font-weight: 600;
+  color: rgb(13, 17, 54);
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.Order .body {
+  padding: 15px 20px;
+}
+
+.Order .body .order-date,
+.Order .body .order-id,
+.Order .body .total-price {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(13, 17, 54);
+}
+
+.Order .body .total-price {
+  font-weight: 600;
+}
+
+.order-active {
+  border: 2px solid rgb(0, 158, 127);
+}
