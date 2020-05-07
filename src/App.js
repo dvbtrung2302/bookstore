@@ -31,7 +31,7 @@ class App extends React.Component {
               <OrderProvider>
                 <AreaProvider>
                   <div className="App">
-                    {/* <Alert option="login" /> */}
+                    <Alert option="login" />
                     <Switch>
                       <Route exact path="/" component={Home} />
                       <Route exact path="/product/:title" component={Detail} />

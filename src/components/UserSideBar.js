@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 
 import '../css/UserSideBar.css';
@@ -36,6 +37,10 @@ const UserSideBar =  (props) => {
       </ul>
     </div>
   );
+}
+
+UserSideBar.propTypes = {
+  page: PropTypes.string
 }
 
 export default withRouter(UserSideBar);

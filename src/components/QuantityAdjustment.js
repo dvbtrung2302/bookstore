@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
 import '../css/QuantityAdjustment.css';
 import { CartContext } from '../contexts/CartContext';
 
-export default function(props) {
+const QuantityAdjustment = (props) => {
   const { type, product } = props;
   const { increaseItem, decreaseItem } = useContext(CartContext);
   return(
@@ -26,3 +27,12 @@ export default function(props) {
     </div>
   );
 }
+
+QuantityAdjustment.propTypes = {
+  type: PropTypes.string,
+  product: PropTypes.shape({
+    quantity: PropTypes.number
+  })
+}
+
+export default QuantityAdjustment;

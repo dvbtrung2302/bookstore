@@ -1,10 +1,12 @@
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
 import { ProductsContext } from '../contexts/ProductsContext';
 import '../css/SearchBar.css';
 
-export default function(props) {
+const SearchBar = (props) => {
   const { isTopMenu, isTopMenuMobile, setClicked } = props;
   const [text, setText] = useState('');
   const { setKeyword } = useContext(ProductsContext);
@@ -76,3 +78,11 @@ export default function(props) {
   </div>
   )
 }
+
+SearchBar.propTypes = {
+  isTopMenu: PropTypes.bool,
+  isTopMenuMobile: PropTypes.bool,
+  setClicked: PropTypes.func
+}
+
+export default SearchBar;

@@ -1,12 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { 
   Container,
-  Row
+  Row,
+  Spinner
 } from 'reactstrap';
 
 import '../css/Products.css';
 import { ProductsContext } from '../contexts/ProductsContext';
-import Loading from './Loading';
 import NotFound from './NotFound';
 import ProductsLoading from './ProductsLoading';
 import Product from './Product';
@@ -19,6 +19,9 @@ export default function(props) {
 
   useEffect(() => {
     setItems(products);
+    return () => {
+      setItems([]);
+    }
   }, [products])
 
   const loadMore = () => {
@@ -45,11 +48,11 @@ export default function(props) {
         <Row className="m-0 w-100 d-flex justify-content-center">
           {
             (visible < items.length && !isLoading) &&
-          <button onClick={loadMore} type="button" className="load-more">
+          <button onClick={loadMore} type="button" className="load-more mb-3">
             Load more
           </button>
           }
-          { isLoading && <Loading /> }
+          { isLoading && <Spinner style={{color:"rgb(0, 158, 127)"}} /> }
         </Row>
       </Container>
     </div>

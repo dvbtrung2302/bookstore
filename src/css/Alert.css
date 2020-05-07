@@ -1,12 +1,19 @@
-.Alert {
+.bt-alert {
   position: fixed;
   top: 100px;
   right: 20px;
   z-index: 5;
   width: 280px;
+  padding: 20px;
+  background-color: rgb(237, 247, 237);
+  color: rgb(30, 70, 32);
+  transform: translateX(110%);
+  transition: transform .5s ease-in;
 }
 
-.Alert .alert {
-  margin: 0;
-  padding: 20px 20px;
+.alert-active {
+  transform: translateX(0%);
 }
+
+
+

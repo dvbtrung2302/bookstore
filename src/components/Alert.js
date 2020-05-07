@@ -1,17 +1,19 @@
 import React, { useContext }from 'react';
-import { Alert } from 'reactstrap';
+import PropTypes from 'prop-types';
 
 import '../css/Alert.css';
 import { AuthContext } from '../contexts/AuthContext';
 
-export default function(props) {
+const Alert = (props) => {
+  const { isOpen } = props;
   const { isAlertOpen } = useContext(AuthContext);
+
   const render = () => {
     switch(props.option) {
       case 'login': 
-        return <Alert isOpen={isAlertOpen}>Welcome Back!</Alert>;
+        return <div className={isAlertOpen ? "bt-alert alert-active" : "bt-alert" }>Welcome Back!</div>;
       case 'edit':
-        return <Alert isOpen={props.isOpen}>Save Successfully!</Alert> 
+        return <div className={isOpen ? "bt-alert alert-active" : "bt-alert" }>Save Successfully!</div> 
       default:
         return;
     }
@@ -22,3 +24,10 @@ export default function(props) {
     </div>
   );
 }
+
+Alert.propTypes = {
+  isOpen: PropTypes.bool
+}
+
+export default Alert;
+

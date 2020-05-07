@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Col } from 'reactstrap';
 
 import '../css/Product.css';
 import CartBtn from './CartBtn';
 
-export default function(props) {
+const Product = (props) => {
   const { item, type } = props;
   const toSlug = (str) => {
     // Chuyển hết sang chữ thường
@@ -61,3 +62,16 @@ export default function(props) {
     </Col>
   );
 }
+
+Product.propTypes = {
+  item: PropTypes.shape({
+    title: PropTypes.string,
+    _id: PropTypes.string,
+    image: PropTypes.string,
+    author: PropTypes.string,
+    price: PropTypes.number
+  }),
+  type: PropTypes.string
+}
+
+export default Product;

@@ -14,10 +14,10 @@ export default function (props) {
     <main className="Main">
       <Container fluid>
         <Row>
-          <Col xl="3" lg="4">
+          <Col xl="2" lg="3">
             <Category />
           </Col>
-          <Col xl="9" lg="8">
+          <Col xl="10" lg="9">
             <Products />
           </Col>
         </Row>

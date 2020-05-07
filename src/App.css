@@ -132,12 +132,11 @@ p {
   .Category {
     height: 10vh;
   }
-  /* .Category ul {
-    opacity: 0;
-    pointer-events: none;
-  } */
-  .Category .burger {
-    display: block;
+  .Burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .ProductView .back-btn {
     top: -40px!important;
@@ -152,7 +151,9 @@ p {
   .Checkout .checkout-form .payment .form-check {
     flex-direction: column;
   }
-  
+  .Checkout form .payment .form-check-label {
+    margin-bottom: 1rem!important;
+  }
 }
 
 

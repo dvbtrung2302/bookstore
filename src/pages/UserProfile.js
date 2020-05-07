@@ -22,6 +22,9 @@ const  UserProfile = () => {
   useEffect(() => {
     document.title = 'Profile - PickBazar'
     setData(user);
+    return () => {
+      setData({});
+    }
   }, [user])
 
   const handleSubmit = (event) => {
@@ -83,11 +86,11 @@ const  UserProfile = () => {
         </div>
         <div className="contact mb-5">
           <h3 className="bt-header">Contact Number</h3>
-          <UserInfo info={user.phone} isPhone handleInput={handleInput} handleSubmit={handleSubmit} data={data}/>
+          <UserInfo isPhone handleInput={handleInput} handleSubmit={handleSubmit} data={data}/>
         </div>
         <div className="address">
           <h3 className="bt-header">Delivery Address</h3>
-          <UserInfo info={user.address} handleInput={handleInput} handleSubmit={handleSubmit} data={data}/>
+          <UserInfo handleInput={handleInput} handleSubmit={handleSubmit} data={data}/>
         </div>
       </div>
     </div>

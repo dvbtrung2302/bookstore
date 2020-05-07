@@ -14,11 +14,11 @@ import {
 } from '@stripe/react-stripe-js';
 import axios from 'axios';
 
+import '../css/Checkout.css';
 import { CartContext } from '../contexts/CartContext';
 import { AuthContext } from '../contexts/AuthContext';
 import { OrderContext } from '../contexts/OrderContext';
 import { AreaContext } from '../contexts/AreaContext';  
-import '../css/Checkout.css';
 import UserSideBar from '../components/UserSideBar';
 
 export default function(props) {
@@ -64,7 +64,14 @@ export default function(props) {
              cartItems: JSON.parse(localStorage.getItem('cartItems'))
            })
          })
+    return () => {
+      const CancelToken = axios.CancelToken;
+      const source = CancelToken.source();
 
+      axios.get(`https://dvbt-areas.herokuapp.com/districts?city=${user.city}`, {
+        cancelToken: source.token
+      })
+    }
   }, [user.name, user.email, user.address, user.phone, user._id, totalPrice, user.city, user.district])
 
   const handleInput = (event) => {
@@ -119,7 +126,7 @@ export default function(props) {
       base: {
         iconColor: '#ccc',
         fontWeight: 500,
-        fontSize: '1rem',
+        fontSize: '14px',
       },
     },
   };
@@ -243,7 +250,7 @@ export default function(props) {
                 onChange={handleInput}
                 checked={order.payment === 'cash'}
               />{' '}
-              <Label className="mb-3" for="cash" check>
+              <Label for="cash" check>
                 <FontAwesomeIcon icon={faMoneyBillAlt} />
                 <span>Cash</span>
               </Label>

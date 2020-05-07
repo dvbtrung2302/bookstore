@@ -1,13 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link, withRouter } from 'react-router-dom';
 
 import '../css/User.css';
 import { AuthContext } from '../contexts/AuthContext';
+import Burger from './Burger';
 
 const User = (props)  => {
-  const { setStateDefault } = useContext(AuthContext);
+  const { setStateDefault , user} = useContext(AuthContext);
   const [active, setActive] = useState(false);
 
   const handleBtnClick = () => {
@@ -25,7 +24,7 @@ const User = (props)  => {
   }
 
   return(
-    <div className="User">
+    <div className="User h-100">
       <ul className={ active ? "nav-links nav-active" : "nav-links" } >
         <li className={ active ? "item-active" : "" }>
           <Link to="/profile">Profile</Link>
@@ -40,8 +39,9 @@ const User = (props)  => {
           <Link to="/" onClick={handleLogout}>Logout</Link>
         </li>
       </ul>
-      <div className="btn" onClick={handleBtnClick}>
-        <FontAwesomeIcon icon={faUser} />
+      <div className="welcome" onClick={handleBtnClick}>
+        Hello {user.name.split(' ').pop()}
+        <Burger isTopMenu={true} isClick={active} />
       </div>
     </div>
   );

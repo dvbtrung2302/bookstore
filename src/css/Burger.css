@@ -1,0 +1,25 @@
+.Burger {
+  cursor: pointer;
+  display: none;
+  height: 10vh;
+}
+
+.Burger .line {
+  width: 25px;
+  height: 3px;
+  background-color:rgb(13, 17, 54);
+  margin: 3px;
+  transition: transform .3s, background-color .3s;
+}
+
+.toggle .line:first-child {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle .line:nth-child(2) {
+  opacity: 0;
+}
+
+.toggle .line:last-child {
+  transform: rotate(45deg) translate(-5px, -6px);
+}

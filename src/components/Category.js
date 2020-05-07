@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThLarge } from "@fortawesome/free-solid-svg-icons";
 
 import '../css/Category.css';
+import Burger from '../components/Burger';
 import { ProductsContext } from '../contexts/ProductsContext';
 
 const Category = (props) => {
@@ -42,36 +43,7 @@ const Category = (props) => {
           </li>
         )}
       </ul>
-      <div className={isClick ? "burger toggle" : "burger"} onClick={handleCatClick}>
-        <div className="line"></div>
-        <div className="line"></div>
-        <div className="line"></div>
-      </div>
-      {/* <Navbar color="light" light expand="lg" >
-        <NavbarBrand>
-          <FontAwesomeIcon icon={faThLarge} className="mr-2" />
-          Select your Category
-        </NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            {
-              category.map(item => 
-                <NavItem key={item}>
-                  <NavLink
-                    to="/"
-                    tag={Link} 
-                    className={categoryName === item ? 'active' : null}
-                    onClick={() => setCategory(item)}
-                  >{item}
-                  </NavLink>
-                </NavItem>
-              )
-            }
-          </Nav>
-
-        </Collapse>
-      </Navbar> */}
+      <Burger isClick={isClick} handleCatClick={handleCatClick} />
     </div>
   );
 }

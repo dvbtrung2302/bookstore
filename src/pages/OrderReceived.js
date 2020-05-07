@@ -5,7 +5,7 @@ import '../css/OrderReceived.css';
 import BackToHomeBtn from '../components/BackToHomeBtn';
 
 
-export default function(props) {
+const OrderReceived = (props) => {
   const [order, setOrder] = useState({});
 
   useEffect(() => {
@@ -14,7 +14,19 @@ export default function(props) {
          .then(res => {
            setOrder(res.data);
          }) 
+    return () => {
+      const CancelToken = axios.CancelToken;
+      const source = CancelToken.source();
+
+      axios.get(`http://localhost:5000/checkout/?id=${props.match.params.id}`, {
+        cancelToken: source.token
+      })
+          .then(() => {
+            setOrder({});
+          })
+    }
   }, [props.match.params.id])
+
   return(
     <div className="OrderReceived user-container">
       <div className="user-wrapper">
@@ -79,3 +91,6 @@ export default function(props) {
     </div>
   );
 }
+
+export default OrderReceived;
+

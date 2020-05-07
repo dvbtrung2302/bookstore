@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { Button, Modal } from 'reactstrap';
 
+import '../css/AuthForm.css';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
-import '../css/AuthForm.css';
 import { AuthContext } from '../contexts/AuthContext';
 
 export default function() {
@@ -21,8 +21,8 @@ export default function() {
       <Button className="auth-btn" onClick={() => {toggle(); changeForm('signin')}}>Sign In</Button>
       <Modal isOpen={isCheckoutClick} toggle={toggle} centered external={externalCloseBtn}>
         { form === 'signin' ?
-           <SignIn changeForm={changeForm} setModal={setModal} /> : 
-           <SignUp changeForm={changeForm} /> 
+          <SignIn changeForm={changeForm} setModal={setModal} /> : 
+          <SignUp changeForm={changeForm} /> 
         }
       </Modal>
     </div>

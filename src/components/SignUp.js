@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import {
   Form,
@@ -19,7 +20,8 @@ function validateFn(input = '', info = '') {
   return '';
 }
 
-export default function(props) {
+const SignUp = (props) => {
+  const { changeForm } = props;
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -98,7 +100,7 @@ export default function(props) {
               phone: user.phone
             })
             .then(() => {
-              props.changeForm('signin');
+              changeForm('signin');
             })
             .catch(err => {
               setError({
@@ -180,8 +182,14 @@ export default function(props) {
       </Form>
       <div className="footer">
         Already have an account?
-        <span onClick={() => props.changeForm('signin')}>Sign In</span>
+        <span onClick={() => changeForm('signin')}>Sign In</span>
       </div>
     </div>
   )
 }
+
+SignUp.propTypes = {
+  changeForm: PropTypes.func
+}
+
+export default SignUp;

@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import {
   Form,
@@ -8,9 +9,11 @@ import {
   Label,
   Alert
 } from 'reactstrap';
+
 import { AuthContext } from '../contexts/AuthContext';
 
-export default function(props) {
+const SignIn = (props) => {
+  const { changeForm, setModal } = props;
   const [user, setUser] = useState({
     email: '',
     password: ''
@@ -59,7 +62,7 @@ export default function(props) {
            .then(res => {
               localStorage.setItem('token', res.data.token);
               userLogin(res.data.token);
-              props.setModal(true);
+              setModal(true);
               setAlertOpen();
             })
            .catch(err => {
@@ -104,8 +107,15 @@ export default function(props) {
       </Form>
       <div className="footer">
         Don't have an account?
-        <span onClick={() => props.changeForm('signup')}>Sign Up</span>
+        <span onClick={() => changeForm('signup')}>Sign Up</span>
       </div>
     </div>
   )
 }
+
+SignIn.propTypes = {
+  changeForm: PropTypes.func,
+  setModal: PropTypes.func
+}
+
+export default SignIn;

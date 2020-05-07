@@ -31,15 +31,25 @@
   color: rgb(0, 158, 127);
 }
 
-.User .btn {
-  background-color: rgb(0, 158, 127);
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  color: #fff;
+.User .welcome {
+  color: rgb(13, 17, 54);
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  padding: 10px 0;
+  font-weight: 600;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: color .3s;
+}
+
+.User .welcome:hover {
+  color: rgb(0, 158, 127)
+}
+
+.User .welcome:hover .Burger .line{
+  background-color: rgb(0, 158, 127);
 }
 
 .nav-active {

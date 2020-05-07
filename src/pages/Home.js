@@ -18,6 +18,7 @@ class Home extends React.Component {
     }
     document.title = 'PickBazar'
   }
+
   render() {
     return(
       <div className="Home">

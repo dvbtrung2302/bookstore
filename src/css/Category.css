@@ -8,6 +8,7 @@
   height: 90vh;
   transition: height .3s ease-in;
   overflow: hidden;
+  padding: 0 20px;
 }
 
 .Category .logo {
@@ -15,8 +16,9 @@
   font-weight: 700;
   color: rgb(13, 17, 54);
   letter-spacing: 2px;
-  padding: 20px;
-  height: 10%;
+  height: 10vh;
+  display: flex;
+  align-items: center;
 }
 
 .Category ul {
@@ -49,37 +51,10 @@
 
 }
 
-.Category .burger {
-  cursor: pointer;
-  display: none;
-  height: 35px;
-  padding: 20px 0;
-}
-
-.Category .burger .line {
-  width: 25px;
-  height: 3px;
-  background-color:rgb(13, 17, 54);
-  margin: 5px;
-  transition: transform .3s;
-}
-
 .category-active {
   height: 540px!important;
 }
 
 .active {
   color: rgb(0, 158, 127)!important;
-}
-
-.toggle .line:first-child {
-  transform: rotate(-45deg) translate(-5px, 6px);
-}
-
-.toggle .line:nth-child(2) {
-  opacity: 0;
-}
-
-.toggle .line:last-child {
-  transform: rotate(45deg) translate(-5px, -6px);
 }

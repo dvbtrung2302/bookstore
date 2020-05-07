@@ -50,17 +50,6 @@
   border-bottom: 1px solid #eee;
 }
 
-/* .Checkout form .form-group .form-control {
-  background-color: rgb(247, 247, 247);
-  border: none;
-}
-
-.Checkout form .form-group .form-control:focus {
-  border: none;
-  box-shadow: none;
-  background-color: rgb(247, 247, 247);
-} */
-
 .Checkout form .form-group:nth-child(5) {
   border-bottom: none;
 }

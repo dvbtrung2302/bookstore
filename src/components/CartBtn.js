@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 
@@ -6,7 +7,7 @@ import '../css/CartBtn.css';
 import { CartContext } from '../contexts/CartContext';
 import QuantityAdjustment from './QuantityAdjustment';
 
-export default function(props) {
+const CartBtn = (props) => {
   let { type, product } = props;
   const { addToCart, cartItems, setCartClicked } = useContext(CartContext);
   
@@ -42,3 +43,10 @@ export default function(props) {
     </div>
   );
 }
+
+CartBtn.propTypes = {
+  type: PropTypes.string,
+  product: PropTypes.object
+}
+
+export default CartBtn;

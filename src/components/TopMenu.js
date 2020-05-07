@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Container } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,11 +12,11 @@ import User from './User';
 import { ProductsContext } from '../contexts/ProductsContext'
 import { AuthContext } from '../contexts/AuthContext';
 
-export default function(props) {
+const TopMenu = (props) => {
+  const { isTopMenu } = props;
   const [isHide, setHide] = useState(false);
   const [isVisble, setVisible] = useState(true);
   const [isClicked, setClicked] = useState(false);
-  const { isTopMenu } = props;
   const { setStateDefault } = useContext(ProductsContext);
   const { user } = useContext(AuthContext);
 
@@ -60,7 +61,7 @@ export default function(props) {
           <Container className="justify-content-between">
             { 
               isTopMenu &&
-              <div className="mobile-btn d-block d-xl-none">
+              <div className="mobile-btn d-flex d-xl-none">
                 <FontAwesomeIcon 
                   icon={faSearch}
                   onClick={() => setClicked(true)}
@@ -82,3 +83,9 @@ export default function(props) {
     </header>
   );
 }
+
+TopMenu.propTypes = {
+  isTopMenu: PropTypes.bool
+}
+
+export default TopMenu;

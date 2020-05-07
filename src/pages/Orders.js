@@ -20,6 +20,14 @@ const Orders = () => {
            setOrders(res.data);
            setOrder(res.data[0]);
          })
+    return () => {
+      const CancelToken = axios.CancelToken;
+      const source = CancelToken.source();
+
+      axios.get('http://localhost:5000/order', { headers: {"Authorization" : `Bearer ${token}`}}, {
+        cancelToken: source.token
+      })
+    }
   }, [token])
 
   const handleClick = (index, order) => {
@@ -58,7 +66,7 @@ const Orders = () => {
               show={show}
             /> )}
         </div>
-        <OrderDetails order={order} />
+          <OrderDetails order={order} />
       </div>
     </div>
   );

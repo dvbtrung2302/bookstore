@@ -29,6 +29,7 @@ export class AreaProvider extends React.Component {
     axios.get(`https://dvbt-areas.herokuapp.com/cities`, {
       cancelToken: source.token
     })
+
   }
 
   handleCityClick(event) {
