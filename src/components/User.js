@@ -1,19 +1,18 @@
 import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { 
-  Dropdown, 
-  DropdownToggle,
-  DropdownMenu
-} from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
 
 import '../css/User.css';
 import { AuthContext } from '../contexts/AuthContext';
 
 const User = (props)  => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const { setStateDefault } = useContext(AuthContext);
+  const [active, setActive] = useState(false);
+
+  const handleBtnClick = () => {
+    setActive(!active)
+  }
   
   const handleLogout = (event) => {
     event.preventDefault();
@@ -25,25 +24,25 @@ const User = (props)  => {
     }
   }
 
-  const toggle = () => setDropdownOpen(prevState => !prevState);
   return(
     <div className="User">
-      <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-        <DropdownToggle>
-          <FontAwesomeIcon icon={faUser} size="lg" />
-        </DropdownToggle>
-        <DropdownMenu right>
-          <div className="menu-item">
-            <Link to="/profile">Profile</Link>
-          </div>
-          <div className="menu-item">
-            <Link to="/checkout">Checkout</Link>
-          </div>
-          <div className="menu-item">
-            <Link to="/" onClick={handleLogout}>Logout</Link>
-          </div>
-        </DropdownMenu>
-      </Dropdown>
+      <ul className={ active ? "nav-links nav-active" : "nav-links" } >
+        <li className={ active ? "item-active" : "" }>
+          <Link to="/profile">Profile</Link>
+        </li>
+        <li className={ active ? "item-active" : "" }>
+          <Link to="/checkout">Checkout</Link>
+        </li>
+        <li className={ active ? "item-active" : "" }>
+          <Link to="/order">My Orders</Link>
+        </li>
+        <li className={ active ? "item-active" : "" }>
+          <Link to="/" onClick={handleLogout}>Logout</Link>
+        </li>
+      </ul>
+      <div className="btn" onClick={handleBtnClick}>
+        <FontAwesomeIcon icon={faUser} />
+      </div>
     </div>
   );
 }

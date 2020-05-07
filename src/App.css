@@ -3,7 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+body {
+  overflow-x: hidden;
+}
 p {
   color: rgb(119, 121, 140);
 }
@@ -128,11 +130,14 @@ p {
 
 @media (max-width: 992px) {
   .Category {
-    min-height: 0!important;
+    height: 10vh;
   }
-  .Category .navbar {
-    display: flex!important;
-    justify-content: space-between;
+  /* .Category ul {
+    opacity: 0;
+    pointer-events: none;
+  } */
+  .Category .burger {
+    display: block;
   }
   .ProductView .back-btn {
     top: -40px!important;
@@ -183,5 +188,8 @@ p {
   }
   .UserInfo {
     width: 100%;
+  }
+  .User .nav-links {
+    width: 100%!important;
   }
 }

@@ -14,7 +14,7 @@ export default (props) => {
       <div className="details">
         <div className="address">
           <div className="title">Delivery Address</div>
-          <span>{props.order && props.order.address }</span>
+          <span>{props.order && `${props.order.address}, ${props.order.district}, ${props.order.city}` }</span>
         </div>
         <div className="info">
           <div>
@@ -59,37 +59,40 @@ export default (props) => {
         </Progress>
       </div>
       <div className="items">
-        <Table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Items</th>
-              <th>Quantity</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            { 
-              props.order.cart && 
-              props.order.cart.map(item => 
-              <tr key={item._id}>
-                <th scope="row">
-                  <div className="img-wrapper">
-                    <img src={item.image} alt="" />
-                  </div>
-                </th>
-                <td>
-                  <div className="title">{item.title}</div>
-                  <div className="price">${item.price}.00</div>
-                </td>
-                <td>
-                  {item.quantity}
-                </td>
-                <td>${parseInt(item.quantity) * item.price}.00</td>
-              </tr>)
-            }
-          </tbody>
-        </Table>
+        {
+          !props.order ? <div>Loading...</div> :  
+          <Table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Items</th>
+                <th>Quantity</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              { 
+                props.order.cart && 
+                props.order.cart.map(item => 
+                <tr key={item._id}>
+                  <th scope="row">
+                    <div className="img-wrapper">
+                      <img src={item.image} alt="" />
+                    </div>
+                  </th>
+                  <td>
+                    <div className="title">{item.title}</div>
+                    <div className="price">${item.price}.00</div>
+                  </td>
+                  <td>
+                    {item.quantity}
+                  </td>
+                  <td>${parseInt(item.quantity) * item.price}.00</td>
+                </tr>)
+              }
+            </tbody>
+          </Table>
+        }
       </div>
     </div>
   );

@@ -27,6 +27,15 @@ export class AuthProvider extends React.Component {
          })
   }
 
+  componentWillUnmount() {
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+
+    axios.get('http://localhost:5000/user', { headers: {"Authorization" : `Bearer ${this.state.token}`}}, {
+      cancelToken: source.token
+    })
+  }
+
   userLogin(token = '') {
     axios.get('http://localhost:5000/user', { headers: {"Authorization" : `Bearer ${token}`}} )
     .then(res => {

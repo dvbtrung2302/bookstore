@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import {
   Form,
@@ -7,6 +7,7 @@ import {
   Input,
   Label
 } from 'reactstrap';
+import { AreaContext } from '../contexts/AreaContext';
 
 function validateFn(input = '', info = '') {
   if (!input) {
@@ -23,6 +24,8 @@ export default function(props) {
     name: '',
     email: '',
     password: '',
+    city: '',
+    district: '',
     address: '',
     phone: ''
   });
@@ -31,8 +34,26 @@ export default function(props) {
     email: '',
     password: '',
     address: '',
+    city: '',
+    district: '',
     phone: '',
   });
+  const { cities, districts, handleCityClick } = useContext(AreaContext); 
+  
+  // useEffect(() => {
+  //   axios.get('https://dvbt-areas.herokuapp.com/cities')
+  //        .then(res => {
+  //          setCity(res.data);
+  //        })
+  // })
+
+  // const handleCity = (event) => {
+  //   event.preventDefault();
+  //   axios.get(`https://dvbt-areas.herokuapp.com/districts?city=${event.target.value}`)
+  //        .then(res => {
+  //          setDistrict(res.data);
+  //        })
+  // }
 
   const validate = () => {
     const nameError = validateFn(user.name, 'name') || '';
@@ -40,6 +61,8 @@ export default function(props) {
     const passwordError = validateFn(user.password, 'password') || '';
     const addressError = validateFn(user.address, 'address') || '';
     const phoneError = validateFn(user.phone, 'phone') || '';
+    const cityError = validateFn(user.city, 'city') || '';
+    const districtError = validateFn(user.district, 'district') || '';
     
     if (nameError || emailError || passwordError || addressError || phoneError) {
       setError({
@@ -47,6 +70,8 @@ export default function(props) {
         email: emailError,
         password: passwordError,
         address: addressError,
+        city: cityError,
+        district: districtError,
         phone: phoneError,
       })
       return false;
@@ -68,6 +93,8 @@ export default function(props) {
               email: user.email,
               password: user.password,
               address: user.address,
+              city: user.city,
+              district: user.district,
               phone: user.phone
             })
             .then(() => {
@@ -118,6 +145,26 @@ export default function(props) {
           </Label>
           <Input id="address" type="text" name="address"  onChange={handleInput}/>
           {errors.address && <div className="validation">{errors.address}</div>}
+        </FormGroup>
+        <FormGroup>
+          <Label for="city">
+            City
+            <span className="ml-1 text-danger">*</span>
+          </Label>
+          <Input type="select" name="city" id="city" onChange={(event) => {handleCityClick(event); handleInput(event)}}>
+            <option>Tỉnh/Thành phố</option>
+            { cities.map(city => <option key={city.code}>{city.name}</option>)}
+          </Input>
+        </FormGroup>
+        <FormGroup>
+          <Label for="district">
+            District
+            <span className="ml-1 text-danger">*</span>
+          </Label>
+          <Input type="select" name="district" id="district" onChange={handleInput}>
+            <option>Quận/Huyện</option>
+            { districts.map(district => <option key={district.code}>{district.name}</option>)}
+          </Input>
         </FormGroup>
         <FormGroup>
           <Label for="phone">

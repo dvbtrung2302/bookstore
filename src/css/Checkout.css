@@ -50,6 +50,17 @@
   border-bottom: 1px solid #eee;
 }
 
+/* .Checkout form .form-group .form-control {
+  background-color: rgb(247, 247, 247);
+  border: none;
+}
+
+.Checkout form .form-group .form-control:focus {
+  border: none;
+  box-shadow: none;
+  background-color: rgb(247, 247, 247);
+} */
+
 .Checkout form .form-group:nth-child(5) {
   border-bottom: none;
 }
@@ -66,17 +77,16 @@
   color: #797979;
 }
 
-.Checkout form .billing-address input {
+.Checkout form .billing-address .form-control {
   font-size: 16px;
   width: 100%;
-  padding: 11px 15px 11px 0;
   background-color: rgb(247, 247, 247);
   outline: none;
   border: none;
   text-overflow: ellipsis;
 }
 
-.Checkout form input:focus {
+.Checkout form .form-control:focus {
   box-shadow: none;
   background-color: rgb(247, 247, 247);
 }

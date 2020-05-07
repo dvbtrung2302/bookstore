@@ -17,6 +17,7 @@ import axios from 'axios';
 import { CartContext } from '../contexts/CartContext';
 import { AuthContext } from '../contexts/AuthContext';
 import { OrderContext } from '../contexts/OrderContext';
+import { AreaContext } from '../contexts/AreaContext';  
 import '../css/Checkout.css';
 import UserSideBar from '../components/UserSideBar';
 
@@ -25,14 +26,18 @@ export default function(props) {
   const { user } = useContext(AuthContext);
   const { setStateDefault } = useContext(CartContext);
   const { createOrder } = useContext(OrderContext)
+  const { cities, handleCityClick} = useContext(AreaContext);
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setError] = useState(null);
+  const [ districts, setDistricts ] =  useState([]);
   const [order, setOrder] = useState({
     id: '',
     name: '',
     email: '',
     address: '',
+    city: '',
+    district: '',
     phone: '',
     payment: '',
     totalPrice: '',
@@ -40,18 +45,27 @@ export default function(props) {
   });
 
   useEffect(() => {
-    document.title = 'Checkout - PickBazar'
-    setOrder({
-      id: user._id,
-      name: user.name,
-      email: user.email,
-      address: user.address,
-      phone: user.phone,
-      totalPrice: totalPrice,
-      payment: 'cash',
-      cartItems: JSON.parse(localStorage.getItem('cartItems'))
-    })
-  }, [user.name, user.email, user.address, user.phone, user._id, totalPrice])
+    document.title = 'Checkout - PickBazar';
+    axios.get(`https://dvbt-areas.herokuapp.com/districts?city=${user.city}`)
+         .then(res => {
+           setDistricts(res.data);
+         })
+         .then(() => {
+           setOrder({
+             id: user._id,
+             name: user.name,
+             email: user.email,
+             address: user.address,
+             city: user.city,
+             district: user.district,
+             phone: user.phone,
+             totalPrice: totalPrice,
+             payment: 'cash',
+             cartItems: JSON.parse(localStorage.getItem('cartItems'))
+           })
+         })
+
+  }, [user.name, user.email, user.address, user.phone, user._id, totalPrice, user.city, user.district])
 
   const handleInput = (event) => {
     setOrder({ ...order, [event.target.name]: event.target.value });
@@ -174,6 +188,35 @@ export default function(props) {
                 required
                 id="address"
               />
+            </FormGroup>
+            <FormGroup>
+              <Label for="city">City</Label>
+              <Input 
+                type="select" 
+                name="city" 
+                id="city" 
+                onChange={(event) => {
+                  handleInput(event);
+                  handleCityClick(event); 
+                }}
+                value={order.city || ''}
+              >
+                <option>Tỉnh/Thành phố</option>
+                { cities.map(city => <option key={city.code}>{city.name}</option>)}
+              </Input>
+            </FormGroup>
+            <FormGroup>
+              <Label for="district">District</Label>
+              <Input 
+                type="select" 
+                name="district" 
+                id="district" 
+                onChange={handleInput}
+                value={order.district || ''}
+              >
+                <option>Quận/Huyện</option>
+                { districts.map(district => <option key={district.code}>{district.name}</option>)}
+              </Input>
             </FormGroup>
             <FormGroup>
               <Label for="phone">

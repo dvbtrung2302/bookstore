@@ -55,7 +55,7 @@ export default function(props) {
           </div>
           <div className="detail-info">
             <div className="info-header m-0">Delivery Location</div>
-            <p>{order.address}</p>
+            <p>{`${order.address}, ${order.district}, ${order.city}`}</p>
           </div>
         </div>
         <div className="amount detail">

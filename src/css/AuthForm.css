@@ -30,11 +30,11 @@
   color: rgb(13, 17, 54);
   font-size: 14px;
   transition: border-color .3s;
+  border-bottom: 2px solid rgb(0, 158, 127);
 }
 
 .AuthForm .form-control:focus {
   box-shadow: none;
-  border-color: rgb(0, 158, 127);
 }
 
 .AuthForm .btn {

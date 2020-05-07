@@ -13,6 +13,7 @@ import { ProductsProvider } from './contexts/ProductsContext';
 import { CartProvider } from './contexts/CartContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { OrderProvider } from './contexts/OrderContext';
+import { AreaProvider } from './contexts/AreaContext';
 import Alert from './components/Alert';
 import AuthenticatedComponent from './components/AuthenticatedComponent';
 import './App.css';
@@ -28,22 +29,24 @@ class App extends React.Component {
           <CartProvider>
             <AuthProvider>
               <OrderProvider>
-                <div className="App">
-                  <Alert option="login" />
-                  <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/product/:title" component={Detail} />
-                    <AuthenticatedComponent>
-                      <TopMenu {...this.props}/>
-                      <Elements stripe={stripePromise}>
-                        <Route exact path="/checkout" component={Checkout} />
-                      </Elements>
-                      <Route exact path="/order-received/:id" component={OrderReceived} />
-                      <Route exact path="/profile" component={UserProfile} />
-                      <Route exact path="/order" component={Orders} />
-                    </AuthenticatedComponent>
-                  </Switch>
-                </div>
+                <AreaProvider>
+                  <div className="App">
+                    {/* <Alert option="login" /> */}
+                    <Switch>
+                      <Route exact path="/" component={Home} />
+                      <Route exact path="/product/:title" component={Detail} />
+                      <AuthenticatedComponent>
+                        <TopMenu {...this.props}/>
+                        <Elements stripe={stripePromise}>
+                          <Route exact path="/checkout" component={Checkout} />
+                        </Elements>
+                        <Route exact path="/order-received/:id" component={OrderReceived} />
+                        <Route exact path="/profile" component={UserProfile} />
+                        <Route exact path="/order" component={Orders} />
+                      </AuthenticatedComponent>
+                    </Switch>
+                  </div>
+                </AreaProvider>
               </OrderProvider>
             </AuthProvider>
           </CartProvider>

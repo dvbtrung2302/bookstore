@@ -1,47 +1,85 @@
 .Category {
   background-color: rgb(255, 255, 255);
-  padding: 20px;
-  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
   position: sticky;
   position: -webkit-sticky;
-  top: 0;
+  top: 10vh;
+  height: 90vh;
+  transition: height .3s ease-in;
+  overflow: hidden;
 }
 
-.Category .navbar {
-  position: sticky;
-  position: -webkit-sticky;
-  top: 100px;
-  display: block;
-}
-
-.Category .navbar .navbar-brand {
-  font-size: 1rem;
-  font-weight: 700;
-  color: rgb(13, 17, 54)
-}
-
-.Category .navbar-collapse {
-  width: 100%;
-}
- 
-.Category .navbar .navbar-nav {
-  flex-direction: column;
-  width: 100%;
-}
-
-.Category .navbar-light .navbar-nav .nav-link {
-  color: rgb(13, 17, 54);
-  font-weight: 500;
+.Category .logo {
   font-size: 15px;
-  transition: color 0.2s;
+  font-weight: 700;
+  color: rgb(13, 17, 54);
+  letter-spacing: 2px;
   padding: 20px;
+  height: 10%;
+}
+
+.Category ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  position: absolute;
+  height: 92vh;
+  top: 8vh;
+  transition: transform .3s ease-in;
   width: 100%;
+  padding: 0 20px 20px 20px;
 }
 
-.Category .navbar-light .navbar-nav .nav-link:hover {
+.Category li {
+  cursor: pointer;
+}
+
+.Category ul li a {
+  color: rgb(13, 17, 54);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color .3s;
+}
+
+.Category li:hover a {
   color: rgb(0, 158, 127);
+
 }
 
- .Category .active {
+.Category .burger {
+  cursor: pointer;
+  display: none;
+  height: 35px;
+  padding: 20px 0;
+}
+
+.Category .burger .line {
+  width: 25px;
+  height: 3px;
+  background-color:rgb(13, 17, 54);
+  margin: 5px;
+  transition: transform .3s;
+}
+
+.category-active {
+  height: 540px!important;
+}
+
+.active {
   color: rgb(0, 158, 127)!important;
- }
+}
+
+.toggle .line:first-child {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle .line:nth-child(2) {
+  opacity: 0;
+}
+
+.toggle .line:last-child {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
