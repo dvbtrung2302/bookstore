@@ -26,53 +26,49 @@ export default function(props) {
   const { user } = useContext(AuthContext);
   const { setStateDefault } = useContext(CartContext);
   const { createOrder } = useContext(OrderContext)
-  const { cities, handleCityClick} = useContext(AreaContext);
+  const { cities, handleCityClick } = useContext(AreaContext);
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setError] = useState(null);
-  const [ districts, setDistricts ] =  useState([]);
-  const [order, setOrder] = useState({
-    id: '',
-    name: '',
-    email: '',
-    address: '',
-    city: '',
-    district: '',
-    phone: '',
-    payment: '',
-    totalPrice: '',
-    cartItems: []
-  });
+  const [order, setOrder] = useState({});
+  const [districts, setDistricts] = useState([]);
 
   useEffect(() => {
     document.title = 'Checkout - PickBazar';
-    axios.get(`https://dvbt-areas.herokuapp.com/districts?city=${user.city}`)
-         .then(res => {
-           setDistricts(res.data);
-         })
-         .then(() => {
-           setOrder({
-             id: user._id,
-             name: user.name,
-             email: user.email,
-             address: user.address,
-             city: user.city,
-             district: user.district,
-             phone: user.phone,
-             totalPrice: totalPrice,
-             payment: 'cash',
-             cartItems: JSON.parse(localStorage.getItem('cartItems'))
-           })
-         })
-    return () => {
-      const CancelToken = axios.CancelToken;
-      const source = CancelToken.source();
+    
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
 
-      axios.get(`https://dvbt-areas.herokuapp.com/districts?city=${user.city}`, {
-        cancelToken: source.token
+    if (!order.city) {
+      setOrder({
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        address: user.address,
+        city: user.city,
+        district: user.district,
+        phone: user.phone,
+        payment: 'cash',
+        totalPrice: totalPrice,
+        cartItems: JSON.parse(localStorage.getItem('cartItems'))
       })
     }
-  }, [user.name, user.email, user.address, user.phone, user._id, totalPrice, user.city, user.district])
+
+
+    const tempCity = order.city ? order.city : user.city;
+    
+    axios.get(`https://dvbt-areas.herokuapp.com/districts?city=${tempCity}`, { cancelToken: source.token })
+          .then(res => {
+            setDistricts(res.data);
+          })
+          .catch(err => {
+            console.log(err);
+    })
+
+    return () => {
+      source.cancel();
+    }
+  }, [user.city, order.city, totalPrice, user._id, user.address, user.district, user.email, user.name, user.phone])
 
   const handleInput = (event) => {
     setOrder({ ...order, [event.target.name]: event.target.value });
@@ -163,7 +159,7 @@ export default function(props) {
               </Label>
               <Input 
                 type="text" 
-                value={order.name || ''} 
+                value={order.name || user.name || ''} 
                 name="name" 
                 onChange={handleInput}
                 required
@@ -176,7 +172,7 @@ export default function(props) {
               </Label>
               <Input 
                 type="email" 
-                value={order.email || ''} 
+                value={order.email || user.email || ''} 
                 name="email" 
                 onChange={handleInput}
                 required
@@ -189,7 +185,7 @@ export default function(props) {
               </Label>
               <Input 
                 type="text" 
-                value={order.address || ''} 
+                value={order.address || user.address || ''} 
                 name="address" 
                 onChange={handleInput}
                 required
@@ -206,10 +202,10 @@ export default function(props) {
                   handleInput(event);
                   handleCityClick(event); 
                 }}
-                value={order.city || ''}
+                value={order.city || user.city}
               >
                 <option>Tỉnh/Thành phố</option>
-                { cities.map(city => <option key={city.code}>{city.name}</option>)}
+                { cities.map(city => <option key={city.name} >{city.name}</option>)}
               </Input>
             </FormGroup>
             <FormGroup>
@@ -219,10 +215,10 @@ export default function(props) {
                 name="district" 
                 id="district" 
                 onChange={handleInput}
-                value={order.district || ''}
+                value={order.district || user.district}
               >
                 <option>Quận/Huyện</option>
-                { districts.map(district => <option key={district.code}>{district.name}</option>)}
+                { districts.map(district => <option key={district.name}>{district.name}</option>)}
               </Input>
             </FormGroup>
             <FormGroup>
@@ -231,7 +227,7 @@ export default function(props) {
               </Label>
               <Input 
                 type="text" 
-                value={order.phone || ''} 
+                value={order.phone || user.phone || ''} 
                 name="phone"
                 onChange={handleInput}
                 required

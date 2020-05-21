@@ -6,8 +6,7 @@ import {
   FormGroup,
   Button, 
   Input,
-  Label,
-  Alert
+  Label
 } from 'reactstrap';
 
 import { AuthContext } from '../contexts/AuthContext';
@@ -79,7 +78,13 @@ const SignIn = (props) => {
         <h1>Welcome Back</h1>
         <p>Login with your email & password</p>
       </div>
-      {errors.err && <Alert color="danger">{errors.err}</Alert>}
+      {errors.err && <div style={{
+          color:"rgb(97, 26, 21)",
+          backgroundColor:"rgb(253, 236, 234)",
+          textAlign:"center",
+          padding:"15px",
+          borderRadius:"4px"
+        }}>{errors.err}</div>}
       <Form onSubmit={handleSubmit}>
         <FormGroup>
           <Label for="email">EMAIL</Label>

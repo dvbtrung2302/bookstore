@@ -1,0 +1,16 @@
+.Sale .header {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Sale .total {
+  color: rgb(0, 197, 141);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.Sale .bt-header {
+  color: rgb(22, 31, 106);
+  margin: 0;
+}

@@ -24,20 +24,22 @@ const UserInfo = (props) => {
   const externalCloseBtn = <button className="auth close" style={{ position: 'absolute', top: '15px', right: '15px' }} onClick={toggle}>&times;</button>;
 
   useEffect(() => {
-    axios.get(`https://dvbt-areas.herokuapp.com/districts?city=${data.city}`)
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+        
+    axios.get(`https://dvbt-areas.herokuapp.com/districts?city=${data.city}`, { cancelToken: source.token })
          .then(res => {
            setDistricts(res.data)
          })
+         .catch(err => {
+           console.log(err);
+         })
+
     return () => {
-      const CancelToken = axios.CancelToken;
-      const source = CancelToken.source();
-  
-      axios.get(`https://dvbt-areas.herokuapp.com/districts?city=${data.city}`, {
-        cancelToken: source.token
-      })
+      source.cancel();
     }
   }, [data.city])
-
+  
   return(
     <div className="UserInfo">
       <div className="info">{isPhone ? data.phone : `${data.address}, ${data.district}, ${data.city}`}</div>
@@ -82,7 +84,7 @@ const UserInfo = (props) => {
                     defaultValue={data.city}
                   >
                     <option>Tỉnh/Thành phố</option>
-                    { cities.map(city => <option key={city.code}>{city.name}</option>)}
+                    { cities.map(city => <option key={city.name}>{city.name}</option>)}
                   </Input>
                 </FormGroup>
               }
@@ -101,7 +103,7 @@ const UserInfo = (props) => {
                     defaultValue={data.district}
                   >
                     <option>Quận/Huyện</option>
-                    { districts.map(district => <option key={district.code}>{district.name}</option>)}
+                    { districts.map(district => <option key={district.name}>{district.name}</option>)}
                   </Input>
                 </FormGroup>
               }

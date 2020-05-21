@@ -24,7 +24,9 @@ function ProductView(props) {
       top: 0,
       behavior: "smooth"
     })
-    axios.get(`https://dvbt-bookstore.herokuapp.com/products/product/?id=${props.location.state.id}`)
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+    axios.get(`https://dvbt-bookstore.herokuapp.com/products/product/?id=${props.location.state.id}`, { cancelToken: source.token })
           .then(res => {
             setProduct(res.data);
             document.title = `${res.data.title} - PickBazar`;
@@ -33,12 +35,7 @@ function ProductView(props) {
             console.log(err);
           });
     return () => {
-      const CancelToken = axios.CancelToken;
-      const source = CancelToken.source();
-  
-      axios.get(`https://dvbt-bookstore.herokuapp.com/products/product/?id=${props.location.state.id}`, {
-        cancelToken: source.token
-      })
+      source.cancel();
     }
   }, [props.location.state.id]);
 

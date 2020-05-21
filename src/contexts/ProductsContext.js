@@ -3,6 +3,9 @@ import axios from 'axios';
 
 export const ProductsContext = React.createContext();
 
+const CancelToken = axios.CancelToken;
+const source = CancelToken.source();
+
 export class ProductsProvider extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +22,7 @@ export class ProductsProvider extends React.Component {
 
   componentDidMount() {
     if (this.state.products.length === 0) {
-      axios.get('https://dvbt-bookstore.herokuapp.com/products')
+      axios.get('https://dvbt-bookstore.herokuapp.com/products', { cancelToken: source.token })
            .then(res => {
              this.setState({
                products: res.data
@@ -42,12 +45,7 @@ export class ProductsProvider extends React.Component {
   }
 
   componentWillUnmount() {
-    const CancelToken = axios.CancelToken;
-    const source = CancelToken.source();
-
-    axios.get('https://dvbt-bookstore.herokuapp.com/products', {
-      cancelToken: source.token
-    })
+    source.cancel();
   }
 
   setCategory(category = '') {

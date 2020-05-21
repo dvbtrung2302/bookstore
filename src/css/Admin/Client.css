@@ -1,0 +1,60 @@
+.Client {
+  display: flex;
+  flex-direction: column;
+}
+.Client .main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 70px 35px;
+  border-bottom: 1px solid #eee;
+  height: 80%;
+}
+
+.Client .main .title {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Client .client-progress {
+  flex-grow: 3;
+}
+
+.Client .city-name {
+  color: rgb(22, 31, 106);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.Client .city-name span {
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.Client .progress-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.Client .progress-wrapper {
+  flex-grow: 1;
+  background-color: rgba(231, 231, 231, 0.85);
+  height: 15px;
+  border-radius: 10px;
+}
+
+.Client .percent {
+  color: rgb(22, 31, 106);
+  font-weight: 600;
+  font-size: 13px;
+  margin-left: 10px;
+}
+
+.Client .LegendItems {
+  padding: 35px 15px;
+}

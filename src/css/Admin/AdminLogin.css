@@ -1,0 +1,38 @@
+.AdminLogin {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.AdminLogin .AuthForm {
+  width: 470px;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px 15px rgba(0, 0, 0, .02);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.AdminLogin .AuthForm .header {
+  margin: 0;
+}
+
+.AdminLogin .AuthForm .header img {
+  width: 150px;
+}
+
+.AdminLogin .AuthForm .header p {
+  color: rgb(12,17,54);
+  margin: 20px 0;
+  font-size: 18px;
+}
+
+.AdminLogin .AuthForm label {
+  color: rgb(12,17,54);
+  font-size: 16px;
+  font-weight: 600;
+}
+

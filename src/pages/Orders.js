@@ -15,18 +15,18 @@ const Orders = () => {
   
   useEffect(() => {
     document.title = 'Order - PickBazar';
-    axios.get('http://localhost:5000/order', { headers: {"Authorization" : `Bearer ${token}`}})
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+    axios.get('http://localhost:5000/order', { headers: {"Authorization" : `Bearer ${token}`}}, { cancelToken: source.token })
          .then(res => {
            setOrders(res.data);
            setOrder(res.data[0]);
          })
+         .catch(err => {
+           console.log(err);
+         })
     return () => {
-      const CancelToken = axios.CancelToken;
-      const source = CancelToken.source();
-
-      axios.get('http://localhost:5000/order', { headers: {"Authorization" : `Bearer ${token}`}}, {
-        cancelToken: source.token
-      })
+      source.cancel();
     }
   }, [token])
 

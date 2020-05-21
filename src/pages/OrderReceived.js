@@ -10,20 +10,17 @@ const OrderReceived = (props) => {
 
   useEffect(() => {
     document.title = 'Invoice - PickBazar';
-    axios.get(`http://localhost:5000/checkout/?id=${props.match.params.id}`)
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+    axios.get(`http://localhost:5000/checkout/?id=${props.match.params.id}`, { cancelToken: source.token })
          .then(res => {
            setOrder(res.data);
-         }) 
+         })
+         .catch(err => {
+           console.log(err);
+         })
     return () => {
-      const CancelToken = axios.CancelToken;
-      const source = CancelToken.source();
-
-      axios.get(`http://localhost:5000/checkout/?id=${props.match.params.id}`, {
-        cancelToken: source.token
-      })
-          .then(() => {
-            setOrder({});
-          })
+      source.cancel();
     }
   }, [props.match.params.id])
 

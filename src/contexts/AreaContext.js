@@ -3,6 +3,9 @@ import axios from 'axios';
 
 export const AreaContext = React.createContext();
 
+const CancelToken = axios.CancelToken;
+const source = CancelToken.source();
+
 export class AreaProvider extends React.Component {
   constructor(props) {
     super(props);
@@ -14,22 +17,19 @@ export class AreaProvider extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('https://dvbt-areas.herokuapp.com/cities')
+    axios.get('https://dvbt-areas.herokuapp.com/cities', { cancelToken: source.token })
          .then(res => {
            this.setState({
              cities: res.data
            })
          })
+         .catch(err => {
+           console.log(err);
+         })
   }
 
   componentWillUnmount() {
-    const CancelToken = axios.CancelToken;
-    const source = CancelToken.source();
-
-    axios.get(`https://dvbt-areas.herokuapp.com/cities`, {
-      cancelToken: source.token
-    })
-
+    source.cancel();
   }
 
   handleCityClick(event) {

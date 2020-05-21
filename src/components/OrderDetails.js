@@ -13,7 +13,7 @@ const OrderDetails =  (props) => {
 
   return(
     <div className={className} style={mobile ? {maxHeight:"0", overflow:"hidden", padding:"0"} : null}>
-      <h3 className="bt-header">Order Details</h3>
+      <h3 className="bt-header d-none d-xl-block">Order Details</h3>
       {
         !order ? <span style={{
           fontSize:"15px",
@@ -29,6 +29,8 @@ const OrderDetails =  (props) => {
             <div className="address">
               <div className="title">Delivery Address</div>
               <span>{order && `${order.address}, ${order.district}, ${order.city}` }</span>
+              <div className="title mt-4">Payment Method</div>
+              <span>{order.payment === 'cash' ? 'Cash On Delivery' : 'Online Payment'}</span>
             </div>
             <div className="info">
               <div>

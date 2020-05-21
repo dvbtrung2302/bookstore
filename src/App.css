@@ -49,7 +49,7 @@ p {
 }
 
  .App {
-   background-color: rgb(224, 224, 224);
+   background-color: rgb(247, 247, 247);
  }
 
  .bt-header {
@@ -107,33 +107,33 @@ p {
     padding-right: 20px!important;
   }
   .Order {
-    width: 100%;
-    margin: 0;
+    width: 100%!important;
+    margin: 0!important;
   }
   .Orders .details {
-    flex-direction: column;
+    flex-direction: column!important;
   }
   .Orders .address {
-    border-right: none;
-    border-bottom: 1px solid #eee;
+    border-right: none!important;
+    border-bottom: 1px solid #eee!important;
   }
   .Orders .info {
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
+    width: 100%!important;
+    padding-left: 0!important;
+    padding-right: 0!important;
   }
   .Orders .des .text {
-    font-size: 9px;
+    font-size: 9px!important;
   }
 }
 
 
 @media (max-width: 992px) {
   .Category {
-    height: 10vh;
+    height: 10vh!important;
   }
   .Burger {
-    display: flex;
+    display: flex!important;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -153,6 +153,34 @@ p {
   }
   .Checkout form .payment .form-check-label {
     margin-bottom: 1rem!important;
+  }
+  .NavBar .wrapper {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+  }
+  .NavBar .navs {
+    display: none;
+    transform: translateX(-110%);
+    transition: transform .5s ease-in;
+    box-shadow: 0px 8px 6px rgba(0, 0, 0, .2);
+  }
+  .Admin {
+    width: 100%!important;
+    padding: 155px 0 0 0!important;
+  }
+  .Client {
+    height: auto!important;
+  }
+  .Client .main {
+    flex-direction: column;
+    padding: 70px 35px 0 35px!important;
+  }
+  .Client .client-progress {
+    width: 100%;
+    margin-top: 25px;
+  }
+  .Admin .legend .LegendItems {
+    width: 50%;  
   }
 }
 
@@ -182,15 +210,32 @@ p {
     flex-direction: column;
   }
   .UserProfile .AuthForm .form-group {
-    margin-bottom: 20px;
+    margin: 0 0 20px 0!important;
   }
   .UserProfile .AuthForm .btn {
-    width: 100%;
+    width: 100%!important;
   }
   .UserInfo {
-    width: 100%;
+    width: 100%!important;
   }
   .User .nav-links {
     width: 100%!important;
+  }
+  .AdminLogin .AuthForm {
+    height: 100%!important;
+  }
+  .NavBar .wrapper {
+    padding-left: 15px!important;
+    padding-right: 15px!important;
+  }
+  .NavBar .logo img {
+    width: 110px!important;
+  } 
+  .NavBar .navs {
+    width: 100%;
+  }
+  .NavBar .add-products-btn {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }

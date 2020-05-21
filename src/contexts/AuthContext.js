@@ -3,6 +3,9 @@ import axios from 'axios';
 
 export const AuthContext = React.createContext();
 
+const CancelToken = axios.CancelToken;
+const source = CancelToken.source();
+
 export class AuthProvider extends React.Component {
   constructor(props) {
     super(props);
@@ -19,21 +22,19 @@ export class AuthProvider extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/user', { headers: {"Authorization" : `Bearer ${this.state.token}`}})
+    axios.get('http://localhost:5000/user', { headers: {"Authorization" : `Bearer ${this.state.token}`}}, { cancelToken: source.token })
          .then(res => {
             this.setState({
               user: res.data
             })
          })
+         .catch(err => {
+           console.log(err);
+         })
   }
 
   componentWillUnmount() {
-    const CancelToken = axios.CancelToken;
-    const source = CancelToken.source();
-
-    axios.get('http://localhost:5000/user', { headers: {"Authorization" : `Bearer ${this.state.token}`}}, {
-      cancelToken: source.token
-    })
+    source.cancel();
   }
 
   userLogin(token = '') {

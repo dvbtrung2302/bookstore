@@ -4,11 +4,17 @@ import PropTypes from 'prop-types';
 import '../css/Burger.css';
 
 const Burger = (props) => {
-  const { isClick, handleCatClick, isTopMenu } = props;
+  const { 
+    isClick, 
+    handleCatClick, 
+    handleBurgerClick, 
+    isTopMenu, 
+    isNav 
+  } = props;
   return(
     <div 
       className={isClick ? "Burger toggle" : "Burger"} 
-      onClick={handleCatClick}
+      onClick={isNav ? handleBurgerClick : handleCatClick}
       style={isTopMenu && {
         display:"flex",
         flexDirection:"column",
@@ -29,7 +35,9 @@ const Burger = (props) => {
 Burger.propTypes = {
   isClick: PropTypes.bool,
   handleCatClick: PropTypes.func,
-  isTopMenu: PropTypes.bool
+  handleBurgerClick: PropTypes.func,
+  isTopMenu: PropTypes.bool,
+  isNav: PropTypes.bool
 }
 
 export default Burger;

@@ -20,11 +20,8 @@ const  UserProfile = () => {
   const [isSave, setSave] = useState(false);
 
   useEffect(() => {
-    document.title = 'Profile - PickBazar'
+    document.title = 'Profile - PickBazar';
     setData(user);
-    return () => {
-      setData({});
-    }
   }, [user])
 
   const handleSubmit = (event) => {
@@ -32,11 +29,16 @@ const  UserProfile = () => {
     if (JSON.stringify(data) === JSON.stringify(user)) {
       return;
     }
+
+    if (data.district === 'Quận/Huyện' || data.city === 'Tỉnh/Thành phố')  {
+      return;
+    }
+    
     const token = localStorage.getItem('token');
     axios.patch('http://localhost:5000/user/update', data, { headers: {"Authorization" : `Bearer ${token}`}})
          .then(res => {
            setSave(true);
-           userLogin(token);
+           userLogin(token); 
          })
          .then(() => {
            setTimeout(() => {

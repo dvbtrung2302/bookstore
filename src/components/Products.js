@@ -19,9 +19,6 @@ export default function(props) {
 
   useEffect(() => {
     setItems(products);
-    return () => {
-      setItems([]);
-    }
   }, [products])
 
   const loadMore = () => {

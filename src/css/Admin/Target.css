@@ -1,0 +1,13 @@
+.Target {
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.03) 0px 21px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Target .bt-header {
+  color: rgb(22, 31, 106);
+  padding: 30px;
+  margin: 0;
+}
