@@ -24,6 +24,7 @@ import UserRoute from './components/UserRoute';
 import AdminRoute from './components/Admin/AdminRoute';
 import { AdminProvider } from './contexts/AdminContext';
 import NavBar from './components/Admin/NavBar';
+import AdminOrders from './pages/Admin/Orders';
 
 const stripePromise = loadStripe('pk_test_UveTYJMSFhA9nBMhfj2AE6K600nYtR677m');
 
@@ -41,7 +42,7 @@ class App extends React.Component {
                       <div className="App">
                         <Route path={["/checkout", "/order-received/:id", "/profile", "/order"]} render={props => <TopMenu {...props}/>} />
                         <Route path={["/", "product:title", "/checkout", "/order-received/:id", "/profile", "/order"]} render={props => <Alert option="login" />} />
-                        <Route exact path={["/admin", "/admin/products"]} component={NavBar} />
+                        <Route path="/admin" component={NavBar} />
                         <Route path="/admin" render={props => <Alert option="admin" isOpen />} />
                         <Switch>
                           <Route exact path="/" component={Home} />
@@ -55,6 +56,7 @@ class App extends React.Component {
                             <Route exact path="/admin/login" component={AdminLogin} />
                             <AdminRoute exact path="/admin" component={Admin} />
                             <AdminRoute exact path="/admin/products" component={Products} />
+                            <AdminRoute exact path="/admin/orders" component={AdminOrders} />
                         </Switch>
                       </div>
                     </Elements>

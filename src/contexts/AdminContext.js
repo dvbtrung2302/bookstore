@@ -17,7 +17,10 @@ export class AdminProvider extends React.Component {
       filter: {
         category: 'Category Type',
         price: 'Price',
-        keyword: ''
+        payment: 'Payment Method',
+        amount: 'Amount',
+        keyword: '',
+        addressKeyword: ''
       },
       open: false,
       product: {},
@@ -29,6 +32,7 @@ export class AdminProvider extends React.Component {
     this.setOpen = this.setOpen.bind(this);
     this.setProduct = this.setProduct.bind(this);
     this.setProducts = this.setProducts.bind(this);
+    this.onOrdersFilter = this.onOrdersFilter.bind(this);
   }
 
   componentDidMount() {
@@ -57,11 +61,25 @@ export class AdminProvider extends React.Component {
   }
 
   onFilter (filterCategory = '', filterPrice = '', filterKeyword = '') {
-    this.setState({
+    const { filter } = this.state;
+    this.setState({      
       filter: {
+        ...filter,
         category: filterCategory,
         price: filterPrice, 
         keyword: filterKeyword
+      }
+    })
+  }
+
+  onOrdersFilter (payment = '', amount = '', addressKeyword = '') {
+    const { filter } = this.state;
+    this.setState({
+      filter: {
+        ...filter,
+        payment: payment,
+        amount: amount,
+        addressKeyword: addressKeyword
       }
     })
   }
@@ -86,7 +104,6 @@ export class AdminProvider extends React.Component {
 
   setProducts() {
     const token = localStorage.getItem('adminToken');
-    console.log('re-rendering....');
     axios.get('http://localhost:5000/admin/admin-get', { headers: {"Authorization" : `Bearer ${token}`}}, { cancelToken: source.token })
          .then(res => {
            this.setState({
@@ -105,6 +122,12 @@ export class AdminProvider extends React.Component {
          })
   }
 
+  removeAccents(str) {
+    return str.normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '')
+              .replace(/đ/g, 'd').replace(/Đ/g, 'D');
+  }
+
   render() {
     const { 
       adminToken, 
@@ -117,8 +140,9 @@ export class AdminProvider extends React.Component {
       isSave,
       option
     } = this.state;
-    let filtedProducts = products;
 
+    let filtedProducts = products;
+    let filtedOrders = orders;
     const revenue = orders.reduce((acc, current) => {
       return acc + current.totalPrice;
     }, 0);
@@ -141,12 +165,37 @@ export class AdminProvider extends React.Component {
       }
     }
 
+    if (filter.payment !== 'Payment Method') {
+      const paymentMethod = filter.payment === 'Cash On Delivery' ? 'cash' : 'card';
+      filtedOrders = filtedOrders.filter(order => {
+        return order.payment === paymentMethod;
+      })
+    }
+
+    if (filter.amount !== 'Amount') {
+      if (filter.amount === 'Highest to Lowest') {
+        filtedOrders = filtedOrders.concat().sort((a, b) => {
+          return b.totalPrice - a.totalPrice;
+        })
+      } else {
+        filtedOrders = filtedOrders.concat().sort((a, b) => {
+          return a.totalPrice - b.totalPrice;
+        })
+      }
+    }
+
     if (filter.keyword) {
       filtedProducts = filtedProducts.filter(product => {
         return product.title.toLowerCase().indexOf(filter.keyword.toLowerCase()) !== -1;
       })
     }
 
+    if (filter.addressKeyword) {
+      filtedOrders = filtedOrders.filter(order => {
+        const userAdress = this.removeAccents(`${order.address}, ${order.district}, ${order.city}`);
+        return userAdress.toLowerCase().indexOf(filter.addressKeyword.toLowerCase()) !== -1;
+      })
+    }
     return(
       <AdminContext.Provider value={{
         adminToken: adminToken,
@@ -163,7 +212,9 @@ export class AdminProvider extends React.Component {
         setProduct: this.setProduct,
         setProducts: this.setProducts,
         isSave: isSave,
-        option: option
+        option: option,
+        onOrdersFilter: this.onOrdersFilter,
+        filtedOrders: filtedOrders
       }}>
         {this.props.children}
       </AdminContext.Provider>
