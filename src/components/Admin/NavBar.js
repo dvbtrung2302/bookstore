@@ -42,9 +42,9 @@ const NavBar = (props) => {
 
   const nav = [
     {icon: faThLarge, text: 'Dashboard', path: '/admin'},
-    {icon: faShoppingBasket, text: 'Products', path: '/products'},
-    {icon: faCalendarCheck, text: 'Orders', path: '/orders'},
-    {icon: faUsers, text: 'Customers', path: '/customers'},
+    {icon: faShoppingBasket, text: 'Products', path: '/admin/products'},
+    {icon: faCalendarCheck, text: 'Orders', path: '/admin/orders'},
+    {icon: faUsers, text: 'Customers', path: '/admin/customers'},
     {icon: faSignOutAlt, text: 'Logout'}
   ];
   

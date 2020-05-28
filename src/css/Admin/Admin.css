@@ -1,22 +1,7 @@
-.Admin {
-  background-color: rgb(247, 247, 247);
-  /* background-color: palegoldenrod; */
-  width: calc(100% - 270px);
-  float: right;
-  padding: 155px 40px 0 40px;
-}
-
 .Admin .amount {
   color: rgb(22, 31, 106);
   font-size: 20px;
   font-weight: 600;
-}
-
-.Admin .admin-col {
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.03) 0px 21px 36px;
-  padding-bottom: 20px;
-  height: 100%;
 }
 
 .Admin .legend {

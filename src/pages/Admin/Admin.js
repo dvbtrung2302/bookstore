@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { faDollarSign, faCartArrowDown, faUserCircle, faTruck } from "@fortawesome/free-solid-svg-icons";
 
-import '../css/Admin/Admin.css';
-import Target from '../components/Admin/Target';
-import Client from '../components/Admin/Client';
-import Statistic from '../components/Admin/Statistic';
-import Sale from '../components/Admin/Sale';
-import { AdminContext } from '../contexts/AdminContext';
+import '../../css/Admin/Admin.css';
+import Target from '../../components/Admin/Target';
+import Client from '../../components/Admin/Client';
+import Statistic from '../../components/Admin/Statistic';
+import Sale from '../../components/Admin/Sale';
+import { AdminContext } from '../../contexts/AdminContext';
 
 const Admin = () => {
   const { orders, revenue, users } = useContext(AdminContext);
@@ -20,7 +20,7 @@ const Admin = () => {
   ];
 
   return(
-    <div className="Admin">
+    <div className="Admin admin-page">
       <Container>
         <Row>
           <Col xl="4" className="mb-4">

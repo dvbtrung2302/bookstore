@@ -1,0 +1,123 @@
+.TaskBar {
+  display: flex;
+  width: 100%;
+  padding: 40px;
+}
+
+.TaskBar .title {
+  color: rgb(22, 31, 106);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.TaskBar .Filter {
+  position: relative;
+}
+
+.TaskBar .name {
+  background-color: rgb(238, 238, 238);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #000;
+  border: 2px solid transparent;
+}
+
+.TaskBar .name div:first-child {
+  flex-grow: 1;
+}
+
+.TaskBar .name:focus {
+  outline: none;
+  border-color: rgb(0, 197, 141);
+  background-color: rgb(247, 247, 247);
+}
+
+.TaskBar .name div {
+  color: rgb(22, 31, 106);
+  font-weight: 600;
+}
+
+.TaskBar .Search .form-group {
+  margin: 0;
+  height: 100%;
+}
+
+.TaskBar .Search .form-group {
+  background-color: rgb(238, 238, 238);
+  border-radius: 3px;
+  height: 100%;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+}
+
+.TaskBar .Search .form-group:focus-within {
+  border-color: rgb(0, 197, 141);
+  background-color: rgb(247, 247, 247);
+}
+
+.TaskBar .Search .form-control {
+  background-color: rgb(238, 238, 238);
+  border: none;
+}
+
+.TaskBar .Search .form-control:focus {
+  box-shadow: none;
+  outline: none;
+  border: none;
+  background-color: rgb(247, 247, 247);
+
+}
+
+.TaskBar .Search .form-group ::placeholder {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.TaskBar .list {
+  position: absolute;
+  background-color: #fff;
+  margin-top: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: all .4s ease;
+  z-index: 2;
+}
+
+.TaskBar .list .list-item {
+  padding: 10px 16px;
+  color: rgb(102, 109, 146);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.TaskBar .list .list-item:hover {
+  background-color: rgb(247, 247, 247);
+}
+
+.TaskBar .list-active {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+.TaskBar .fa-caret-down {
+  margin-left: 5px;
+}

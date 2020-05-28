@@ -8,8 +8,8 @@ import {
   Button
 } from 'reactstrap';
 
-import '../css/Admin/AdminLogin.css';
-import { AdminContext } from '../contexts/AdminContext';
+import '../../css/Admin/AdminLogin.css';
+import { AdminContext } from '../../contexts/AdminContext';
 
 const AdminLogin = (props) => {
   const [admin, setAdmin] = useState({});

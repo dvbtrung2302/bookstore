@@ -15,7 +15,7 @@ import { ProductsContext } from '../contexts/ProductsContext';
 import ProductViewLoading from './ProductViewLoading';
 
 function ProductView(props) {
-  const [ product, setProduct ] = useState([]);
+  const [ product, setProduct ] = useState({});
   const [ isShow, setShow ] = useState(false);
   const { setCategory } = useContext(ProductsContext);
 
@@ -26,7 +26,7 @@ function ProductView(props) {
     })
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
-    axios.get(`https://dvbt-bookstore.herokuapp.com/products/product/?id=${props.location.state.id}`, { cancelToken: source.token })
+    axios.get(`http://localhost:5000/products/product/?slug=${props.match.params.title}`, { cancelToken: source.token })
           .then(res => {
             setProduct(res.data);
             document.title = `${res.data.title} - PickBazar`;
@@ -37,7 +37,7 @@ function ProductView(props) {
     return () => {
       source.cancel();
     }
-  }, [props.location.state.id]);
+  }, [props.match.params.title]);
 
   return(
     <div className="ProductView py-5">

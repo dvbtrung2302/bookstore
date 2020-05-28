@@ -35,7 +35,7 @@ export default function(props) {
       <Container className="h-100">
         {
           (items === undefined || items.length === 0) ?
-          [keyword ? <NotFound /> : <ProductsLoading key={items.length} /> ] :
+          (keyword ? <NotFound /> : <ProductsLoading /> ) :
           <Row>
             {
               items.slice(0, visible).map(item => <Product key={item._id} item={item} />)
@@ -49,7 +49,7 @@ export default function(props) {
             Load more
           </button>
           }
-          { isLoading && <Spinner style={{color:"rgb(0, 158, 127)"}} /> }
+          { isLoading && <Spinner style={{color:"rgb(0, 158, 127)"}} className="mb-3" /> }
         </Row>
       </Container>
     </div>

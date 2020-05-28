@@ -10,8 +10,9 @@ import Checkout from './pages/Checkout';
 import OrderReceived  from './pages/OrderReceived';
 import UserProfile from './pages/UserProfile';
 import Orders from './pages/Orders';
-import AdminLogin from './pages/AdminLogin';
-import Admin from './pages/Admin';
+import AdminLogin from './pages/Admin/AdminLogin';
+import Admin from './pages/Admin/Admin';
+import Products from './pages/Admin/Products';
 import { ProductsProvider } from './contexts/ProductsContext';
 import { CartProvider } from './contexts/CartContext';
 import { AuthProvider } from './contexts/AuthContext';
@@ -35,27 +36,29 @@ class App extends React.Component {
             <AuthProvider>
               <OrderProvider>
                 <AreaProvider>
-                  <Elements stripe={stripePromise}>
-                    <div className="App">
-                      <Route path={["/checkout", "/order-received/:id", "/profile", "/order"]} render={props => <TopMenu {...props}/>} />
-                      <Route path={["/", "product:title", "/checkout", "/order-received/:id", "/profile", "/order"]} render={props => <Alert option="login" />} />
-                      <Route exact path={["/admin"]} component={NavBar} />
-                      <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route exact path="/product/:title" component={Detail} />
-                        {/* UserRoute */}
-                        <UserRoute exact path="/checkout" component={Checkout} />
-                        <UserRoute exact path="/order-received/:id" component={OrderReceived} />
-                        <UserRoute exact path="/profile" component={UserProfile} />
-                        <UserRoute exact path="/order" component={Orders} />
-                        {/* AdminRoute */}
-                        <AdminProvider>
-                          <Route exact path="/admin/login" component={AdminLogin} />
-                          <AdminRoute exact path="/admin" component={Admin} />
-                        </AdminProvider>
-                      </Switch>
-                    </div>
-                  </Elements>
+                  <AdminProvider>
+                    <Elements stripe={stripePromise}>
+                      <div className="App">
+                        <Route path={["/checkout", "/order-received/:id", "/profile", "/order"]} render={props => <TopMenu {...props}/>} />
+                        <Route path={["/", "product:title", "/checkout", "/order-received/:id", "/profile", "/order"]} render={props => <Alert option="login" />} />
+                        <Route exact path={["/admin", "/admin/products"]} component={NavBar} />
+                        <Route path="/admin" render={props => <Alert option="admin" isOpen />} />
+                        <Switch>
+                          <Route exact path="/" component={Home} />
+                          <Route exact path="/product/:title" location={{state: { id: 1}}} component={Detail} />
+                          {/* UserRoute */}
+                          <UserRoute exact path="/checkout" component={Checkout} />
+                          <UserRoute exact path="/order-received/:id" component={OrderReceived} />
+                          <UserRoute exact path="/profile" component={UserProfile} />
+                          <UserRoute exact path="/order" component={Orders} />
+                          {/* AdminRoute */}
+                            <Route exact path="/admin/login" component={AdminLogin} />
+                            <AdminRoute exact path="/admin" component={Admin} />
+                            <AdminRoute exact path="/admin/products" component={Products} />
+                        </Switch>
+                      </div>
+                    </Elements>
+                  </AdminProvider>
                 </AreaProvider>
               </OrderProvider>
             </AuthProvider>

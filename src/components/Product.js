@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Col } from 'reactstrap';
 
 import '../css/Product.css';
 import CartBtn from './CartBtn';
+import { AdminContext } from '../contexts/AdminContext';
 
 const Product = (props) => {
   const { item, type } = props;
+  const { setOpen, setProduct } = useContext(AdminContext);
+
   const toSlug = (str) => {
     // Chuyển hết sang chữ thường
     str = str.toLowerCase();     
@@ -36,26 +39,37 @@ const Product = (props) => {
     // return
     return str;
   }
+
+  const handleClick = () => {
+    setOpen(true);
+    setProduct(item);
+  }
+
   return(
-    <Col xl="3" lg="4" md="6" sm="6" className="p-0 mb-5">
-      <Link to={{
-        pathname:'/product/' + toSlug(item.title),
-        state: {
-          id: item._id
-        }
-      }} 
-      className={type === 'related' ? 'product fade-in w-custom' : 'product fade-in'}
-    >
+    <Col xl="3" lg="4" md="6" sm="6" className="mb-5">
+      <Link
+        onClick={type === 'admin' ? handleClick : null}
+        to={
+          type === 'admin' ? '/admin/products' :
+          `/product/${toSlug(item.title)}`
+            
+        } 
+        className={type === 'related' || type === 'admin' ? 'product fade-in w-custom' : 'product fade-in'}
+
+      >
         <img src={item.image} alt="" />
-        <div className={type === 'related' ? "info text-left" : "info"}>
+        <div className={type === 'related' || type === 'admin' ? "info text-left" : "info"}>
           <h3 className="title">{item.title}</h3>
           <p className="author">By {item.author}</p>
         </div>
         { 
-          type === 'related' && 
+          (type === 'related' || type === 'admin') && 
           <div className="cart">
             <div className="price">${item.price}</div>
-            <CartBtn type={type} product={item} />
+            {
+              type !== 'admin' &&
+              <CartBtn type={type} product={item} />
+            }
           </div>
         }
       </Link> 

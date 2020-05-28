@@ -53,11 +53,6 @@
   color: rgb(0, 158, 127);
 }
 
-.w-custom {
-  max-width: 90%;
-  margin: 0 auto;
-}
-
 .w-custom .info {
   padding: 0 20px;
 }
