@@ -29,22 +29,32 @@ function validateFn(input = '', info = '') {
 }
 
 const ProductFunc = () => {
-  const { open, setOpen, product, setProducts } = useContext(AdminContext);
+  const { open, setOpen, product, setProducts, option } = useContext(AdminContext);
   const [ data, setData ] = useState({});
   const [errors, setError] = useState({
     name: '',
     description: '',
     price: '',
-    author: ''
+    author: '',
+    slug: ''
   });
   const divElement = useRef(null);
 
   useEffect(() => {
-    setData(product);
+    if (option !== 'add') {
+      setData(product);
+    } else {
+      setData({category: 'Children Literature'});
+    }
+
     if (open) {
       divElement.current.focus();
     }
-  }, [open, product])
+    return () => {
+      setData({});
+      setError({});
+    }
+  }, [open, product, option])
   
   const categoryList = [
     { name: 'Children Literature' },
@@ -62,17 +72,48 @@ const ProductFunc = () => {
     const descriptionError = validateFn(data.description, 'description') || '';
     const priceError = validateFn(data.price, 'price') || '';
     const authorError = validateFn(data.author, 'author') || '';
-    
-    if (nameError || descriptionError || priceError || authorError) {
+    const slugError = validateFn(data.slug, 'slug') || '';
+
+    if (nameError || descriptionError || priceError || authorError || slugError) {
       setError({
         name: nameError,
         description: descriptionError,
         price: priceError,
         author: authorError,
+        slug: slugError
       })
       return false;
     }
     return true;
+  }
+
+  const toSlug = (str) => {
+    // Chuyển hết sang chữ thường
+    str = str.toLowerCase();     
+ 
+    // xóa dấu
+    str = str.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
+    str = str.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, 'e');
+    str = str.replace(/(ì|í|ị|ỉ|ĩ)/g, 'i');
+    str = str.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, 'o');
+    str = str.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, 'u');
+    str = str.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, 'y');
+    str = str.replace(/(đ)/g, 'd');
+ 
+    // Xóa ký tự đặc biệt
+    str = str.replace(/([^0-9a-z-\s])/g, '');
+ 
+    // Xóa khoảng trắng thay bằng ký tự -
+    str = str.replace(/(\s+)/g, '-');
+ 
+    // xóa phần dự - ở đầu
+    str = str.replace(/^-+/g, '');
+ 
+    // xóa phần dư - ở cuối
+    str = str.replace(/-+$/g, '');
+ 
+    // return
+    return str;
   }
 
   const handleEsc = (event) => {
@@ -94,24 +135,37 @@ const ProductFunc = () => {
   }
 
   const handleInput = (event) => {
-    setData({...data, [event.target.name]: event.target.value});
+    if (event.target.name === 'title') {
+      setData({...data, [event.target.name]: event.target.value, slug: toSlug(event.target.value)});
+    } else {
+      setData({...data, [event.target.name]: event.target.value});
+    }
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const token = localStorage.getItem('adminToken');
-    if (JSON.stringify(data) === JSON.stringify(product)) {
-      return;
-    }
-
     const isValid = validate();
-
-    if (isValid) {
-      axios.patch('http://localhost:5000/admin/update', data, { headers: {"Authorization" : `Bearer ${token}`}})
-           .then(res => {
-              setOpen(false);
-              setProducts();
-           })
+    if ( option !== 'add') {
+      if (JSON.stringify(data) === JSON.stringify(product)) {
+        return;
+      }
+      
+      if (isValid) {
+        axios.patch('http://localhost:5000/admin/update', data, { headers: {"Authorization" : `Bearer ${token}`}})
+             .then(res => {
+                setOpen(false);
+                setProducts();
+             })
+      }
+    } else {
+      if (isValid) {
+        axios.post('http://localhost:5000/admin/add-product', data, { headers: {"Authorization" : `Bearer ${token}`}})
+             .then(res => {
+               setOpen(false);
+               setProducts();
+             })
+      }
     }
   }
   
@@ -139,7 +193,7 @@ const ProductFunc = () => {
           }}
         >
           <Col className="d-flex justify-content-between p-0">
-            <h3 className="bt-header mb-5" style={{fontSize:"18px", color:"rgb(22,31,106)"}}>Update Product</h3>
+            <h3 className="bt-header mb-5" style={{fontSize:"18px", color:"rgb(22,31,106)"}}>{option === 'add' ? 'Add Product' :'Update Product'}</h3>
             <FontAwesomeIcon icon={faTimes} onClick={() => setOpen(false)}/>
           </Col>
         </Row>
@@ -164,9 +218,12 @@ const ProductFunc = () => {
                     your image here.
                   </span>
                 </Label>
-                <div className="img-wrapper">
-                  <img src={data.image} alt="" />
-                </div>
+                {
+                  data.image &&
+                  <div className="img-wrapper">
+                    <img src={data.image} alt="" />
+                  </div>
+                }
               </FormGroup>
             </Col>
           </Row>
@@ -229,7 +286,15 @@ const ProductFunc = () => {
                 <Input onChange={handleInput} className="product-form-control" id="category" type="select" name="category" value={data.category || ''}>
                   { categoryList.map(category => <option key={category.name}>{category.name}</option>) }
                 </Input>
-                
+              </FormGroup>
+
+              <FormGroup className="update-form">
+                <Label className="product-label" for="slug">
+                  Slug
+                  <span className="ml-1 text-danger">*</span>
+                </Label>
+                <Input onChange={handleInput} value={(data.title && toSlug(data.title)) || ''} className="product-form-control" id="slug" type="text" name="slug"/>
+                {errors.slug && <div className="validation">{errors.slug}</div>}
               </FormGroup>
             </Col>
           </Row>
@@ -239,7 +304,7 @@ const ProductFunc = () => {
               <Button className="w-100" onClick={() => setOpen(false)}>Cancle</Button>
             </Col>
             <Col className="p-0 submit-btn w-100">
-              <Button className="w-100" type="submit">Update Product</Button>
+              <Button className="w-100" type="submit">{option === 'add' ? 'Create Product' : 'Update Product'}</Button>
             </Col>
           </Row>
         </Form>

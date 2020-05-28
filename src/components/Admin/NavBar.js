@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,6 +12,7 @@ import {
 
 import '../../css/Admin/NavBar.css';
 import Burger from '../Burger';
+import { AdminContext } from '../../contexts/AdminContext';
 
 const LinkItem = (props) => {
   const {
@@ -35,6 +36,7 @@ const LinkItem = (props) => {
 
 const NavBar = (props) => {
   const [isClick, setClick] = useState(false);
+  const { setOpen } = useContext(AdminContext);
 
   const handleBurgerClick = () => {
     setClick(!isClick);
@@ -58,7 +60,7 @@ const NavBar = (props) => {
             <img src="https://res.cloudinary.com/dofqucuyy/image/upload/v1585755124/Books/logo_gtuxyy.svg" alt="" />
           </Link>
         </div>
-        <div className="add-products-btn">
+        <div className="add-products-btn" onClick={() => setOpen(true, "add")}>
           Add Products
         </div>
       </div>

@@ -21,7 +21,8 @@ export class AdminProvider extends React.Component {
       },
       open: false,
       product: {},
-      isSave: false
+      isSave: false,
+      option: ''
     }
     this.adminLogin = this.adminLogin.bind(this);
     this.onFilter = this.onFilter.bind(this);
@@ -65,14 +66,15 @@ export class AdminProvider extends React.Component {
     })
   }
 
-  setOpen(open) {
+  setOpen(open, option = '') {
     if (open) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
     }
     this.setState({
-      open: open
+      open: open,
+      option: option
     })
   }
 
@@ -112,7 +114,8 @@ export class AdminProvider extends React.Component {
       products, 
       open, 
       product,
-      isSave
+      isSave,
+      option
     } = this.state;
     let filtedProducts = products;
 
@@ -159,7 +162,8 @@ export class AdminProvider extends React.Component {
         product: product,
         setProduct: this.setProduct,
         setProducts: this.setProducts,
-        isSave: isSave
+        isSave: isSave,
+        option: option
       }}>
         {this.props.children}
       </AdminContext.Provider>
