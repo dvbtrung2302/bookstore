@@ -113,6 +113,45 @@ p {
   outline: none;
 }
 
+.admin-table {
+  display: table;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  margin: 0;
+  width: 100%;
+  border-top: none;
+}
+
+.admin-table thead {
+  border: none;
+}
+
+.admin-table tbody {
+  border: none;
+}
+
+.admin-table tr {
+  border: none;
+}
+
+.admin-table th {
+  color: rgb(22, 31, 106);
+  font-size: 15px;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 4px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.admin-table td {
+  color: rgb(22, 31, 106);
+  font-size: 14px;
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.10);
+}
+
 @media (min-width: 1200px) {
   .container, .container-lg, 
   .container-md, .container-sm, .container-xl {

@@ -19,8 +19,9 @@ const TaskBar = (props) => {
   const [ priceClick, setPriceClick ]  = useState(false);
   const [ paymentClick, setPaymentClick ] = useState(false);
   const [ amountClick, setAmoutClick ] = useState(false);
+  const [ orderAmountClick, setOrderAmountClick ] = useState(false);
 
-  const { onFilter, filter, onOrdersFilter } = useContext(AdminContext);
+  const { onFilter, filter, onOrdersFilter, onCustomersFilter } = useContext(AdminContext);
 
   const categoryList = [
     { name: 'Children Literature' },
@@ -75,7 +76,25 @@ const TaskBar = (props) => {
           </React.Fragment>
         )
       case 'customers':
-        return <h3 className="title">Customers</h3>
+        return (
+          <React.Fragment>
+            <Col xl="2" className="mb-4 mb-xl-0">
+              <h3 className="title">Customers</h3>
+            </Col>
+
+            <Search onFilter={onCustomersFilter} filter={filter} option="customers" />
+            
+            <Filter 
+              setClick={setOrderAmountClick} 
+              isClick={orderAmountClick}
+              name={filter.orderAmount} 
+              list={priceList} 
+              onFilter={onCustomersFilter}
+              filter={filter}
+              type="order amount"
+            />
+          </React.Fragment>
+        );
       default:
         return (
           <React.Fragment>
@@ -133,6 +152,8 @@ const Filter = (props) => {
           return onFilter(item.name, filter.amount, filter.addressKeyword);
         case 'amount':
           return onFilter(filter.payment, item.name, filter.addressKeyword);
+        case 'order amount':
+          return onFilter(filter.nameKeyword, item.name);
         default:
           return onFilter(filter.category, item.name, filter.keyword);
       }
@@ -148,6 +169,8 @@ const Filter = (props) => {
         return onFilter('Payment Method', filter.amount, filter.addressKeyword);
       case 'amount':
         return onFilter(filter.payment, 'Amount', filter.addressKeyword);
+      case 'order amount':
+        return onFilter(filter.nameKeyword, 'Order Amount');
       default:
         return onFilter(filter.category, 'Price', filter.keyword);
     }
@@ -163,7 +186,7 @@ const Filter = (props) => {
         >
         <div>{name}</div>
         {
-          (name !== 'Category Type' && name !== 'Price' && name !== 'Payment Method' && name !== 'Amount') && 
+          (name !== 'Category Type' && name !== 'Price' && name !== 'Payment Method' && name !== 'Amount' && name !== 'Order Amount') && 
           <FontAwesomeIcon icon={faTimesCircle} onClick={handleClear} />
         }
         <FontAwesomeIcon icon={faCaretDown} />
@@ -191,6 +214,8 @@ const Search = (props) => {
     switch(option) {
       case 'orders':
         return onFilter(filter.payment, filter.amount, event.target.value);
+      case 'customers':
+        return onFilter(event.target.value, filter.orderAmount);
       default:
         return onFilter(filter.category, filter.price, event.target.value);
       }
@@ -222,6 +247,26 @@ const Search = (props) => {
             </FormGroup>
           </Form>
         );
+      case 'customers':
+        return (
+          <Form className="h-100" onSubmit={handleSubmit}>
+            <FormGroup>
+              <Input 
+                value={filter.nameKeyword}
+                onChange={handleInput}
+                placeholder="Ex: Search By Name"
+              />
+              {
+                filter.nameKeyword && 
+                <FontAwesomeIcon 
+                  icon={faTimesCircle} 
+                  style={{cursor:"pointer"}}
+                  onClick={() => onFilter('', filter.orderAmount)}  
+                />
+              }
+            </FormGroup>
+          </Form>
+        );
       default:
         return (
           <Form className="h-100" onSubmit={handleSubmit}>
@@ -246,7 +291,15 @@ const Search = (props) => {
   }
 
   return(
-    <Col xl="4" className="Search">
+    <Col 
+      xl="4" 
+      className={option === 'customers' ? "Search mb-3 mb-xl-0" : "Search"} 
+      style={option === 'customers' ?
+       {
+         flexGrow:"1", 
+         maxWidth:"none"
+        } : null
+      }>
       {render(option)}
     </Col>
   );

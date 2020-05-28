@@ -19,7 +19,9 @@ export class AdminProvider extends React.Component {
         price: 'Price',
         payment: 'Payment Method',
         amount: 'Amount',
+        orderAmount: 'Order Amount',
         keyword: '',
+        nameKeyword: '',
         addressKeyword: ''
       },
       open: false,
@@ -33,6 +35,7 @@ export class AdminProvider extends React.Component {
     this.setProduct = this.setProduct.bind(this);
     this.setProducts = this.setProducts.bind(this);
     this.onOrdersFilter = this.onOrdersFilter.bind(this);
+    this.onCustomersFilter = this.onCustomersFilter.bind(this);
   }
 
   componentDidMount() {
@@ -80,6 +83,17 @@ export class AdminProvider extends React.Component {
         payment: payment,
         amount: amount,
         addressKeyword: addressKeyword
+      }
+    })
+  }
+
+  onCustomersFilter (nameKeyword = '',orderAmount = '') {
+    const { filter } = this.state;
+    this.setState({
+      filter: {
+        ...filter,
+        nameKeyword: nameKeyword,
+        orderAmount: orderAmount
       }
     })
   }
@@ -143,9 +157,25 @@ export class AdminProvider extends React.Component {
 
     let filtedProducts = products;
     let filtedOrders = orders;
+    
     const revenue = orders.reduce((acc, current) => {
       return acc + current.totalPrice;
     }, 0);
+    
+    const newUsers = users.map(user => {
+      let totalOrder = 0;
+      let totalAmount = 0;
+      for (const order of orders) {
+        if (order.userId === user._id){
+          user = {...user, totalOrder: totalOrder += 1, totalAmount: totalAmount += order.totalPrice}
+        } else {
+          user = {...user, totalOrder: totalOrder, totalAmount: totalAmount}
+        }
+      }
+      return user;
+    })
+
+    let filtedUsers = newUsers;
 
     if (filter.category !== 'Category Type') {
       filtedProducts = filtedProducts.filter(product => {
@@ -196,6 +226,25 @@ export class AdminProvider extends React.Component {
         return userAdress.toLowerCase().indexOf(filter.addressKeyword.toLowerCase()) !== -1;
       })
     }
+
+    if (filter.nameKeyword) {
+      filtedUsers = filtedUsers.filter(user => {
+        return this.removeAccents(user.name).toLowerCase().indexOf(filter.nameKeyword.toLowerCase()) !== -1;
+      })
+    }
+
+    if (filter.orderAmount !== 'Order Amount') {
+      if (filter.orderAmount === 'Highest to Lowest') {
+        filtedUsers = filtedUsers.concat().sort((a, b) => {
+          return b.totalAmount - a.totalAmount;
+        })
+      } else {
+        filtedUsers = filtedUsers.concat().sort((a, b) => {
+          return a.totalAmount - b.totalAmount;
+        })
+      }
+    }
+
     return(
       <AdminContext.Provider value={{
         adminToken: adminToken,
@@ -214,7 +263,9 @@ export class AdminProvider extends React.Component {
         isSave: isSave,
         option: option,
         onOrdersFilter: this.onOrdersFilter,
-        filtedOrders: filtedOrders
+        filtedOrders: filtedOrders,
+        onCustomersFilter: this.onCustomersFilter,
+        newUsers: filtedUsers
       }}>
         {this.props.children}
       </AdminContext.Provider>

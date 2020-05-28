@@ -13,6 +13,7 @@ import Orders from './pages/Orders';
 import AdminLogin from './pages/Admin/AdminLogin';
 import Admin from './pages/Admin/Admin';
 import Products from './pages/Admin/Products';
+import Customers from './pages/Admin/Customers';
 import { ProductsProvider } from './contexts/ProductsContext';
 import { CartProvider } from './contexts/CartContext';
 import { AuthProvider } from './contexts/AuthContext';
@@ -57,6 +58,7 @@ class App extends React.Component {
                             <AdminRoute exact path="/admin" component={Admin} />
                             <AdminRoute exact path="/admin/products" component={Products} />
                             <AdminRoute exact path="/admin/orders" component={AdminOrders} />
+                            <AdminRoute exact path="/admin/customers" component={Customers} />
                         </Switch>
                       </div>
                     </Elements>

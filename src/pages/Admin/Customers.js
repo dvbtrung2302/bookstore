@@ -11,19 +11,19 @@ import { AdminContext } from '../../contexts/AdminContext';
 import TaskBar from '../../components/Admin/TaskBar';
 import NotFound from '../../components/NotFound';
 
-const AdminOrders = () => {
-  const { filtedOrders, filter } = useContext(AdminContext);
+const Customers = () => {
+  const { newUsers, filter } = useContext(AdminContext);
   return(
-    <div className="AdminOrders admin-page">
+    <div className="Customers admin-page">
       <Container>
         <Row style={{padding: "0 15px"}}>
           <Col className="admin-col mb-4 pb-0">
-            <TaskBar option="orders" />
+            <TaskBar option="customers" />
           </Col>
         </Row>
         {
-          (filtedOrders === undefined || filtedOrders.length === 0) ?
-          (filter.addressKeyword ? <NotFound type="admin" /> : <Spinner style={{color:"rgb(0, 158, 127)"}} className="mb-3" /> ) :
+          (newUsers === undefined || newUsers.length === 0) ?
+          (filter.nameKeyword ? <NotFound type="admin" /> : <Spinner style={{color:"rgb(0, 158, 127)"}} className="mb-3" /> ) :
           <Row style={{padding: "0 15px"}}>
             <Col 
               className="admin-col p-0" 
@@ -36,28 +36,28 @@ const AdminOrders = () => {
                 <thead>
                   <tr>
                     <th>Number</th>
-                    <th>Order Id</th>
-                    <th>Time</th>
-                    <th>Amount</th>
-                    <th>Payment Method</th>
-                    <th>Customer's Email</th>
+                    <th>Id</th>
+                    <th>Name</th>
                     <th>Contact</th>
-                    <th>Delivery Address</th>
+                    <th>Email</th>
+                    <th>Total Order</th>
+                    <th>Total Amount</th>
+                    <th>Address</th>
                   </tr>
                 </thead>
 
                 <tbody>
                   {
-                    filtedOrders.map((order, index) => 
-                      <tr key={order._id}>
+                    newUsers.map((user, index) => 
+                      <tr key={user._id}>
                         <td>{index + 1}</td>
-                        <td>{order._id}</td>
-                        <td>{order.date}</td>
-                        <td>${order.totalPrice}</td>
-                        <td>{order.payment === 'cash' ? 'Cash On Delivery' : 'Online Payment'}</td>
-                        <td>{order.email}</td>
-                        <td>{order.phone}</td>
-                        <td>{`${order.address}, ${order.district}, ${order.city}`}</td>
+                        <td>{user._id}</td>
+                        <td>{user.name}</td>
+                        <td>{user.phone}</td>
+                        <td>{user.email}</td>
+                        <td>{user.totalOrder}</td>
+                        <td>${user.totalAmount}</td>
+                        <td>{`${user.address}, ${user.district}, ${user.city}`}</td>
                       </tr>
                     )
                   }
@@ -71,4 +71,4 @@ const AdminOrders = () => {
   );
 }
 
-export default AdminOrders;
+export default Customers;
