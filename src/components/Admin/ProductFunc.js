@@ -152,7 +152,7 @@ const ProductFunc = () => {
       }
       
       if (isValid) {
-        axios.patch('http://localhost:5000/admin/update', data, { headers: {"Authorization" : `Bearer ${token}`}})
+        axios.patch('https://dvbt-bookstore.herokuapp.com/admin/update', data, { headers: {"Authorization" : `Bearer ${token}`}})
              .then(res => {
                 setOpen(false);
                 setProducts();
@@ -160,7 +160,7 @@ const ProductFunc = () => {
       }
     } else {
       if (isValid) {
-        axios.post('http://localhost:5000/admin/add-product', data, { headers: {"Authorization" : `Bearer ${token}`}})
+        axios.post('https://dvbt-bookstore.herokuapp.com/admin/add-product', data, { headers: {"Authorization" : `Bearer ${token}`}})
              .then(res => {
                setOpen(false);
                setProducts();
@@ -238,7 +238,7 @@ const ProductFunc = () => {
                   Name
                   <span className="ml-1 text-danger">*</span>
                 </Label>
-                <Input onChange={handleInput} value={data.title || ''} className="product-form-control" id="name" type="text" name="title"/>
+                <Input autoComplete="off" onChange={handleInput} value={data.title || ''} className="product-form-control" id="name" type="text" name="title"/>
                 {errors.name && <div className="validation">{errors.name}</div>}
               </FormGroup>
 
@@ -255,6 +255,7 @@ const ProductFunc = () => {
                     type="text" 
                     name="description" 
                     onChange={handleInput}
+                    autoComplete="off"
                   />
                 </div>
                 {errors.description && <div className="validation">{errors.description}</div>}
@@ -265,7 +266,7 @@ const ProductFunc = () => {
                   Price
                   <span className="ml-1 text-danger">*</span>
                 </Label>
-                <Input onChange={handleInput} value={data.price || ''} className="product-form-control" id="price" type="number" name="price"/>
+                <Input autoComplete="off" onChange={handleInput} value={data.price || ''} className="product-form-control" id="price" type="number" name="price"/>
                 {errors.price && <div className="validation">{errors.price}</div>}
               </FormGroup>
 
@@ -274,7 +275,7 @@ const ProductFunc = () => {
                   Author
                   <span className="ml-1 text-danger">*</span>
                 </Label>
-                <Input onChange={handleInput} value={data.author || ''} className="product-form-control" id="author" type="text" name="author"/>
+                <Input autoComplete="off" onChange={handleInput} value={data.author || ''} className="product-form-control" id="author" type="text" name="author"/>
                 {errors.author && <div className="validation">{errors.author}</div>}
               </FormGroup>
 
@@ -283,7 +284,7 @@ const ProductFunc = () => {
                   Category
                   <span className="ml-1 text-danger">*</span>
                 </Label>
-                <Input onChange={handleInput} className="product-form-control" id="category" type="select" name="category" value={data.category || ''}>
+                <Input autoComplete="off" onChange={handleInput} className="product-form-control" id="category" type="select" name="category" value={data.category || ''}>
                   { categoryList.map(category => <option key={category.name}>{category.name}</option>) }
                 </Input>
               </FormGroup>
@@ -293,7 +294,7 @@ const ProductFunc = () => {
                   Slug
                   <span className="ml-1 text-danger">*</span>
                 </Label>
-                <Input onChange={handleInput} value={(data.title && toSlug(data.title)) || ''} className="product-form-control" id="slug" type="text" name="slug"/>
+                <Input autoComplete="off" onChange={handleInput} value={(data.title && toSlug(data.title)) || ''} className="product-form-control" id="slug" type="text" name="slug"/>
                 {errors.slug && <div className="validation">{errors.slug}</div>}
               </FormGroup>
             </Col>

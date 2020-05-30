@@ -27,7 +27,8 @@ export class AdminProvider extends React.Component {
       open: false,
       product: {},
       isSave: false,
-      option: ''
+      option: '',
+      loading: true
     }
     this.adminLogin = this.adminLogin.bind(this);
     this.onFilter = this.onFilter.bind(this);
@@ -36,16 +37,18 @@ export class AdminProvider extends React.Component {
     this.setProducts = this.setProducts.bind(this);
     this.onOrdersFilter = this.onOrdersFilter.bind(this);
     this.onCustomersFilter = this.onCustomersFilter.bind(this);
+    this.setStateDefault = this.setStateDefault.bind(this);
   }
 
   componentDidMount() {
-    const token = localStorage.getItem('adminToken');
-    axios.get('http://localhost:5000/admin/admin-get', { headers: {"Authorization" : `Bearer ${token}`}}, { cancelToken: source.token })
+    const { adminToken } = this.state;
+    axios.get('https://dvbt-bookstore.herokuapp.com/admin/admin-get', { headers: {"Authorization" : `Bearer ${adminToken}`}}, { cancelToken: source.token })
          .then(res => {
            this.setState({
              orders: res.data.orders,
              users: res.data.users,
-             products: res.data.products
+             products: res.data.products,
+             loading: false
            })
          })
          .catch(err => {
@@ -58,8 +61,42 @@ export class AdminProvider extends React.Component {
   }
 
   adminLogin(token = '') {
+    axios.get('https://dvbt-bookstore.herokuapp.com/admin/admin-get', { headers: {"Authorization" : `Bearer ${token}`}}, { cancelToken: source.token })
+         .then(res => {
+           this.setState({
+             adminToken: token,
+             orders: res.data.orders,
+             users: res.data.users,
+             products: res.data.products,
+             loading: false
+           })
+         })
+         .catch(err => {
+           console.log(err);
+         })
+  }
+
+  setStateDefault() {
     this.setState({
-      adminToken: token
+      adminToken: localStorage.getItem('adminToken') || '',
+      orders: [],
+      users: [],
+      products: [],
+      filter: {
+        category: 'Category Type',
+        price: 'Price',
+        payment: 'Payment Method',
+        amount: 'Amount',
+        orderAmount: 'Order Amount',
+        keyword: '',
+        nameKeyword: '',
+        addressKeyword: ''
+      },
+      open: false,
+      product: {},
+      isSave: false,
+      option: '',
+      loading: true
     })
   }
 
@@ -152,7 +189,8 @@ export class AdminProvider extends React.Component {
       open, 
       product,
       isSave,
-      option
+      option,
+      loading
     } = this.state;
 
     let filtedProducts = products;
@@ -265,7 +303,9 @@ export class AdminProvider extends React.Component {
         onOrdersFilter: this.onOrdersFilter,
         filtedOrders: filtedOrders,
         onCustomersFilter: this.onCustomersFilter,
-        newUsers: filtedUsers
+        newUsers: filtedUsers,
+        setStateDefault: this.setStateDefault,
+        loading: loading
       }}>
         {this.props.children}
       </AdminContext.Provider>

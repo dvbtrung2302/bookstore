@@ -19,13 +19,16 @@ const LinkItem = (props) => {
     path,
     itemPath,
     icon,
-    text
+    text,
+    handdleLogout
   } = props;
+
   return(
     <li>
       <Link 
         className={path === itemPath ? "link-active" : ""}
         to={itemPath || "/"}
+        onClick={handdleLogout}
       >
         <FontAwesomeIcon icon={icon} />
         {text}
@@ -36,10 +39,16 @@ const LinkItem = (props) => {
 
 const NavBar = (props) => {
   const [isClick, setClick] = useState(false);
-  const { setOpen } = useContext(AdminContext);
+  const { setOpen, setStateDefault } = useContext(AdminContext);
 
   const handleBurgerClick = () => {
     setClick(!isClick);
+  }
+
+  const handdleLogout = (event) => {
+    event.preventDefault();
+    localStorage.removeItem('adminToken');
+    setStateDefault();
   }
 
   const nav = [
@@ -47,7 +56,7 @@ const NavBar = (props) => {
     {icon: faShoppingBasket, text: 'Products', path: '/admin/products'},
     {icon: faCalendarCheck, text: 'Orders', path: '/admin/orders'},
     {icon: faUsers, text: 'Customers', path: '/admin/customers'},
-    {icon: faSignOutAlt, text: 'Logout'}
+    {icon: faSignOutAlt, text: 'Logout', handdleLogout: handdleLogout}
   ];
   
     
@@ -72,7 +81,9 @@ const NavBar = (props) => {
               icon={item.icon} 
               text={item.text} 
               path={props.location.pathname} 
-              itemPath={item.path} />
+              itemPath={item.path} 
+              handdleLogout={item.handdleLogout}
+              />
           )
         }
       </ul>
@@ -84,7 +95,8 @@ LinkItem.propTypes = {
   path: PropTypes.string,
   itemPath: PropTypes.string,
   icon: PropTypes.object,
-  text: PropTypes.string
+  text: PropTypes.string,
+  handdleLogout: PropTypes.func
 }
 
 export default NavBar;

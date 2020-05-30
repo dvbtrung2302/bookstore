@@ -7,11 +7,12 @@ import Target from '../../components/Admin/Target';
 import Client from '../../components/Admin/Client';
 import Statistic from '../../components/Admin/Statistic';
 import Sale from '../../components/Admin/Sale';
+import LoadingPage from '../../components/LoadingPage';
 import { AdminContext } from '../../contexts/AdminContext';
 
 const Admin = () => {
-  const { orders, revenue, users } = useContext(AdminContext);
-  
+  const { orders, revenue, users, loading } = useContext(AdminContext);
+  console.log(loading);
   const statistics = [
     { title: 'Total Revenue', icon: faDollarSign, background: 'rgb(255, 232, 178)', color: 'rgb(255, 179, 0)', data: revenue },
     { title: 'Total Order', icon: faCartArrowDown, background: 'rgb(250, 202, 202)', color: 'rgb(255, 110, 110)', data: orders.length },
@@ -22,34 +23,40 @@ const Admin = () => {
   return(
     <div className="Admin admin-page">
       <Container>
-        <Row>
-          <Col xl="4" className="mb-4">
-            <Target />
-          </Col>
-          <Col xl="8" className="mb-4">
-            <Client />
-          </Col>
-        </Row>
-        <Row>
-          {
-            statistics.map(statistic => 
-              <Col xl="3" lg="6" md="6" className="mb-4" key={statistic.title}>
-                <Statistic 
-                  title={statistic.title} 
-                  icon={statistic.icon}
-                  color={statistic.color}
-                  background={statistic.background}
-                  data={statistic.data}
-                />
+        {
+          loading ?
+          <LoadingPage /> :
+          <React.Fragment>
+            <Row>
+              <Col xl="4" className="mb-4">
+                <Target />
               </Col>
-            )
-          }
-        </Row>
-        <Row>
-          <Col className="mb-4">
-            <Sale />
-          </Col>
-        </Row>
+              <Col xl="8" className="mb-4">
+                <Client />
+              </Col>
+            </Row>
+            <Row>
+              {
+                statistics.map(statistic => 
+                  <Col xl="3" lg="6" md="6" className="mb-4" key={statistic.title}>
+                    <Statistic 
+                      title={statistic.title} 
+                      icon={statistic.icon}
+                      color={statistic.color}
+                      background={statistic.background}
+                      data={statistic.data}
+                    />
+                  </Col>
+                )
+              }
+            </Row>
+            <Row>
+              <Col className="mb-4">
+                <Sale />
+              </Col>
+            </Row>
+          </React.Fragment>
+        }
       </Container>
     </div>
   );

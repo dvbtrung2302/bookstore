@@ -13,7 +13,8 @@ export class AuthProvider extends React.Component {
       token: localStorage.getItem('token') || '',
       user: {},
       isAlertOpen: false, 
-      isCheckoutClick: false
+      isCheckoutClick: false,
+      loading: true
     }
     this.setStateDefault = this.setStateDefault.bind(this);
     this.setAlertOpen = this.setAlertOpen.bind(this);
@@ -22,10 +23,11 @@ export class AuthProvider extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/user', { headers: {"Authorization" : `Bearer ${this.state.token}`}}, { cancelToken: source.token })
+    axios.get('https://dvbt-bookstore.herokuapp.com/user', { headers: {"Authorization" : `Bearer ${this.state.token}`}}, { cancelToken: source.token })
          .then(res => {
             this.setState({
-              user: res.data
+              user: res.data,
+              loading: false
             })
          })
          .catch(err => {
@@ -38,11 +40,12 @@ export class AuthProvider extends React.Component {
   }
 
   userLogin(token = '') {
-    axios.get('http://localhost:5000/user', { headers: {"Authorization" : `Bearer ${token}`}} )
+    axios.get('https://dvbt-bookstore.herokuapp.com/user', { headers: {"Authorization" : `Bearer ${token}`}} )
     .then(res => {
       this.setState({
         token: token,
-        user: res.data
+        user: res.data,
+        loading: false
       })
     })
   }

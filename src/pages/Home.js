@@ -14,7 +14,7 @@ class Home extends React.Component {
           top: window.innerHeight - 90,
           behavior: "smooth"
         });
-      }, 300);
+      }, 600);
     }
     document.title = 'PickBazar'
   }

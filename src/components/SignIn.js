@@ -54,7 +54,7 @@ const SignIn = (props) => {
     event.preventDefault();
     const isValid = validate();
     if (isValid) {
-      axios.post('http://localhost:5000/user/signin', {
+      axios.post('https://dvbt-bookstore.herokuapp.com/user/signin', {
               email: user.email,
               password: user.password
             })
@@ -92,8 +92,9 @@ const SignIn = (props) => {
             id="email" 
             type="email" 
             name="email" 
-            placeholder="demo@demo.com"
+            placeholder="Ex: demo@demo.com"
             onChange={handleInput}
+            autoComplete="off"
           />
           {errors.email && <div className="validation">{errors.email}</div>}
         </FormGroup>
@@ -103,8 +104,9 @@ const SignIn = (props) => {
             id="password" 
             type="password" 
             name="password" 
-            placeholder="demo"
+            placeholder="Ex: demo123"
             onChange={handleInput}
+            autoComplete="off"
           />
           {errors.password && <div className="validation">{errors.password}</div>}
         </FormGroup>

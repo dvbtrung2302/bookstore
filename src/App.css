@@ -13,7 +13,7 @@ p {
   color: rgb(13, 17, 54);
  }
  .App {
-   overflow: auto;
+   /* overflow: auto; */
    min-height: 100vh;
  }
 

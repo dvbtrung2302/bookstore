@@ -14,6 +14,7 @@ import AdminLogin from './pages/Admin/AdminLogin';
 import Admin from './pages/Admin/Admin';
 import Products from './pages/Admin/Products';
 import Customers from './pages/Admin/Customers';
+import ProductFunc from './components/Admin/ProductFunc';
 import { ProductsProvider } from './contexts/ProductsContext';
 import { CartProvider } from './contexts/CartContext';
 import { AuthProvider } from './contexts/AuthContext';
@@ -26,6 +27,7 @@ import AdminRoute from './components/Admin/AdminRoute';
 import { AdminProvider } from './contexts/AdminContext';
 import NavBar from './components/Admin/NavBar';
 import AdminOrders from './pages/Admin/Orders';
+import NotFound from './pages/404';
 
 const stripePromise = loadStripe('pk_test_UveTYJMSFhA9nBMhfj2AE6K600nYtR677m');
 
@@ -43,7 +45,8 @@ class App extends React.Component {
                       <div className="App">
                         <Route path={["/checkout", "/order-received/:id", "/profile", "/order"]} render={props => <TopMenu {...props}/>} />
                         <Route path={["/", "product:title", "/checkout", "/order-received/:id", "/profile", "/order"]} render={props => <Alert option="login" />} />
-                        <Route path="/admin" component={NavBar} />
+                        <Route exact path={["/admin", "/admin/products", "/admin/orders", "/admin/customers"]} component={NavBar} />
+                        <Route exact path={["/admin", "/admin/products", "/admin/orders", "/admin/customers"]} component={ProductFunc} />
                         <Route path="/admin" render={props => <Alert option="admin" isOpen />} />
                         <Switch>
                           <Route exact path="/" component={Home} />
@@ -54,11 +57,13 @@ class App extends React.Component {
                           <UserRoute exact path="/profile" component={UserProfile} />
                           <UserRoute exact path="/order" component={Orders} />
                           {/* AdminRoute */}
-                            <Route exact path="/admin/login" component={AdminLogin} />
-                            <AdminRoute exact path="/admin" component={Admin} />
-                            <AdminRoute exact path="/admin/products" component={Products} />
-                            <AdminRoute exact path="/admin/orders" component={AdminOrders} />
-                            <AdminRoute exact path="/admin/customers" component={Customers} />
+                          <Route exact path="/admin/login" component={AdminLogin} />
+                          <AdminRoute exact path="/admin" component={Admin} />
+                          <AdminRoute exact path="/admin/products" component={Products} />
+                          <AdminRoute exact path="/admin/orders" component={AdminOrders} />
+                          <AdminRoute exact path="/admin/customers" component={Customers} />
+                          {/* 404 */}
+                          <Route exact path="*" component={NotFound} /> 
                         </Switch>
                       </div>
                     </Elements>

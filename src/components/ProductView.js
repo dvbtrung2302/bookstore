@@ -26,7 +26,7 @@ function ProductView(props) {
     })
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
-    axios.get(`http://localhost:5000/products/product/?slug=${props.match.params.title}`, { cancelToken: source.token })
+    axios.get(`https://dvbt-bookstore.herokuapp.com/products/product/?slug=${props.match.params.title}`, { cancelToken: source.token })
           .then(res => {
             setProduct(res.data);
             document.title = `${res.data.title} - PickBazar`;

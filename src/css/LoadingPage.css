@@ -1,0 +1,27 @@
+.LoadingPage {
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.LoadingPage .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgba(3, 211, 181, 0.85);
+  margin: 2px;
+  opacity: 1;
+  animation: preLoader 3s ease-in 0s infinite;
+}
+
+@keyframes preLoader {
+ from {
+   opacity: 1;
+ } 
+ to {
+   opacity: 0;
+   transform: translateX(300px);
+ }
+}

@@ -64,6 +64,7 @@ const UserInfo = (props) => {
                   onChange={handleInput}
                   autoFocus
                   required
+                  autoComplete="off"
                 />
               </FormGroup>
               {
@@ -82,6 +83,7 @@ const UserInfo = (props) => {
                       handleCityClick(event)
                     }} 
                     defaultValue={data.city}
+                    autoComplete="off"
                   >
                     <option>Tỉnh/Thành phố</option>
                     { cities.map(city => <option key={city.name}>{city.name}</option>)}
@@ -101,6 +103,7 @@ const UserInfo = (props) => {
                     id="district" 
                     onChange={handleInput} 
                     defaultValue={data.district}
+                    autoComplete="off"
                   >
                     <option>Quận/Huyện</option>
                     { districts.map(district => <option key={district.name}>{district.name}</option>)}

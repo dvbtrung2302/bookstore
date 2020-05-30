@@ -90,7 +90,7 @@ const SignUp = (props) => {
     event.preventDefault();
     const isValid = validate();
     if (isValid) {
-      axios.post('http://localhost:5000/user/signup', {
+      axios.post('https://dvbt-bookstore.herokuapp.com/user/signup', {
               name: user.name,
               email: user.email,
               password: user.password,
@@ -121,7 +121,7 @@ const SignUp = (props) => {
             NAME
             <span className="ml-1 text-danger">*</span>
           </Label>
-          <Input id="name" type="text" name="name" onChange={handleInput}/>
+          <Input id="name" type="text" name="name" onChange={handleInput} autoComplete="off" />
           {errors.name && <div className="validation">{errors.name}</div>}
         </FormGroup>
         <FormGroup>
@@ -129,7 +129,7 @@ const SignUp = (props) => {
             EMAIL
             <span className="ml-1 text-danger">*</span>
           </Label>
-          <Input id="email" type="email" name="email" onChange={handleInput}/>
+          <Input id="email" type="email" name="email" onChange={handleInput} autoComplete="off"/>
           {errors.email && <div className="validation">{errors.email}</div>}
         </FormGroup>
         <FormGroup>
@@ -137,7 +137,7 @@ const SignUp = (props) => {
             PASSWORD
             <span className="ml-1 text-danger">*</span>
           </Label>
-          <Input id="password" type="password" name="password" onChange={handleInput}/>
+          <Input id="password" type="password" name="password" onChange={handleInput} autoComplete="off"/>
           {errors.password && <div className="validation">{errors.password}</div>}
         </FormGroup>
         <FormGroup>
@@ -145,7 +145,7 @@ const SignUp = (props) => {
             ADDRESS
             <span className="ml-1 text-danger">*</span>
           </Label>
-          <Input id="address" type="text" name="address"  onChange={handleInput}/>
+          <Input id="address" type="text" name="address"  onChange={handleInput} autoComplete="off"/>
           {errors.address && <div className="validation">{errors.address}</div>}
         </FormGroup>
         <FormGroup>
@@ -153,7 +153,7 @@ const SignUp = (props) => {
             City
             <span className="ml-1 text-danger">*</span>
           </Label>
-          <Input type="select" name="city" id="city" onChange={(event) => {handleCityClick(event); handleInput(event)}}>
+          <Input autoComplete="off" type="select" name="city" id="city" onChange={(event) => {handleCityClick(event); handleInput(event)}}>
             <option>Tỉnh/Thành phố</option>
             { cities.map(city => <option key={city.code}>{city.name}</option>)}
           </Input>
@@ -163,7 +163,7 @@ const SignUp = (props) => {
             District
             <span className="ml-1 text-danger">*</span>
           </Label>
-          <Input type="select" name="district" id="district" onChange={handleInput}>
+          <Input autoComplete="off" type="select" name="district" id="district" onChange={handleInput}>
             <option>Quận/Huyện</option>
             { districts.map(district => <option key={district.code}>{district.name}</option>)}
           </Input>
@@ -173,7 +173,7 @@ const SignUp = (props) => {
             PHONE
             <span className="ml-1 text-danger">*</span>
           </Label>
-          <Input id="phone" type="text" name="phone" onChange={handleInput} />
+          <Input autoComplete="off" id="phone" type="text" name="phone" onChange={handleInput} />
           {errors.phone && <div className="validation">{errors.phone}</div>}
         </FormGroup>
         <Button size="lg" block type="submit">

@@ -5,22 +5,25 @@ import '../css/Orders.css';
 import Order from '../components/Order';
 import UserSideBar from '../components/UserSideBar';
 import OrderDetails from '../components/OrderDetails';
+import LoadingPage from '../components/LoadingPage';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [i, setIndex] = useState(0);
   const [show, setShow] = useState(false);
   const [order, setOrder] = useState({});
+  const [loading, setLoading] = useState(true);
   const token = localStorage.getItem('token');
   
   useEffect(() => {
     document.title = 'Order - PickBazar';
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
-    axios.get('http://localhost:5000/order', { headers: {"Authorization" : `Bearer ${token}`}}, { cancelToken: source.token })
+    axios.get('https://dvbt-bookstore.herokuapp.com/order', { headers: {"Authorization" : `Bearer ${token}`}}, { cancelToken: source.token })
          .then(res => {
            setOrders(res.data);
            setOrder(res.data[0]);
+           setLoading(false);
          })
          .catch(err => {
            console.log(err);
@@ -43,31 +46,35 @@ const Orders = () => {
       <div>
         <UserSideBar page="order" />
       </div>
-      <div className="order-container">
-        <div className="my-order mx-4">
-          <h3 className="bt-header">My Order</h3>
-          { orders.length === 0 && <span style={{
-              fontSize:"15px",
-              fontWeight:"700",
-              color:"rgb(119, 121, 140)",
-              display:"block",
-              width:"100%",
-              textAlign:"center",
-              padding:"40px 0px"
-            }}>No Order found.</span>
-          }
-          { orders.map((order, index) => 
-            <Order 
-              order={order} 
-              index={index} 
-              key={order._id} 
-              handleClick={handleClick} 
-              i={i} 
-              show={show}
-            /> )}
+      {
+        loading ?
+        <LoadingPage /> :
+        <div className="order-container">
+          <div className="my-order mx-4">
+            <h3 className="bt-header">My Order</h3>
+            { orders.length === 0 && <span style={{
+                fontSize:"15px",
+                fontWeight:"700",
+                color:"rgb(119, 121, 140)",
+                display:"block",
+                width:"100%",
+                textAlign:"center",
+                padding:"40px 0px"
+              }}>No Order found.</span>
+            }
+            { orders.map((order, index) => 
+              <Order 
+                order={order} 
+                index={index} 
+                key={order._id} 
+                handleClick={handleClick} 
+                i={i} 
+                show={show}
+              /> )}
+          </div>
+            <OrderDetails order={order} />
         </div>
-          <OrderDetails order={order} />
-      </div>
+      }
     </div>
   );
 }

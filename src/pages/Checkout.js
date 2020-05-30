@@ -20,10 +20,11 @@ import { AuthContext } from '../contexts/AuthContext';
 import { OrderContext } from '../contexts/OrderContext';
 import { AreaContext } from '../contexts/AreaContext';  
 import UserSideBar from '../components/UserSideBar';
+import LoadingPage from '../components/LoadingPage';
 
 export default function(props) {
   const { cartItems, totalPrice} = useContext(CartContext);
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const { setStateDefault } = useContext(CartContext);
   const { createOrder } = useContext(OrderContext)
   const { cities, handleCityClick } = useContext(AreaContext);
@@ -81,7 +82,7 @@ export default function(props) {
       return;
     }
     if (order.payment === 'cash') {
-      const { data } = await axios.post('http://localhost:5000/checkout', {
+      const { data } = await axios.post('https://dvbt-bookstore.herokuapp.com/checkout', {
         order: order
       })
       if (data) {
@@ -99,7 +100,7 @@ export default function(props) {
   
       if (!error) {
         const { id } = paymentMethod;
-        const { data } = await axios.post('http://localhost:5000/checkout', {
+        const { data } = await axios.post('https://dvbt-bookstore.herokuapp.com/checkout', {
           id: id, 
           amount: totalPrice * 100,
           order: order
@@ -132,146 +133,158 @@ export default function(props) {
       <div>
         <UserSideBar page="checkout" />
       </div>
-      <div className="checkout-form">
-        <div className="order-info">
-          <h3 className="bt-header">Your order</h3>
-          <div className="item">
-            <div className="title">{`Sub Total(${cartItems.length}` + [cartItems.length === 1 ? 'item)': 'items)' ]}</div>
-            <div className="price">{`$${totalPrice}.00`}</div>
+      {
+        loading ?
+        <LoadingPage /> :
+        <div className="checkout-form">
+          <div className="order-info">
+            <h3 className="bt-header">Your order</h3>
+            <div className="item">
+              <div className="title">{`Sub Total(${cartItems.length}` + [cartItems.length === 1 ? 'item)': 'items)' ]}</div>
+              <div className="price">{`$${totalPrice}.00`}</div>
+            </div>
+            <div className="item">
+              <div className="title">Shipping Fee</div>
+              <div className="price">$00</div>
+            </div>
+            <div className="item">
+              <div className="title">Total</div>
+              <div className="price">{`$${totalPrice}.00`}</div>
+            </div>
+            <div></div>
           </div>
-          <div className="item">
-            <div className="title">Shipping Fee</div>
-            <div className="price">$00</div>
-          </div>
-          <div className="item">
-            <div className="title">Total</div>
-            <div className="price">{`$${totalPrice}.00`}</div>
-          </div>
-          <div></div>
-        </div>
-        <Form onSubmit={handleSubmit}>
-          <div className="billing-address">
+          <Form onSubmit={handleSubmit}>
+            <div className="billing-address">
 
-            <h3 className="bt-header">Billing Address</h3>
-            <FormGroup>
-              <Label for="name">
-                Name
-              </Label>
-              <Input 
-                type="text" 
-                value={order.name || user.name || ''} 
-                name="name" 
-                onChange={handleInput}
-                required
-                id="name"
+              <h3 className="bt-header">Billing Address</h3>
+              <FormGroup>
+                <Label for="name">
+                  Name
+                </Label>
+                <Input 
+                  type="text" 
+                  value={order.name || user.name || ''} 
+                  name="name" 
+                  onChange={handleInput}
+                  required
+                  id="name"
+                  autoComplete="off"
+                  />
+              </FormGroup>
+              <FormGroup>
+                <Label for="email">
+                  Email
+                </Label>
+                <Input 
+                  type="email" 
+                  value={order.email || user.email || ''} 
+                  name="email" 
+                  onChange={handleInput}
+                  required
+                  id="email"
+                  autoComplete="off"
                 />
-            </FormGroup>
-            <FormGroup>
-              <Label for="email">
-                Email
-              </Label>
-              <Input 
-                type="email" 
-                value={order.email || user.email || ''} 
-                name="email" 
-                onChange={handleInput}
-                required
-                id="email"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="address">
-                Address
-              </Label>
-              <Input 
-                type="text" 
-                value={order.address || user.address || ''} 
-                name="address" 
-                onChange={handleInput}
-                required
-                id="address"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="city">City</Label>
-              <Input 
-                type="select" 
-                name="city" 
-                id="city" 
-                onChange={(event) => {
-                  handleInput(event);
-                  handleCityClick(event); 
-                }}
-                value={order.city || user.city}
-              >
-                <option>Tỉnh/Thành phố</option>
-                { cities.map(city => <option key={city.name} >{city.name}</option>)}
-              </Input>
-            </FormGroup>
-            <FormGroup>
-              <Label for="district">District</Label>
-              <Input 
-                type="select" 
-                name="district" 
-                id="district" 
-                onChange={handleInput}
-                value={order.district || user.district}
-              >
-                <option>Quận/Huyện</option>
-                { districts.map(district => <option key={district.name}>{district.name}</option>)}
-              </Input>
-            </FormGroup>
-            <FormGroup>
-              <Label for="phone">
-                Phone
-              </Label>
-              <Input 
-                type="text" 
-                value={order.phone || user.phone || ''} 
-                name="phone"
-                onChange={handleInput}
-                required
-                id="phone"
-              />
-            </FormGroup>
-          </div>
-          <div className="payment">
-            <h3 className="bt-header">Select Payment Option</h3>
-            <FormGroup check className="d-flex justify-content-between mb-3 p-0">
-              <Input 
-                type="radio" 
-                id="cash" 
-                name="payment" 
-                value="cash" 
-                onChange={handleInput}
-                checked={order.payment === 'cash'}
-              />{' '}
-              <Label for="cash" check>
-                <FontAwesomeIcon icon={faMoneyBillAlt} />
-                <span>Cash</span>
-              </Label>
-              <Input 
-                type="radio" 
-                id="card" 
-                name="payment" 
-                value="card" 
-                onChange={handleInput}
-              />{' '}
-              <Label for="card" check>
-                <FontAwesomeIcon icon={faCreditCard} />
-                <span>Card</span>
-              </Label>
-            </FormGroup>
-          </div> 
-          {order.payment === 'card' && <CardElement options={CARD_OPTIONS} onChange={e => setError(e.error)}/> }
-          {cardError && <div className="error-msg">{cardError.message}</div>}
-          <button 
-            disabled={!stripe} 
-            type="submit"
-            className={cartItems.length === 0 ? 'disable-btn btn w-100' : 'btn w-100'} 
-          >Proceed to Checkout</button>
-        </Form>
-      </div>
+              </FormGroup>
+              <FormGroup>
+                <Label for="address">
+                  Address
+                </Label>
+                <Input 
+                  type="text" 
+                  value={order.address || user.address || ''} 
+                  name="address" 
+                  onChange={handleInput}
+                  required
+                  id="address"
+                  autoComplete="off"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="city">City</Label>
+                <Input 
+                  type="select" 
+                  name="city" 
+                  id="city" 
+                  onChange={(event) => {
+                    handleInput(event);
+                    handleCityClick(event); 
+                  }}
+                  value={order.city || user.city}
+                  autoComplete="off"
+                >
+                  <option>Tỉnh/Thành phố</option>
+                  { cities.map(city => <option key={city.name} >{city.name}</option>)}
+                </Input>
+              </FormGroup>
+              <FormGroup>
+                <Label for="district">District</Label>
+                <Input 
+                  type="select" 
+                  name="district" 
+                  id="district" 
+                  onChange={handleInput}
+                  value={order.district || user.district}
+                  autoComplete="off"
+                >
+                  <option>Quận/Huyện</option>
+                  { districts.map(district => <option key={district.name}>{district.name}</option>)}
+                </Input>
+              </FormGroup>
+              <FormGroup>
+                <Label for="phone">
+                  Phone
+                </Label>
+                <Input 
+                  type="text" 
+                  value={order.phone || user.phone || ''} 
+                  name="phone"
+                  onChange={handleInput}
+                  required
+                  id="phone"
+                  autoComplete="off"
+                />
+              </FormGroup>
+            </div>
+            <div className="payment">
+              <h3 className="bt-header">Select Payment Option</h3>
+              <FormGroup check className="d-flex justify-content-between mb-3 p-0">
+                <Input 
+                  type="radio" 
+                  id="cash" 
+                  name="payment" 
+                  value="cash" 
+                  onChange={handleInput}
+                  checked={order.payment === 'cash'}
+                  autoComplete="off"
+                />{' '}
+                <Label for="cash" check>
+                  <FontAwesomeIcon icon={faMoneyBillAlt} />
+                  <span>Cash</span>
+                </Label>
+                <Input 
+                  type="radio" 
+                  id="card" 
+                  name="payment" 
+                  value="card" 
+                  onChange={handleInput}
+                  autoComplete="off"
+                />{' '}
+                <Label for="card" check>
+                  <FontAwesomeIcon icon={faCreditCard} />
+                  <span>Card</span>
+                </Label>
+              </FormGroup>
+            </div> 
+            {order.payment === 'card' && <CardElement options={CARD_OPTIONS} onChange={e => setError(e.error)}/> }
+            {cardError && <div className="error-msg">{cardError.message}</div>}
+            <button 
+              disabled={!stripe} 
+              type="submit"
+              className={cartItems.length === 0 ? 'disable-btn btn w-100' : 'btn w-100'} 
+            >Proceed to Checkout</button>
+          </Form>
+        </div>
+      }
     </div>
   );
 };

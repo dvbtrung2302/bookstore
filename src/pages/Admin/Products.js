@@ -11,7 +11,6 @@ import Product from '../../components/Product';
 import NotFound  from '../../components/NotFound';
 import ProductsLoading from '../../components/ProductsLoading';
 import { AdminContext } from '../../contexts/AdminContext';
-import ProductFunc from '../../components/Admin/ProductFunc';
 
 const Products = () => {
   const [ visible, setVisible ] = useState(10);
@@ -52,7 +51,6 @@ const Products = () => {
           }
           { isLoading && <Spinner style={{color:"rgb(0, 158, 127)"}} className="mb-3" /> }
         </Row>
-        <ProductFunc />
       </Container>  
     </div>
   );
