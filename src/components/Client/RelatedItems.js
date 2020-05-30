@@ -4,9 +4,9 @@ import {
  Row
 } from 'reactstrap';
 
-import '../css/RelatedItems.css';
+import '../../css/Client/RelatedItems.css';
 import Product from './Product';
-import { ProductsContext } from '../contexts/ProductsContext';
+import { ProductsContext } from '../../contexts/ProductsContext';
 
 export default function() {
   const { products } = useContext(ProductsContext);

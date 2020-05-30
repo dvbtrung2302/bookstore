@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-import '../css/TopMenu.css';
+import '../../css/Client/TopMenu.css';
 import SearchBar from './SearchBar';
 import AuthForm from './AuthForm';
 import User from './User';
-import { ProductsContext } from '../contexts/ProductsContext'
-import { AuthContext } from '../contexts/AuthContext';
+import { ProductsContext } from '../../contexts/ProductsContext'
+import { AuthContext } from '../../contexts/AuthContext';
 
 const TopMenu = (props) => {
   const { isTopMenu } = props;

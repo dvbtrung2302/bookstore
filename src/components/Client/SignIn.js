@@ -9,7 +9,7 @@ import {
   Label
 } from 'reactstrap';
 
-import { AuthContext } from '../contexts/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const SignIn = (props) => {
   const { changeForm, setModal } = props;

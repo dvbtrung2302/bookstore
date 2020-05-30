@@ -1,10 +1,10 @@
 import React from 'react';
 
-import ProductView from '../components/ProductView';
-import TopMenu from '../components/TopMenu';
-import RelatedItems from '../components/RelatedItems';
-import Cart from '../components/Cart';
-import CartItems from '../components/CartItems';
+import ProductView from '../../components/Client/ProductView';
+import TopMenu from '../../components/Client/TopMenu';
+import RelatedItems from '../../components/Client/RelatedItems';
+import Cart from '../../components/Client/Cart';
+import CartItems from '../../components/Client/CartItems';
 
 class Detail extends React.Component {
   render() {

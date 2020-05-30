@@ -4,7 +4,7 @@ import  {
   Col
 } from 'reactstrap';
 
-import '../css/ProductViewLoading.css';
+import '../../css/Client/ProductViewLoading.css';
 
 export default function() {
   return(

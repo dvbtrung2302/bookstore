@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Banner from '../components/Banner';
-import Main  from '../components/Main';
-import TopMenu from '../components/TopMenu';
-import Cart from '../components/Cart';
-import CartItems from '../components/CartItems';
+import Banner from '../../components/Client/Banner';
+import Main  from '../../components/Client/Main';
+import TopMenu from '../../components/Client/TopMenu';
+import Cart from '../../components/Client/Cart';
+import CartItems from '../../components/Client/CartItems';
 
 class Home extends React.Component {
   componentDidMount() {

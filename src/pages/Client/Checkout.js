@@ -14,13 +14,13 @@ import {
 } from '@stripe/react-stripe-js';
 import axios from 'axios';
 
-import '../css/Checkout.css';
-import { CartContext } from '../contexts/CartContext';
-import { AuthContext } from '../contexts/AuthContext';
-import { OrderContext } from '../contexts/OrderContext';
-import { AreaContext } from '../contexts/AreaContext';  
-import UserSideBar from '../components/UserSideBar';
-import LoadingPage from '../components/LoadingPage';
+import '../../css/Client/Checkout.css';
+import { CartContext } from '../../contexts/CartContext';
+import { AuthContext } from '../../contexts/AuthContext';
+import { OrderContext } from '../../contexts/OrderContext';
+import { AreaContext } from '../../contexts/AreaContext';  
+import UserSideBar from '../../components/Client/UserSideBar';
+import LoadingPage from '../../components/LoadingPage';
 
 export default function(props) {
   const { cartItems, totalPrice} = useContext(CartContext);

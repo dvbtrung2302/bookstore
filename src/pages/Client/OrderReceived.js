@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-import '../css/OrderReceived.css';
-import BackToHomeBtn from '../components/BackToHomeBtn';
-import LoadingPage from '../components/LoadingPage';
+import '../../css/Client/OrderReceived.css';
+import BackToHomeBtn from '../../components/Client/BackToHomeBtn';
+import LoadingPage from '../../components/LoadingPage';
 
 
 const OrderReceived = (props) => {

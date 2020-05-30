@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
-import '../css/QuantityAdjustment.css';
-import { CartContext } from '../contexts/CartContext';
+import '../../css/Client/QuantityAdjustment.css';
+import { CartContext } from '../../contexts/CartContext';
 
 const QuantityAdjustment = (props) => {
   const { type, product } = props;

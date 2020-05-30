@@ -8,7 +8,8 @@ import {
   Input,
   Label
 } from 'reactstrap';
-import { AreaContext } from '../contexts/AreaContext';
+
+import { AreaContext } from '../../contexts/AreaContext';
 
 function validateFn(input = '', info = '') {
   if (!input) {

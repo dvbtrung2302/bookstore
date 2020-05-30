@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import { 
   Container,
   Row,
@@ -11,7 +12,6 @@ import {
 } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudUploadAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
-import axios from 'axios';
 
 import '../../css/Admin/ProductFunc.css';
 import { AdminContext } from '../../contexts/AdminContext';

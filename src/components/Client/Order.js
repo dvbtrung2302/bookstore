@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import '../css/Order.css';
-import OrderDetails from '../components/OrderDetails';
+import '../../css/Client/Order.css';
+import OrderDetails from './OrderDetails';
 
 const Order = (props) => {
   const { i, index, handleClick, order, show } = props;

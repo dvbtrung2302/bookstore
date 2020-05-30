@@ -11,8 +11,8 @@ import {
  } from "@fortawesome/free-solid-svg-icons";
 
 import '../../css/Admin/NavBar.css';
-import Burger from '../Burger';
 import { AdminContext } from '../../contexts/AdminContext';
+import Burger from '../Burger';
 
 const LinkItem = (props) => {
   const {

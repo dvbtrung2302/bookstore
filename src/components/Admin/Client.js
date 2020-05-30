@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import '../../css/Admin/Client.css';
-import LegendItems from './LegendItems';
 import { AdminContext } from '../../contexts/AdminContext';
+import LegendItems from './LegendItems';
 
 const Client = () => {
   const { users } = useContext(AdminContext);

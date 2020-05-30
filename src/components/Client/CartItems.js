@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBag ,faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 
-import '../css/CartItems.css';
+import '../../css/Client/CartItems.css';
 import QuantityAdjustment from './QuantityAdjustment';
-import { CartContext } from '../contexts/CartContext';
-import { AuthContext } from '../contexts/AuthContext';
+import { CartContext } from '../../contexts/CartContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export default function(props) {
   const { 

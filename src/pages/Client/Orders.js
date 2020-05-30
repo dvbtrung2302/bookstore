@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import '../css/Orders.css';
-import Order from '../components/Order';
-import UserSideBar from '../components/UserSideBar';
-import OrderDetails from '../components/OrderDetails';
-import LoadingPage from '../components/LoadingPage';
+import '../../css/Client/Orders.css';
+import Order from '../../components/Client/Order';
+import UserSideBar from '../../components/Client/UserSideBar';
+import OrderDetails from '../../components/Client/OrderDetails';
+import LoadingPage from '../../components/LoadingPage';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);

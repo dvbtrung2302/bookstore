@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 
-import '../css/UserSideBar.css';
-import { AuthContext } from '../contexts/AuthContext';
+import '../../css/Client/UserSideBar.css';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const UserSideBar =  (props) => {
   const { page } = props;

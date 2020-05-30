@@ -5,9 +5,9 @@ import {
   Col
 } from 'reactstrap';
 
+import '../../css/Client/Main.css';
 import Category from './Category';
 import Products from './Products';
-import '../css/Main.css';
 
 export default function (props) {
   return(

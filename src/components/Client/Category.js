@@ -3,9 +3,9 @@ import { Link  } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThLarge } from "@fortawesome/free-solid-svg-icons";
 
-import '../css/Category.css';
-import Burger from '../components/Burger';
-import { ProductsContext } from '../contexts/ProductsContext';
+import '../../css/Client/Category.css';
+import Burger from '../Burger';
+import { ProductsContext } from '../../contexts/ProductsContext';
 
 const Category = (props) => {
   const { setCategory, categoryName } = useContext(ProductsContext);

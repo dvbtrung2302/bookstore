@@ -8,12 +8,12 @@ import {
   Button
 } from 'reactstrap';
 
-import '../css/UserProfile.css';
-import { AuthContext } from '../contexts/AuthContext';
-import UserInfo from '../components/UserInfo';
-import Alert from '../components/Alert';
-import UserSideBar from '../components/UserSideBar';
-import LoadingPage from '../components/LoadingPage';
+import '../../css/Client/UserProfile.css';
+import { AuthContext } from '../../contexts/AuthContext';
+import UserInfo from '../../components/Client/UserInfo';
+import Alert from '../../components/Alert';
+import UserSideBar from '../../components/Client/UserSideBar';
+import LoadingPage from '../../components/LoadingPage';
 
 const  UserProfile = () => {
   const { user, userLogin, loading } = useContext(AuthContext);

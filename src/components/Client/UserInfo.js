@@ -12,8 +12,8 @@ import {
 } from 'reactstrap';
 import axios from 'axios';
 
-import '../css/UserInfo.css';
-import { AreaContext } from '../contexts/AreaContext';
+import '../../css/Client/UserInfo.css';
+import { AreaContext } from '../../contexts/AreaContext';
 
 const UserInfo = (props) => {
   const { data, isPhone, handleSubmit, handleInput} = props;

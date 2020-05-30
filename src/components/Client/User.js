@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
-import '../css/User.css';
-import { AuthContext } from '../contexts/AuthContext';
-import Burger from './Burger';
+import '../../css/Client/User.css';
+import { AuthContext } from '../../contexts/AuthContext';
+import Burger from '../Burger';
 
 const User = (props)  => {
   const { setStateDefault , user} = useContext(AuthContext);

@@ -4,30 +4,33 @@ import { Elements } from '@stripe/react-stripe-js';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import './App.css';
-import Home from './pages/Home';
-import Detail from './pages/Detail';
-import Checkout from './pages/Checkout';
-import OrderReceived  from './pages/OrderReceived';
-import UserProfile from './pages/UserProfile';
-import Orders from './pages/Orders';
+// --Pages
+import Home from './pages/Client/Home';
+import Detail from './pages/Client/Detail';
+import Checkout from './pages/Client/Checkout';
+import OrderReceived  from './pages/Client/OrderReceived';
+import UserProfile from './pages/Client/UserProfile';
+import Orders from './pages/Client/Orders';
 import AdminLogin from './pages/Admin/AdminLogin';
 import Admin from './pages/Admin/Admin';
 import Products from './pages/Admin/Products';
 import Customers from './pages/Admin/Customers';
-import ProductFunc from './components/Admin/ProductFunc';
+import AdminOrders from './pages/Admin/Orders';
+import NotFound from './pages/404';
+// --Contexts
 import { ProductsProvider } from './contexts/ProductsContext';
 import { CartProvider } from './contexts/CartContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { OrderProvider } from './contexts/OrderContext';
 import { AreaProvider } from './contexts/AreaContext';
-import Alert from './components/Alert';
-import TopMenu from './components/TopMenu';
-import UserRoute from './components/UserRoute';
-import AdminRoute from './components/Admin/AdminRoute';
 import { AdminProvider } from './contexts/AdminContext';
+// --Components
+import Alert from './components/Alert';
+import TopMenu from './components/Client/TopMenu';
+import UserRoute from './components/Client/UserRoute';
+import AdminRoute from './components/Admin/AdminRoute';
 import NavBar from './components/Admin/NavBar';
-import AdminOrders from './pages/Admin/Orders';
-import NotFound from './pages/404';
+import ProductFunc from './components/Admin/ProductFunc';
 
 const stripePromise = loadStripe('pk_test_UveTYJMSFhA9nBMhfj2AE6K600nYtR677m');
 

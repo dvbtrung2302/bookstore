@@ -9,9 +9,9 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-import '../css/ProductView.css';
+import '../../css/Client/ProductView.css';
 import CartBtn from './CartBtn';
-import { ProductsContext } from '../contexts/ProductsContext';
+import { ProductsContext } from '../../contexts/ProductsContext';
 import ProductViewLoading from './ProductViewLoading';
 
 function ProductView(props) {

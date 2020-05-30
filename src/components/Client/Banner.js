@@ -1,8 +1,8 @@
 import React from 'react';
-
-import '../css/Banner.css';
-import SearchBar from './SearchBar';
 import { Container } from 'reactstrap';
+
+import '../../css/Client/Banner.css';
+import SearchBar from './SearchBar';
 
 export default function() {
   return(

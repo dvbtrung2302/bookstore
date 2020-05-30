@@ -5,9 +5,9 @@ import {
   Spinner
 } from 'reactstrap';
 
-import '../css/Products.css';
-import { ProductsContext } from '../contexts/ProductsContext';
-import NotFound from './NotFound';
+import '../../css/Client/Products.css';
+import { ProductsContext } from '../../contexts/ProductsContext';
+import NotFound from '../NotFound';
 import ProductsLoading from './ProductsLoading';
 import Product from './Product';
 

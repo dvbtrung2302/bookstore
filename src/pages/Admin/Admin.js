@@ -3,12 +3,12 @@ import { Container, Row, Col } from 'reactstrap';
 import { faDollarSign, faCartArrowDown, faUserCircle, faTruck } from "@fortawesome/free-solid-svg-icons";
 
 import '../../css/Admin/Admin.css';
+import { AdminContext } from '../../contexts/AdminContext';
 import Target from '../../components/Admin/Target';
 import Client from '../../components/Admin/Client';
 import Statistic from '../../components/Admin/Statistic';
 import Sale from '../../components/Admin/Sale';
 import LoadingPage from '../../components/LoadingPage';
-import { AdminContext } from '../../contexts/AdminContext';
 
 const Admin = () => {
   const { orders, revenue, users, loading } = useContext(AdminContext);

@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Button, Modal } from 'reactstrap';
 
-import '../css/AuthForm.css';
+import '../../css/Client/AuthForm.css';
+import { AuthContext } from '../../contexts/AuthContext';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
-import { AuthContext } from '../contexts/AuthContext';
 
 export default function() {
   const [modal, setModal] = useState(false);

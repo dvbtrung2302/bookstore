@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-import { ProductsContext } from '../contexts/ProductsContext';
-import '../css/SearchBar.css';
+import '../../css/Client/SearchBar.css';
+import { ProductsContext } from '../../contexts/ProductsContext';
 
 const SearchBar = (props) => {
   const { isTopMenu, isTopMenuMobile, setClicked } = props;

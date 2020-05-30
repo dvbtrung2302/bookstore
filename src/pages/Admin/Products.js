@@ -6,11 +6,11 @@ import {
   Spinner
 } from 'reactstrap';
 
-import TaskBar from '../../components/Admin/TaskBar';
-import Product from '../../components/Product';
-import NotFound  from '../../components/NotFound';
-import ProductsLoading from '../../components/ProductsLoading';
 import { AdminContext } from '../../contexts/AdminContext';
+import TaskBar from '../../components/Admin/TaskBar';
+import Product from '../../components/Client/Product';
+import ProductsLoading from '../../components/Client/ProductsLoading';
+import NotFound  from '../../components/NotFound';
 
 const Products = () => {
   const [ visible, setVisible ] = useState(10);

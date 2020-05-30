@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Col } from 'reactstrap';
 
-import '../css/Product.css';
+import '../../css/Client/Product.css';
 import CartBtn from './CartBtn';
-import { AdminContext } from '../contexts/AdminContext';
+import { AdminContext } from '../../contexts/AdminContext';
 
 const Product = (props) => {
   const { item, type } = props;

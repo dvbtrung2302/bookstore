@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import '../css/BackToHomeBtn.css';
+import '../../css/Client/BackToHomeBtn.css';
 
 export default function() {
   return(
