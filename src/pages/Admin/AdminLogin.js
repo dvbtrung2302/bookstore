@@ -31,7 +31,7 @@ const AdminLogin = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:5000/admin/login', {
+    axios.post('https://dvbt-bookstore.herokuapp.com/admin/login', {
       username: admin.username,
       password: admin.password
     })
