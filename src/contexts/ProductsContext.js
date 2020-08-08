@@ -15,6 +15,7 @@ export class ProductsProvider extends React.Component {
       relatedItems: [],
       product: {},
       isLoading: true,
+      isLoadMore: true,
       keyword: '',
       filters: {
         _category: null,
@@ -36,10 +37,10 @@ export class ProductsProvider extends React.Component {
     const paramsString = queryString.stringify(filters);
     axios.get(`https://dvbt-bookstore.herokuapp.com/products/?${paramsString}`, { cancelToken: source.token })
           .then(res => {
-            console.log(res.data);
             this.setState({
               products: res.data,
-              isLoading: this.state.filters._page === 1 ? true : false,
+              isLoading: false,
+              isLoadMore: this.state.filters._page === 1 ? true : false,
               relatedItems: []
             })
           })
@@ -86,7 +87,8 @@ export class ProductsProvider extends React.Component {
         ...filters,
         _limit: 8,
         _category: category
-      }
+      },
+      isLoading: true
     })
   }
 
@@ -95,7 +97,8 @@ export class ProductsProvider extends React.Component {
       filters: {
         ...this.state.filters,
         _keyword: keyword
-      }
+      },
+      isLoading: true
     })
   }
 
@@ -103,6 +106,7 @@ export class ProductsProvider extends React.Component {
     this.setState({
       products: [],
       isLoading: true,
+      isLoadMore: true,
       keyword: '',
       filters: {
         _category: null,
@@ -119,7 +123,7 @@ export class ProductsProvider extends React.Component {
         ...filters,
         _limit: filters._limit + 8
       },
-      isLoading: true
+      isLoadMore: true
     })
   }
 
@@ -156,7 +160,7 @@ export class ProductsProvider extends React.Component {
   //   }
   //   if (keyword) {
   //     const filteredProducts = products.filter(function(product) {
-  //       return product.title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+  //       return product.title.toLisLoadingowerCase().indexOf(keyword.toLowerCase()) !== -1;
   //     });
   //     return filteredProducts;
   //   }
@@ -164,7 +168,7 @@ export class ProductsProvider extends React.Component {
   // }
 
   render() {
-    const { displayCategory, keyword, filters, isLoading, products, product, relatedItems } = this.state;
+    const { displayCategory, keyword, filters, isLoading, products, product, relatedItems, isLoadMore } = this.state;
     // const products = this.filterProducts(displayCategory, keyword);
     return(
       <ProductsContext.Provider value={{
@@ -180,7 +184,8 @@ export class ProductsProvider extends React.Component {
         product: product,
         setProduct: this.setProduct,
         setRelatedItems: this.setRelatedItems,
-        relatedItems: relatedItems
+        relatedItems: relatedItems,
+        isLoadMore: isLoadMore
       }}>
         {this.props.children}
       </ProductsContext.Provider>

@@ -12,7 +12,7 @@ import ProductsLoading from './ProductsLoading';
 import Product from './Product';
 
 export default function(props) {
-  const { products, onLoadMoreBtnClick, filters, isLoading } = useContext(ProductsContext);
+  const { products, onLoadMoreBtnClick, filters, isLoading, isLoadMore } = useContext(ProductsContext);
   const {_limit, _keyword, _category } = filters;
   const [ items, setItems ] = useState([]);
 
@@ -48,8 +48,8 @@ export default function(props) {
           </Row>
         }
         {
-          (items === undefined || items.length === 0) ?
-          (_keyword ? <NotFound /> : <ProductsLoading /> ) :
+          (isLoading || !items.length) ?
+          (_keyword && !items.length ? <NotFound /> : <ProductsLoading /> ) :
           <Row>
             {
               items.map(item => <Product key={item._id} item={item} />)
@@ -57,7 +57,7 @@ export default function(props) {
           </Row>
         }
         <Row className="m-0 w-100 d-flex justify-content-center">
-          { isLoading && _limit !== 8 ? 
+          { isLoadMore && _limit !== 8 ? 
             <Spinner style={{color:"rgb(0, 158, 127)"}} className="mb-3" /> : 
             ((items.length >= _limit) && 
             <button onClick={() => handleLoadMore()} type="button" className="load-more mb-3">

@@ -155,7 +155,7 @@ export class AdminProvider extends React.Component {
 
   setProducts() {
     const token = localStorage.getItem('adminToken');
-    axios.get('http://localhost:5000/admin/admin-get', { headers: {"Authorization" : `Bearer ${token}`}}, { cancelToken: source.token })
+    axios.get('https://dvbt-bookstore.herokuapp.com/admin/admin-get', { headers: {"Authorization" : `Bearer ${token}`}}, { cancelToken: source.token })
          .then(res => {
            this.setState({
              products: res.data.products,
