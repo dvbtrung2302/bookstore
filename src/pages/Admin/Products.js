@@ -24,7 +24,6 @@ const Products = () => {
       setLoading(false);
     }, 1000);
   }
-
   return(
     <div className="AdminProducts admin-page">
       <Container>

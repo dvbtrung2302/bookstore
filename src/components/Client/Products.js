@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { 
   Container,
-  Row,
+  Row, 
   Spinner
 } from 'reactstrap';
 
@@ -12,44 +12,58 @@ import ProductsLoading from './ProductsLoading';
 import Product from './Product';
 
 export default function(props) {
-  const { products, keyword} = useContext(ProductsContext);
+  const { products, onLoadMoreBtnClick, filters, isLoading } = useContext(ProductsContext);
+  const {_limit, _keyword, _category } = filters;
   const [ items, setItems ] = useState([]);
-  const [ visible, setVisible ] = useState(10);
-  const [ isLoading, setLoading ] = useState(false);
 
   useEffect(() => {
     setItems(products);
   }, [products])
 
-  const loadMore = () => {
-    setLoading(true);
-    return setTimeout(() => {
-      setVisible(visible + 8)
-      setLoading(false);
-    }, 1000);
+  const handleLoadMore = () => {
+    if (onLoadMoreBtnClick) {
+      onLoadMoreBtnClick();
+    }
   }
-
 
   return(
     <div className="Products">
       <Container className="h-100">
         {
+          (_keyword) && 
+          <Row style={{padding: "0 15px", marginBottom: "15px", fontWeight: "600"}}>
+            {
+              _category ? 
+              <div>
+                Results for 
+                <p className="d-inline font-weight-bold" style={{color: "rgb(0, 158, 127)"}}> "{_keyword}" </p> 
+                in 
+                <p className="d-inline font-weight-bold" style={{color: "rgb(0, 158, 127)"}}> {_category}</p>. 
+              </div> :
+              <div>
+                Results for 
+                <p className="d-inline font-weight-bold" style={{color: "rgb(0, 158, 127)"}}> "{_keyword}"</p>.
+              </div>
+            }
+          </Row>
+        }
+        {
           (items === undefined || items.length === 0) ?
-          (keyword ? <NotFound /> : <ProductsLoading /> ) :
+          (_keyword ? <NotFound /> : <ProductsLoading /> ) :
           <Row>
             {
-              items.slice(0, visible).map(item => <Product key={item._id} item={item} />)
+              items.map(item => <Product key={item._id} item={item} />)
             }
           </Row>
         }
         <Row className="m-0 w-100 d-flex justify-content-center">
-          {
-            (visible < items.length && !isLoading) &&
-          <button onClick={loadMore} type="button" className="load-more mb-3">
-            Load more
-          </button>
+          { isLoading && _limit !== 8 ? 
+            <Spinner style={{color:"rgb(0, 158, 127)"}} className="mb-3" /> : 
+            ((items.length >= _limit) && 
+            <button onClick={() => handleLoadMore()} type="button" className="load-more mb-3">
+              Load more
+            </button>)
           }
-          { isLoading && <Spinner style={{color:"rgb(0, 158, 127)"}} className="mb-3" /> }
         </Row>
       </Container>
     </div>

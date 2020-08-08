@@ -4,7 +4,6 @@ import {
   Row,
   Col
 } from 'reactstrap';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -15,35 +14,26 @@ import { ProductsContext } from '../../contexts/ProductsContext';
 import ProductViewLoading from './ProductViewLoading';
 
 function ProductView(props) {
-  const [ product, setProduct ] = useState({});
   const [ isShow, setShow ] = useState(false);
-  const { setCategory } = useContext(ProductsContext);
+  const [ isLoading, setLoading ] = useState(false);
+  const { setCategory, setProduct, product  } = useContext(ProductsContext);
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth"
     })
-    const CancelToken = axios.CancelToken;
-    const source = CancelToken.source();
-    axios.get(`https://dvbt-bookstore.herokuapp.com/products/product/?slug=${props.match.params.title}`, { cancelToken: source.token })
-          .then(res => {
-            setProduct(res.data);
-            document.title = `${res.data.title} - PickBazar`;
-          })
-          .catch(err => {
-            console.log(err);
-          });
+    document.title = product.title ? `${product.title} - PickBazar` : 'PickBazar';
+    setProduct(props.match.params.title);
     return () => {
-      source.cancel();
+      setLoading(true);
     }
-  }, [props.match.params.title]);
-
+  }, [product.title, props.match.params.title, setProduct]);
   return(
     <div className="ProductView py-5">
       <Container fluid="lg">
         {
-          !product.title ? <ProductViewLoading /> : 
+          !isLoading ? <ProductViewLoading /> : 
           <Row>
             <Col xl="6" lg="6" className="mb-5 text-center">
               <button 

@@ -55,7 +55,7 @@ const SearchBar = (props) => {
         <input 
           style={isTopMenu && {background:"rgb(243, 243, 243)"}}
           type="text"
-          placeholder="Search your products from here" 
+          placeholder="Search your books from here" 
           className="p-0"
           value={text}
           onChange={(event) => setText(event.target.value)}

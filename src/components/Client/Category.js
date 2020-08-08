@@ -8,7 +8,7 @@ import Burger from '../Burger';
 import { ProductsContext } from '../../contexts/ProductsContext';
 
 const Category = (props) => {
-  const { setCategory, categoryName } = useContext(ProductsContext);
+  const { setCategory, filters } = useContext(ProductsContext);
   const [ isClick, setClick ] = useState(false);
   const category = [
     'Children Literature',
@@ -36,7 +36,7 @@ const Category = (props) => {
           <li key={item} className="my-3" onClick={() => setCategory(item)}>
             <Link 
               to="/"
-              className={categoryName === item ? 'active' : null}
+              className={filters._category === item ? 'active' : null}
             >
               {item}
             </Link>
