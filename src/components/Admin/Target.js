@@ -8,7 +8,7 @@ import { AdminContext } from '../../contexts/AdminContext';
 const Target = () => {
   const { orders } = useContext(AdminContext);
   const [ series, setSerires] = useState([0, 0]);
-  const wTarget = 5000;
+  const wTarget = 10000;
   const mTarget = 40000;
 
   useEffect(() => {
@@ -56,7 +56,11 @@ const Target = () => {
       }
     }
 
-    setSerires([(tempWAmount / wTarget) * 100, (tempMAmount / mTarget) * 100]);
+    const result = {
+      percentWeek: ((tempWAmount / wTarget) * 100) >= 100 ? 100 : (tempWAmount / wTarget) * 100,
+      percentMonth: ((tempMAmount / mTarget) * 100) >= 100 ? 100 : (tempMAmount / mTarget) * 100,
+    }
+    setSerires([result.percentWeek, result.percentMonth]);
 
   }, [orders])
   const options = {

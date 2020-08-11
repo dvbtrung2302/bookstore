@@ -135,7 +135,7 @@ export class ProductsProvider extends React.Component {
             })
           })
           .then(() => {
-            return axios.get(`https://dvbt-bookstore.herokuapp.com/products/?_category=${this.state.product.category}`, { cancelToken: source.token })
+            axios.get(`https://dvbt-bookstore.herokuapp.com/products/?_category=${this.state.product.category}`, { cancelToken: source.token })
                         .then(res => {
                           this.setState({
                             relatedItems: res.data
