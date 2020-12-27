@@ -314,4 +314,8 @@ p {
     padding-left: 15px;
     padding-right: 15px;
   }
+  .ProductFunc .update-btn > div {
+    margin-bottom: 15px;
+    max-width: 100% !important;
+  }
 }

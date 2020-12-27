@@ -168,6 +168,21 @@ const ProductFunc = () => {
       }
     }
   }
+
+  const handleDelete = () => {
+    const token = localStorage.getItem('adminToken');
+    const isValid = validate();
+    if (isValid) {
+      const postData = {
+        _id: data._id
+      }
+      axios.post('https://dvbt-bookstore.herokuapp.com/admin/delete-product', postData, { headers: {"Authorization" : `Bearer ${token}`}})
+           .then(res => {
+             setOpen(false);
+             setProducts();
+           })
+    }
+  }
   
   return(
     <div 
@@ -301,10 +316,13 @@ const ProductFunc = () => {
           </Row>
           
           <Row className="update-btn">
-            <Col className="p-0 cancle-btn w-100">
+            <Col xs="12" md="4" className="p-0 cancle-btn w-100">
               <Button className="w-100" onClick={() => setOpen(false)}>Cancle</Button>
             </Col>
-            <Col className="p-0 submit-btn w-100">
+            <Col xs="12" md="4" className="p-0 delete-btn w-100">
+              <Button className="w-100" onClick={handleDelete}>Delete Product</Button>
+            </Col>
+            <Col xs="12" md="4" className="p-0 submit-btn w-100">
               <Button className="w-100" type="submit">{option === 'add' ? 'Create Product' : 'Update Product'}</Button>
             </Col>
           </Row>

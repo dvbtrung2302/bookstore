@@ -134,10 +134,11 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 3px;
   margin: 0;
   background-color: #fff;
+  justify-content: space-between;
 }
 
-.ProductFunc .update-btn .cancle-btn {
-  margin-right: 15px;
+.ProductFunc .update-btn > div {
+  max-width: 31%;
 }
 
 .ProductFunc .update-btn .cancle-btn button {
@@ -163,8 +164,24 @@
   font-weight: 600;
 }
 
+.ProductFunc .update-btn .delete-btn button {
+  background-color:  rgb(234, 77, 74);
+  border: none;
+  font-weight: 600;
+}
+
 .ProductFunc .update-btn .submit-btn button:hover, .ProductFunc .update-btn .submit-btn button:active {
   background-color: rgb(0, 189, 135);
+}
+
+.ProductFunc .update-btn .delete-btn button:active {
+  color: rgb(238, 238, 238);
+  background-color: rgb(234, 77, 74);
+}
+
+.ProductFunc .update-btn .delete-btn button:hover {
+  color: rgb(238, 238, 238);
+  background-color: rgb(234, 77, 74);
 }
 
 .ProductFunc .update-btn button {

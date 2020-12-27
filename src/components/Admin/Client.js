@@ -40,20 +40,35 @@ const Client = () => {
         </div>
         <div className="client-progress">
           {
-            result.map(client => 
-            <CityProgress 
-              key={client.dot}
-              title={client.city} 
-              amount={client.amount}
-              color={client.dot}
-              percent={parseInt((client.amount / users.length) * 100)}
-            />)
+            result.map(client => {
+              if (client.amount) {
+                return (
+                  <CityProgress 
+                    key={client.dot}
+                    title={client.city} 
+                    amount={client.amount}
+                    color={client.dot}
+                    percent={parseInt((client.amount / users.length) * 100)}
+                  />
+                )
+              } else {
+                return null;
+              }
+            })
           }
         </div>
       </div>
       <div className="legend">
         { 
-          result.map(client => <LegendItems key={client.dot} title={client.city} dot={client.dot} amount={client.amount} type="client" />)
+          result.map(client => {
+            if (client.amount) {
+              return (
+                <LegendItems key={client.dot} title={client.city} dot={client.dot} amount={client.amount} type="client" />
+              )
+            } else {
+              return null;
+            }
+          })
         }
       </div>
     </div>
