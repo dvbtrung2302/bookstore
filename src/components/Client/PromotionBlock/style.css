@@ -1,0 +1,17 @@
+/* .promotion-block {
+  display: flex;
+} */
+
+.slick-arrow::before {
+  color: rgb(0, 158, 127);
+  font-size: 30px;
+}
+
+.slick-next {
+  right: 20px;
+}
+
+.slick-prev {
+  left: 50px;
+  z-index: 3;
+}

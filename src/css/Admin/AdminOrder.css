@@ -1,0 +1,34 @@
+.AdminOrders .status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.AdminOrders .status svg {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.AdminOrders .status .fa-times {
+  color: red;
+}
+
+.AdminOrders .status .fa-shipping-fast {
+  color: tan;
+}
+
+.AdminOrders .status .fa-check {
+  color: green;
+}
+
+.AdminOrders .list {
+  display: none;
+}
+
+.AdminOrders .status:hover .list {
+  display: flex;
+}
+
+.AdminOrders .status:hover .main {
+  display: none;
+}

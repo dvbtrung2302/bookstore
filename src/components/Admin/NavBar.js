@@ -7,7 +7,8 @@ import {
   faThLarge,
   faShoppingBasket,
   faCalendarCheck,
-  faUsers
+  faUsers,
+  faPercent
  } from "@fortawesome/free-solid-svg-icons";
 
 import '../../css/Admin/NavBar.css';
@@ -56,6 +57,7 @@ const NavBar = (props) => {
     {icon: faShoppingBasket, text: 'Products', path: '/admin/products'},
     {icon: faCalendarCheck, text: 'Orders', path: '/admin/orders'},
     {icon: faUsers, text: 'Customers', path: '/admin/customers'},
+    {icon: faPercent, text: 'Promotions', path: '/admin/promotions'},
     {icon: faSignOutAlt, text: 'Logout', handdleLogout: handdleLogout}
   ];
   
@@ -69,8 +71,11 @@ const NavBar = (props) => {
             <img src="https://res.cloudinary.com/dofqucuyy/image/upload/v1585755124/Books/logo_gtuxyy.svg" alt="" />
           </Link>
         </div>
-        <div className="add-products-btn" onClick={() => setOpen(true, "add")}>
+        <div className="add-products-btn" style={{marginLeft: "auto", marginRight: "20px"}} onClick={() => setOpen(true, "add")}>
           Add Products
+        </div>
+        <div className="add-products-btn" onClick={() => setOpen(true, "promotions-add")}>
+          Add Promotions
         </div>
       </div>
       <ul className={isClick ? "navs nav-active" : "navs"}>

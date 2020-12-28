@@ -51,23 +51,34 @@ const OrderDetails =  (props) => {
             </div>
           </div>
           <div className="progress-wrapper">
-            <Progress value="75">
+            <Progress value={(order.status / 3) * 100}>
               <div className="des">
-                <div className="check-btn">
-                  <FontAwesomeIcon icon={faCheck} />
+                <div className={`check-btn ${order.status < 1 ? 'not-completed' : ''}`}>
+                  {
+                    order.status === 1 ?
+                    <FontAwesomeIcon icon={faCheck} /> :
+                    1
+                  }
                 </div>
                 <div className="text">Order Received</div>
               </div>
               <div className="des">
-                <div className="check-btn">
-                  <FontAwesomeIcon icon={faCheck} />
+                <div className={`check-btn ${order.status < 2 ? 'not-completed' : ''}`}>
+                  {
+                    order.status === 2 ?
+                    <FontAwesomeIcon icon={faCheck} /> :
+                    2
+                  }
                 </div>
                 <div className="text">Order On The Way</div>
               </div>
               <div className="des">
-                <div className="check-btn not-completed">
-                  {/* <FontAwesomeIcon icon={faCheck} /> */}
-                  3
+                <div className={`check-btn ${order.status < 3 ? 'not-completed' : ''}`}>
+                  {
+                    order.status === 3  ?
+                    <FontAwesomeIcon icon={faCheck} /> :
+                    3
+                  }
                 </div>
                 <div className="text">Order Delivered</div>
               </div>

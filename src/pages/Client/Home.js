@@ -5,6 +5,7 @@ import Main  from '../../components/Client/Main';
 import TopMenu from '../../components/Client/TopMenu';
 import Cart from '../../components/Client/Cart';
 import CartItems from '../../components/Client/CartItems';
+import PromotionBlock from '../../components/Client/PromotionBlock';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -26,6 +27,7 @@ class Home extends React.Component {
         <Cart />
         <CartItems {...this.props} />
         <Banner />
+        <PromotionBlock />
         <Main />
       </div>
     );

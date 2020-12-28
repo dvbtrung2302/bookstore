@@ -21,7 +21,7 @@ const Orders = () => {
     const source = CancelToken.source();
     axios.get('https://dvbt-bookstore.herokuapp.com/order', { headers: {"Authorization" : `Bearer ${token}`}}, { cancelToken: source.token })
          .then(res => {
-           setOrders(res.data);
+           setOrders(res.data.reverse());
            setOrder(res.data[0]);
            setLoading(false);
          })

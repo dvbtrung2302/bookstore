@@ -1,0 +1,18 @@
+.promotion-item {
+  width: 100%;
+  max-height: 300px;
+  padding: 0 20px;
+}
+
+.promotion-item a {
+  display: block;
+  width: 100%;
+  max-height: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.promotion-item a img{
+  width: 100%;
+  max-height: 300px;
+}

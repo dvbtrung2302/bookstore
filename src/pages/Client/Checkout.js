@@ -3,7 +3,8 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  Alert
 } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCreditCard, faMoneyBillAlt } from "@fortawesome/free-solid-svg-icons";
@@ -33,6 +34,13 @@ export default function(props) {
   const [cardError, setError] = useState(null);
   const [order, setOrder] = useState({});
   const [districts, setDistricts] = useState([]);
+  const [discount, setDiscount] = useState("");
+  const [discountStatus, setDisCountStatus] = useState(null);
+  const [price, setPrice] = useState(null);
+
+  useEffect(() => {
+    setPrice(totalPrice)
+  }, [totalPrice])
 
   useEffect(() => {
     document.title = 'Checkout - PickBazar';
@@ -83,7 +91,10 @@ export default function(props) {
     }
     if (order.payment === 'cash') {
       const { data } = await axios.post('https://dvbt-bookstore.herokuapp.com/checkout', {
-        order: order
+        order: {
+          ...order,
+          totalPrice: price ? price : totalPrice
+        }
       })
       if (data) {
         createOrder(data.order);
@@ -102,7 +113,7 @@ export default function(props) {
         const { id } = paymentMethod;
         const { data } = await axios.post('https://dvbt-bookstore.herokuapp.com/checkout', {
           id: id, 
-          amount: totalPrice * 100,
+          amount: price ? price * 100 : totalPrice * 100,
           order: order
         })
         if (data) {
@@ -115,6 +126,37 @@ export default function(props) {
         setError(error);
       }
     }
+  }
+
+  const handleDiscountInput = (e) => {
+    setDiscount(e.target.value)
+  }
+
+  const handleDiscountSubmit = async () => {
+    const value = discount.trim();
+    if (!value) return;
+    try {
+      const data = {
+        code: value,
+        price: totalPrice
+      }
+      const res = await axios.post('https://dvbt-bookstore.herokuapp.com/promotion/apply-promotion', data);
+      setDisCountStatus(res.data);
+      setDiscount("");
+      if (res.data.status === 1) {
+        setPrice(res.data.priceAfterPromotion);
+      } else {
+        setPrice(null)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.target.keyCode === 13) {
+      handleDiscountSubmit()
+    } 
   }
 
   const CARD_OPTIONS = {
@@ -141,7 +183,7 @@ export default function(props) {
             <h3 className="bt-header">Your order</h3>
             <div className="item">
               <div className="title">{`Sub Total(${cartItems.length}` + [cartItems.length === 1 ? 'item)': 'items)' ]}</div>
-              <div className="price">{`$${totalPrice}.00`}</div>
+              <div className="price">{`$${price ? price : totalPrice}.00`}</div>
             </div>
             <div className="item">
               <div className="title">Shipping Fee</div>
@@ -149,7 +191,7 @@ export default function(props) {
             </div>
             <div className="item">
               <div className="title">Total</div>
-              <div className="price">{`$${totalPrice}.00`}</div>
+              <div className="price">{`$${price ? price : totalPrice}.00`}</div>
             </div>
             <div></div>
           </div>
@@ -244,6 +286,25 @@ export default function(props) {
                   autoComplete="off"
                 />
               </FormGroup>
+            </div>
+            <div className="discount">
+              <h3 className="bt-header">Mã giảm giá</h3>
+              <FormGroup>
+                <Input 
+                  type="discount" 
+                  value={discount || ""} 
+                  name="discount" 
+                  onChange={handleDiscountInput}
+                  onKeyDown={handleKeyDown}
+                  id="discount"
+                  autoComplete="off"
+                  />
+                <button type='button' onClick={handleDiscountSubmit}>Apply</button>
+              </FormGroup>
+              {
+                discountStatus &&
+                <Alert color={discountStatus.status === 0 ? "danger" : "success"}>{discountStatus.msg}</Alert>
+              }
             </div>
             <div className="payment">
               <h3 className="bt-header">Select Payment Option</h3>

@@ -14,6 +14,7 @@ export class AdminProvider extends React.Component {
       orders: [],
       users: [],
       products: [],
+      promotions: [],
       filter: {
         category: 'Category Type',
         price: 'Price',
@@ -26,6 +27,7 @@ export class AdminProvider extends React.Component {
       },
       open: false,
       product: {},
+      promotion: {},
       isSave: false,
       option: '',
       loading: true
@@ -38,14 +40,16 @@ export class AdminProvider extends React.Component {
     this.onOrdersFilter = this.onOrdersFilter.bind(this);
     this.onCustomersFilter = this.onCustomersFilter.bind(this);
     this.setStateDefault = this.setStateDefault.bind(this);
+    this.setPromotions = this.setPromotions.bind(this);
+    this.setPromotion = this.setPromotion.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { adminToken } = this.state;
     axios.get('https://dvbt-bookstore.herokuapp.com/admin/admin-get', { headers: {"Authorization" : `Bearer ${adminToken}`}}, { cancelToken: source.token })
          .then(res => {
            this.setState({
-             orders: res.data.orders,
+             orders: res.data.orders.reverse(),
              users: res.data.users,
              products: res.data.products,
              loading: false
@@ -54,6 +58,15 @@ export class AdminProvider extends React.Component {
          .catch(err => {
            console.log(err);
          })
+
+    try {
+      const response = await axios.get('https://dvbt-bookstore.herokuapp.com/promotion');
+      this.setState({
+        promotions: response.data.reverse()
+      })
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   componentWillUnmount() {
@@ -153,6 +166,12 @@ export class AdminProvider extends React.Component {
     })
   }
 
+  setPromotion(promotion) {
+    this.setState({
+      promotion: promotion
+    })
+  }
+
   setProducts() {
     const token = localStorage.getItem('adminToken');
     axios.get('https://dvbt-bookstore.herokuapp.com/admin/admin-get', { headers: {"Authorization" : `Bearer ${token}`}}, { cancelToken: source.token })
@@ -173,6 +192,17 @@ export class AdminProvider extends React.Component {
          })
   }
 
+  async setPromotions() {
+    try {
+      const response = await axios.get('https://dvbt-bookstore.herokuapp.com/promotion');
+      this.setState({
+        promotions: response.data.reverse()
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   removeAccents(str) {
     return str.normalize('NFD')
               .replace(/[\u0300-\u036f]/g, '')
@@ -190,6 +220,8 @@ export class AdminProvider extends React.Component {
       product,
       isSave,
       option,
+      promotions,
+      promotion,
       loading
     } = this.state;
 
@@ -300,11 +332,15 @@ export class AdminProvider extends React.Component {
         setProducts: this.setProducts,
         isSave: isSave,
         option: option,
+        promotions: promotions,
+        setPromotions: this.setPromotions,
         onOrdersFilter: this.onOrdersFilter,
         filtedOrders: filtedOrders,
         onCustomersFilter: this.onCustomersFilter,
         newUsers: filtedUsers,
         setStateDefault: this.setStateDefault,
+        setPromotion: this.setPromotion,
+        promotion: promotion,
         loading: loading
       }}>
         {this.props.children}
